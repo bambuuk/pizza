@@ -1,0 +1,134 @@
+@import '../../style/variables.scss';
+
+.header {
+	display: grid;
+	grid-template: 1fr / minmax(auto, 80px) minmax(auto, 490px) minmax(auto, 345px) minmax(auto, 120px) 1fr;
+	align-items: center;
+	color: $main-color-text;
+	padding: 0 10px;
+	&__menu {
+		padding: 0 0 0 30px;
+	}
+	&__list {
+		display: flex;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+	&__list li {
+		margin-right: 29px;
+	}
+	&__link {
+		color: $main-color-text;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 20px;
+	}
+	&__address {
+		padding: 0 0 0 19px;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 20px;
+	}
+	&__social-networks {
+		display: flex;
+	}
+}
+
+.social-networks {
+	display: flex;
+	padding-left: 10px;
+	&__round {
+		width: 40px;
+		height: 40px;
+		padding: 5px;
+		background-color: $btn-color;
+		border-radius: 50%;
+	}
+	&__link {
+		display: block;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		margin-right: 10px;
+	}
+}
+
+.contacts {
+	height: 40px;
+	border: 1px solid $btn-color;
+	border-radius: 10px;
+	text-align: center;
+	&__btn {
+		padding: 11.5px 32.7344px 11.5px 33px;
+		width: 100%;
+		display: block;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 17px;
+		color: $main-color-text;
+	}
+}
+
+@media (max-width: 1200px) {
+	.header {
+		&__link, &__address {
+			font-size: 13px;
+		}
+	}
+	.contacts {
+		&__btn {
+			font-size: 13px;
+		}
+	}
+}
+
+@media (max-width: 991px) {
+	.header {
+		&__address {
+			display: none;
+		}
+	}
+	.social-networks {
+		justify-content: end;
+	}
+}
+
+@media (max-width: 767px) {
+	.social-networks, .header__link, .contacts {
+		display: none;
+	}
+	.header {
+		display: flex;
+		justify-content: space-between;
+	}
+	.header__burger {
+		width: 30px;
+		display: grid;
+		align-items: center;
+	}
+	.header__burger::before {
+		content: '';
+		height: 3px;
+		width: 30px;
+		background-color: $btn-color;
+	}
+
+	.header__burger::after {
+		content: '';
+		height: 3px;
+		width: 30px;
+		background-color: $btn-color;
+	}
+
+	.header__burger span {
+		height: 3px;
+		width: 30px;
+		background-color: $btn-color;
+		margin: 5px 0;
+	}
+}
+
+@media (max-width: 575px) {
+
+}

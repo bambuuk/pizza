@@ -1,11 +1,13 @@
-import './App.scss';
+import Header from './components/Header/Header'; 
+import Footer from './components/Footer/Footer';
+import './style/style.scss';
 
 function App() {
   return (
-    <div className="App">
-      <div className="wrapper">
-        It will be a pizza web application
-      </div>
+    <div className="wrapper">
+      <Header />
+      <main>main</main>
+      <Footer />
     </div>
   );
 }

@@ -1,3 +1,7 @@
+@import "./variables";
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+// Resetting Styles
 * {
 	padding: 0;
 	margin: 0;
@@ -87,3 +91,23 @@ h6 {
 	font-weight: inherit;
 }
 
+// ****************************************************
+
+.wrapper {
+	display: grid;
+	min-height: 100vh;
+	grid-template: minmax(100px, auto) 1fr minmax(70px, auto) / minmax(auto, 1200px);
+	justify-content: center;
+	grid-template-areas:
+	"header"
+	"main"
+	"footer";
+	font-family: 'Inter', sans-serif;
+	background-color: #000000;
+}
+
+main {
+	color: white;
+	grid-area: main;
+	// flex: 1 1 auto;
+}
