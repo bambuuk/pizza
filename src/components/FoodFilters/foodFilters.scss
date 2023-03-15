@@ -1,0 +1,56 @@
+@import '../../style/variables';
+
+.food-filter {
+  &__list {
+    display: grid;
+    grid-template: 60px / repeat(auto-fit, minmax(120px, 1fr));
+    grid-auto-rows: 60px;
+    row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 65px 0 0 0;
+    padding: 0 10px;
+  }
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #1F1F1F;
+    border-width: 1px 0px 1px 1px;
+    border-style: solid;
+    border-color: #F3F5F0;
+    text-align: center;
+    cursor: pointer;
+
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: $main-color-text;
+  }
+  &__item:last-child {
+    border-width: 1px;
+    border-radius: 0px 20px 20px 0px;
+  }
+  &__item:first-child {
+    border-width: 1px;
+    border-radius: 20px 0px 0px 20px;
+  }
+}
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 991px) {
+
+}
+
+@media (max-width: 767px) {
+  
+}
+
+@media (max-width: 575px) {
+
+}
