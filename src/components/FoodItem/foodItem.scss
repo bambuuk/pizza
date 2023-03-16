@@ -78,6 +78,7 @@
     font-size: 14px;
     line-height: 17px;
     transition: 0.4s all;
+    color: $main-color-text;
     &:hover {
       background-color: $btn-color;
     }
@@ -90,7 +91,9 @@
     &::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
     }
     &[type='number'] {
       -moz-appearance: textfield;
