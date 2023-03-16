@@ -1,0 +1,30 @@
+@import '../../style/variables';
+
+.food-list {}
+
+.food-items {
+  display: grid;
+  grid-template: minmax(500px, auto) / repeat(auto-fit, minmax(300px, 360px));
+  grid-auto-rows: minmax(500px, auto);
+  justify-content: center;
+  row-gap: 90px;
+  column-gap: 40px;
+  margin: 65px 0 30px 0;
+  padding: 0 10px;
+}
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 991px) {
+
+}
+
+@media (max-width: 767px) {
+  
+}
+
+@media (max-width: 575px) {
+
+}

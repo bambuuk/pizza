@@ -1,6 +1,7 @@
 import Header from './components/Header/Header'; 
 import Footer from './components/Footer/Footer';
 import FoodFilters from './components/FoodFilters/FoodFilters';
+import FoodList from './components/FoodList/FoodList';
 import './style/style.scss';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Header />
       <main>
         <FoodFilters />
+        <FoodList />
       </main>
       <Footer />
     </div>
