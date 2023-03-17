@@ -1,3 +1,5 @@
+import { Link, NavLink } from "react-router-dom";
+
 import logo from '../../resources/img/logo.png';
 import './header.scss';
 
@@ -5,9 +7,9 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__logo logo">
-        <a href="#" className="logo__link">
+        <Link reloadDocument className="logo__link">
           <img src={logo} alt="logo" />
-        </a>
+        </Link>
       </div>
 
       <nav className="header__menu">

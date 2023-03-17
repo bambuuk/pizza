@@ -1,0 +1,41 @@
+@import '../../style/variables.scss';
+
+.page404 {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.descr-404-page {
+  text-align: center;
+  color: $main-color-text;
+  font-size: 25px;
+  transition: 0.4s all;
+  &:hover {
+    color: rgb(118, 16, 16);
+  }
+}
+
+.linkOnMainPage {
+  text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 991px) {
+
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 575px) {
+  .img-404-page {
+      width: 300px;
+  }
+}

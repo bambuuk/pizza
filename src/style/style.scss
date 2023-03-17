@@ -95,16 +95,22 @@ h6 {
 
 .wrapper {
 	display: grid;
-	min-height: 100vh;
+	min-height: 100%;
 	grid-template: minmax(100px, auto) 1fr minmax(70px, auto) / minmax(auto, 1200px);
 	justify-content: center;
 	grid-template-areas:
 	"header"
 	"main"
 	"footer";
+	// display: flex;
+	// flex-direction: column;
 	font-family: 'Inter', sans-serif;
 	background-color: #000000;
 }
+
+// main {
+// 	flex: 1 1 auto;
+// }
 
 .active-btn {
 	background: #8F4069;
