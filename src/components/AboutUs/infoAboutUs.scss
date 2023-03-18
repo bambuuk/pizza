@@ -93,5 +93,12 @@
 }
 
 @media (max-width: 575px) {
-
+  .about-us {
+    grid-template: 1fr / 1fr;  
+    &__img-wrapper {
+      margin: 0 auto;
+      width: 260px;
+      height: 260px;
+    }
+  }
 }
