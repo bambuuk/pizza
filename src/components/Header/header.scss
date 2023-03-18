@@ -24,6 +24,9 @@
 		font-size: 16px;
 		line-height: 20px;
 	}
+	&__link.active {
+		color: #833c27;
+	}
 	&__address {
 		padding: 0 0 0 19px;
 		font-weight: 400;

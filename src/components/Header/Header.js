@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__logo logo">
-        <Link reloadDocument className="logo__link">
+        <Link to="/" reloadDocument className="logo__link">
           <img src={logo} alt="logo" />
         </Link>
       </div>
@@ -15,7 +15,8 @@ const Header = () => {
       <nav className="header__menu">
         <ul className="header__list">
           <li>
-            <a href="" className="header__link">Про нас</a>
+            <NavLink to="/about-us" className="header__link">Про нас</NavLink>
+            {/* <a href="" className="header__link">Про нас</a> */}
           </li>
           <li>
             <a href="" className="header__link">Доставка</a>
