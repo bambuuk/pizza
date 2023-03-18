@@ -1,0 +1,17 @@
+@import '../../style/variables.scss';
+
+.content__confidentiality {
+  margin: 30px 0 45px 0;
+  padding: 0 20px;
+}
+.confidentiality {
+  color: $main-color-text;
+
+  &__wrapper {
+    display: grid;
+    grid-template: 1fr / minmax(auto, 960px);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

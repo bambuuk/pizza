@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import payment_system from '../../resources/img/payment_systems.png';
 import './footer.scss';
 
@@ -14,7 +15,9 @@ const Footer = () => {
         <div className="footer__information">
           <div className="footer__title">Клієнтам:</div>
           <ul className="footer__links-list">
-            <li className="footer__link-item"><a href="#" className="footer__link">Політика конфіденційності</a></li>
+            <li className="footer__link-item">
+              <NavLink to="/confidentiality" className="footer__link">Політика конфіденційності</NavLink>
+            </li>
             <li className="footer__link-item"><a href="#" className="footer__link">Способи оплати</a></li>
             <li className="footer__link-item"><a href="#" className="footer__link">Публічна оферта</a></li>
           </ul>
