@@ -9,4 +9,4 @@ const AboutUs = () => {
   )
 }
 
-export default withLayout(AboutUs);
+export default withLayout(AboutUs, 'AboutUs');

@@ -1,11 +1,13 @@
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
-const withLayout = (BaseComponent) => {
+const withLayout = (BaseComponent, nameComponent) => {
+  const fixedHeader = nameComponent === 'MainPage' ? false : true;
+  
   return function WithLayout() {
     return (
       <div className="wrapper">
-        <Header />
+        <Header fixedHeader={fixedHeader} />
         <main>
           <BaseComponent />
         </main>

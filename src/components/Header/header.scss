@@ -1,11 +1,22 @@
 @import '../../style/variables.scss';
 
+.header-wrapper {
+	position: relative;
+}
 .header {
 	display: grid;
 	grid-template: 1fr / minmax(auto, 80px) minmax(auto, 490px) minmax(auto, 345px) minmax(auto, 120px) 1fr;
+	width: 100%;
 	align-items: center;
 	color: $main-color-text;
 	padding: 0 10px;
+	&_fixed {
+		position: fixed;
+		z-index: 5;
+		max-width: 1200px;
+    margin: 0 auto;
+		background-color: #000000;
+	}
 	&__menu {
 		padding: 0 0 0 30px;
 	}

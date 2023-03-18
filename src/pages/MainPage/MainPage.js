@@ -11,4 +11,4 @@ const MainPage = () => {
   )
 }
 
-export default withLayout(MainPage);
+export default withLayout(MainPage, 'MainPage');
