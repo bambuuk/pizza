@@ -8,6 +8,7 @@ const Page404 = lazy(() => import('./pages/Page404/Page404'));
 const AboutUs = lazy(() => import('./pages/AboutUs/AboutUs'));
 const DeliveryPage = lazy(() => import('./pages/DeliveryPage/DeliveryPage'));
 const ConfidentialityPage = lazy(() => import('./pages/ConfidentialityPage/ConfidentialityPage'));
+const TypesOfPaymentPage = lazy(() => import('./pages/TypesOfPaymentPage/TypesOfPaymentPage'));
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/delivery" element={<DeliveryPage />} />
           <Route path="/confidentiality" element={<ConfidentialityPage />} />
+          <Route path="/type-of-payment" element={<TypesOfPaymentPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
