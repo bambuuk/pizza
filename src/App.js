@@ -3,9 +3,10 @@ import { Suspense, lazy } from 'react';
 import Spinner from './components/Spinner/Spinner';
 import './style/style.scss';
 
-const MainPage = lazy(() => import('./pages/MainPage/MainPage.js'));
-const Page404 = lazy(() => import('./pages/Page404/Page404.js'));
+const MainPage = lazy(() => import('./pages/MainPage/MainPage'));
+const Page404 = lazy(() => import('./pages/Page404/Page404'));
 const AboutUs = lazy(() => import('./pages/AboutUs/AboutUs'));
+const DeliveryPage = lazy(() => import('./pages/DeliveryPage/DeliveryPage'));
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="*" element={<Page404 />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/delivery" element={<DeliveryPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

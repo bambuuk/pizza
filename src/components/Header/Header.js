@@ -20,7 +20,7 @@ const Header = ({ fixedHeader }) => {
               <NavLink to="/about-us" className="header__link">Про нас</NavLink>
             </li>
             <li>
-              <a href="" className="header__link">Доставка</a>
+              <NavLink to="/delivery" className="header__link">Доставка</NavLink>
             </li>
             <li>
               <a href="" className="header__link">Типи оплати</a>
