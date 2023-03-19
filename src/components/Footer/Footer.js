@@ -31,7 +31,9 @@ const Footer = () => {
           <ul className="footer__links-list">
             <li className="footer__link-item"><a href="#" className="footer__link">Акції</a></li>
             <li className="footer__link-item"><a href="#" className="footer__link">Новини</a></li>
-            <li className="footer__link-item"><a href="#" className="footer__link">Доставка і оплата</a></li>
+            <li className="footer__link-item">
+              <NavLink NavLink to="/delivery" className="footer__link">Доставка і оплата</NavLink>
+            </li>
           </ul>
         </div>
         <div className="footer__information">
