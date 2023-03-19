@@ -12,6 +12,17 @@ const DeliveryAndPayment = () => {
           <strong>Години роботи закладу</strong>: з 11:00 до 22:00<br />
           <strong>Середній час доставки</strong>&nbsp;- 1 година<br />
           <br />
+          <strong>Адреса</strong>:  
+          <a 
+            href={`https://www.google.com/maps/search/%D0%B3%D1%80%D0%B8%D0%BB%D0%BB%D0%B0/@
+            50.4367035,29.3661665,7z/data=!3m1!4b1`} 
+            className="delivery__link"
+            target="_blank"
+          >
+            &nbsp;м.Кропивницький, вул. Пашутинська 61/84
+          </a><br />
+          <br />
+
           У разі ускладнення руху містом, погодних умов, чи сирен - час доставлення може складати більше 1 години.<br />
           <br />
           <strong>Ціна доставки по місту</strong>&nbsp;- згідно з цінами перевізника &quot;Містер АМ&quot;. Залежить від відстані.<br />

@@ -6,6 +6,9 @@
 }
 .delivery {
   color: $main-color-text;
+  &__link {
+    color: $main-color-text;
+  }
   &__subtitle {
     padding: 0 0 20px 0;
     font-weight: 400;
