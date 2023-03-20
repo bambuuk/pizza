@@ -32,7 +32,7 @@ const Footer = () => {
             <li className="footer__link-item"><a href="#" className="footer__link">Акції</a></li>
             <li className="footer__link-item"><a href="#" className="footer__link">Новини</a></li>
             <li className="footer__link-item">
-              <NavLink NavLink to="/delivery" className="footer__link">Доставка і оплата</NavLink>
+              <NavLink to="/delivery" className="footer__link">Доставка і оплата</NavLink>
             </li>
           </ul>
         </div>

@@ -10,6 +10,7 @@ const DeliveryPage = lazy(() => import('./pages/DeliveryPage/DeliveryPage'));
 const ConfidentialityPage = lazy(() => import('./pages/ConfidentialityPage/ConfidentialityPage'));
 const TypesOfPaymentPage = lazy(() => import('./pages/TypesOfPaymentPage/TypesOfPaymentPage'));
 const PublicOfferPage = lazy(() => import('./pages/PublicOfferPage/PublicOfferPage'));
+const ContactsPage = lazy(() => import('./pages/ContactsPage/ContactsPage'));
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/confidentiality" element={<ConfidentialityPage />} />
           <Route path="/type-of-payment" element={<TypesOfPaymentPage />} />
           <Route path="/public-offer" element={<PublicOfferPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

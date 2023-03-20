@@ -47,8 +47,8 @@ const Header = ({ fixedHeader }) => {
           </a>
         </div>
 
-        <div className="header__contacts contacts">
-          <a href="#" className="contacts__btn">Контакти</a>
+        <div className="header__contacts">
+          <Link to="/contacts" className="header__contacts__btn">Контакти</Link>
         </div>
 
         <div className="header__burger">
