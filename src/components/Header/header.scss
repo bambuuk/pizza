@@ -54,16 +54,19 @@
 	display: flex;
 	padding-left: 10px;
 	&__round {
-		width: 40px;
-		height: 40px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 30px;
+		height: 30px;
 		padding: 5px;
 		background-color: $btn-color;
 		border-radius: 50%;
 	}
 	&__link {
 		display: block;
-		width: 40px;
-		height: 40px;
+		width: 30px;
+		height: 30px;
 		border-radius: 50%;
 		margin-right: 10px;
 	}
@@ -118,12 +121,15 @@
 }
 
 @media (max-width: 767px) {
-	.social-networks, .header__link, .contacts {
+	.social-networks, .header__link {
 		display: none;
 	}
 	.header {
 		display: flex;
 		justify-content: space-between;
+		&__contacts {
+			display: none;
+		}
 	}
 	.header__burger {
 		width: 30px;

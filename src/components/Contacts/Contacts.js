@@ -5,9 +5,10 @@ const Contacts = () => {
     <div className="contacts content__contacts">
       <div className="contacts__description">
         <div className="contacts__title">Залишились питання</div>
+        <br />
+        <br />
         <p>&laquo;<strong>Grilla</strong>&raquo; &ndash; найкраща доставка в Кропивницькому! Голодний, як горила? Замовляй &laquo;<strong>Grilla</strong>&raquo;!
         </p>
-        <br />
         <br />
 
         <p>
@@ -18,7 +19,6 @@ const Contacts = () => {
           </a>
         </p>
         <br />
-        <br />
 
         <p><strong>Адреса:</strong><br />
           вулиця Пашутинська 61/84<br />
@@ -27,27 +27,29 @@ const Contacts = () => {
       </div>
       <div className="contacts__form">
         <form action="" className="form">
-          <input 
-            type="number" 
+          <input
+            type="number"
             name="number"
-            className="form__num-input"
+            className="form__input"
             placeholder="+380(99)99-99-999"
-            required  
+            required
           />
-          <input 
+          <input
             type="text"
-            name="customer-name" 
-            className="form__name-input" 
+            name="customer-name"
+            className="form__input"
             placeholder="Як до Вас звертатися"
             required
           />
-          <textarea 
+          <textarea
             name="your-question"
-            placeholder="Ваше запитання" 
-            className="form__textarea" 
-            rows="3" 
+            placeholder="Ваше запитання"
+            className="form__textarea"
             required
           />
+          <button className="form__btn">
+            Відправити повідомлення
+          </button>
         </form>
       </div>
     </div>

@@ -1,7 +1,89 @@
 @import '../../style/variables.scss';
 
+.content__contacts {
+  display: grid;
+  grid-template: 1fr / minmax(auto, 460px) minmax(auto, 460px);
+  column-gap: 40px;
+  justify-content: center;
+  padding: 0 20px;
+  margin: 30px 0 50px 0;
+}
+
 .contacts {
   color: $main-color-text;
+  &__title {
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 50px;
+  }
+  &__description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  &__ph-number {
+    color: $main-color-text;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  &__input {
+    margin: 0 0 25px 0;
+    padding: 0 21px;
+    height: 60px;
+    background: $main-bg-for-objects;
+    border: 1px solid #292929;
+    border-radius: 10px;
+
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #969696;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    }
+  }
+  &__textarea {
+    padding: 17px 21px 0 21px;
+    height: 102px;
+    background: $main-bg-for-objects;
+    border: 1px solid #292929;
+    border-radius: 10px;
+
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #969696;
+  }
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 325px;
+    height: 60px;
+    margin-top: 34px;
+    background: #000000;
+    border: 1px solid #F27048;
+    border-radius: 5px;
+
+    font-weight: 400;
+    font-size: 16px;
+    color: $main-color-text;
+    transition: 0.3s all;
+    &:hover {
+      background-color: #f27048;
+    }
+  }
 }
 
 @media (max-width: 1200px) {
@@ -13,7 +95,23 @@
 }
 
 @media (max-width: 767px) {
+  .content__contacts {
+    grid-template: 1fr / minmax(280px, 600px);
+    row-gap: 40px;
+    justify-content: center;
+  }
+
+  .contacts {
+    &__description {
+      text-align: center;
+    }
+  }
   
+  .form {
+    &__btn {
+      width: 100%;
+    }
+  }
 }
 
 @media (max-width: 575px) {
