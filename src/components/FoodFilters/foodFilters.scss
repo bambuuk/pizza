@@ -37,6 +37,9 @@
     border-width: 1px;
     border-radius: 20px 0px 0px 20px;
   }
+  &_wrapper {
+    display: none;
+  } 
 }
 
 .active-btn {
@@ -53,9 +56,38 @@
 }
 
 @media (max-width: 767px) {
-  
+  .food-filter_content {
+    display: grid;
+    grid-template: 51px / minmax(auto, 600px);
+    justify-content: center;
+    margin: 65px 0 0 0;
+    padding: 0 10px;
+  }
+  .food-filter {
+    &__list {
+      display: none;
+    }
+    &_wrapper {
+      display: block;
+    } 
+  }
+  .drop-down-list {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 16px 30px 16px 20px;
+    border: 1px solid #f3f5f0;
+    border-radius: 20px;
+    color: $main-color-text;
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background: url("../../resources/img/arrow-24.png") no-repeat 95% center;
+    background-color: #8F4069;
+  }
 }
 
-@media (max-width: 575px) {
-
-}
+@media (max-width: 575px) {}
