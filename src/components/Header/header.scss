@@ -93,24 +93,13 @@
 	border-radius: 10px;
 	transition: 0.4s all;
 	padding: 0 30px;
-
-	&__btn {
-		display: block;
-		text-align: center;
-		width: 100%;
-		display: block;
-		font-weight: 400;
-		font-size: 14px;
-		color: $main-color-text;
-		transition: 0.4s all;
-
-		&:hover {
-			color: #000000;
-		}
-	}
+	font-weight: 400;
+	font-size: 14px;
+	color: $main-color-text;
 
 	&:hover {
 		background-color: $btn-color;
+		color: #000000;
 	}
 }
 
@@ -128,6 +117,7 @@
 
 @media (max-width: 1200px) {
 	.header {
+
 		&__link,
 		&__address {
 			font-size: 13px;

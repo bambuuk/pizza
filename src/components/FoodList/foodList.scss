@@ -1,7 +1,5 @@
 @import '../../style/variables';
 
-.food-list {}
-
 .food-items {
   display: grid;
   grid-template: minmax(500px, auto) / repeat(auto-fit, minmax(280px, 360px));
