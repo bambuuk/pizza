@@ -1,9 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
-
+import { useState } from "react";
 import logo from '../../resources/img/logo.png';
 import './header.scss';
 
 const Header = ({ fixedHeader }) => {
+  const [active, setActive] = useState(false);
+
+  const toggleBurgerMenuActive = (e) => {
+    if (e.type === 'click' || e.code === 'Enter') {
+      setActive(!active);
+    }
+  };
+
+  const styleBurger = active ? 'header__burger_active' : '';
+  const styleMenu = active ? 'burger__menu_active' : '';
+  const styleOverlay = active ? 'overlay_active' : '';
+
   const headerClazz = fixedHeader ? 'header header_fixed' : 'header';
   return (
     <div className="header-wrapper">
@@ -14,7 +26,7 @@ const Header = ({ fixedHeader }) => {
           </Link>
         </div>
 
-        <nav className="header__menu">
+        <nav className={`header__menu ${styleMenu}`}>
           <ul className="header__list">
             <li>
               <NavLink to="/about-us" className="header__link">Про нас</NavLink>
@@ -35,6 +47,7 @@ const Header = ({ fixedHeader }) => {
             href="https://www.facebook.com/grilla.kr.ua/" 
             className="social-networks__link" 
             target="_blank"
+            rel="noreferrer"
           >
             <div className="social-networks__round">
               <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px">    
@@ -46,6 +59,7 @@ const Header = ({ fixedHeader }) => {
             href="https://www.instagram.com/grilla.house/" 
             className="social-networks__link" 
             target="_blank"
+            rel="noreferrer"
           >
             <div className="social-networks__round">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px">
@@ -59,10 +73,38 @@ const Header = ({ fixedHeader }) => {
           <Link to="/contacts" className="header__contacts__btn">Контакти</Link>
         </div>
 
-        <div className="header__burger">
+        <div 
+          className={`header__burger ${styleBurger}`}
+          onClick={toggleBurgerMenuActive}
+          onKeyDown={toggleBurgerMenuActive}
+          role="button"
+        >
+          <span></span>
+          <span></span>
           <span></span>
         </div>
+
+        <nav className={`burger burger__menu ${styleMenu}`}>
+          <ul className="burger__list">
+            <li>
+              <NavLink to="/" className="burger__link">Головна</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about-us" className="burger__link">Про нас</NavLink>
+            </li>
+            <li>
+              <NavLink to="/delivery" className="burger__link">Доставка</NavLink>
+            </li>
+            <li>
+              <NavLink to="/type-of-payment" className="burger__link">Типи оплати</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contacts" className="burger__link">Контакти</NavLink>
+            </li>
+          </ul>
+        </nav>
       </header>
+      <div className={`overlay ${styleOverlay}`}></div>
     </div>
   )
 }
