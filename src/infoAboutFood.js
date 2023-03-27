@@ -8,7 +8,7 @@ let obj = {
       shortDescr: "Салямі, кабаносі, шинка тостова, балик, маринована цибуля, сир моцарела, помідори, червоний соус",
       weight: "620 грам",
       size: "30 см",
-      img: "meat-safari-4-meats",
+      img: "https://raw.githubusercontent.com/bambuuk/pizza/main/src/resources/img/pizza/meat-safari-4-meats.png",
       price: 210,
       productTipe: 'pizza'
     },
@@ -37,7 +37,7 @@ let obj = {
       name: "Бургер DOUBLE KILL",
       shortDescr: "Подвійна котлета з яловичини, подвійний сир чеддер, подвійний бекон, помідор, соус чеддер",
       size: "82 мм",
-      img: "burger-double-kill",
+      img: "https://raw.githubusercontent.com/bambuuk/pizza/main/src/resources/img/burger/burger-double-kill.jpg",
       price: 200,
       productTipe: 'burger'
     },
@@ -46,7 +46,7 @@ let obj = {
       name: "Бургер з яловичиною",
       shortDescr: "Котлета з яловичини, сир чеддер, айсберг, помідор, огірок квашений, карамелізована цибуля, соус біг мак",
       size: "82 мм",
-      img: "beef-burger",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/burger/beef-burger.jpg?raw=true",
       price: 200,
       productTipe: 'burger'
     },
@@ -55,7 +55,7 @@ let obj = {
       name: "Бургер з свининою",
       shortDescr: "Котлета зі свинини з сиром моцарела, бекон, айсберг, помідор, огірок квашений, карамелізована цибуля, соус біг-мак",
       size: "82 мм",
-      img: "burger-with-pork",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/burger/burger-with-pork.png?raw=true",
       price: 200,
       productTipe: 'burger'
     },
@@ -64,7 +64,7 @@ let obj = {
       name: "Крила медові",
       shortDescr: "Курячі крила в томатно-медовому соусі з кунжутом, які хочеться з'їсти з кісточками!",
       weight: "350 грам",
-      img: "honey-wings",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/wings/honey-wings.png?raw=true",
       price: 150,
       productTipe: 'wings'
     },
@@ -73,7 +73,7 @@ let obj = {
       name: "Крила Чілі",
       shortDescr: "Курячі крила в гострому соусі з кунжутом, які хочеться з'їсти з кісточками!",
       weight: "350 грам",
-      img: "chile-wings",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/wings/chile-wings.png?raw=true",
       price: 150,
       productTipe: 'wings'
     },
@@ -82,7 +82,7 @@ let obj = {
       name: "Крила гірчичні",
       shortDescr: "Курячі крила в гірчичному соусі з кунжутом, які хочеться з'їсти з кісточками!",
       weight: "350 грам",
-      img: "mustard-wings",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/wings/mustard-wings.png?raw=true",
       price: 150,
       productTipe: 'wings'
     },
@@ -91,7 +91,7 @@ let obj = {
       name: "Крила BBQ",
       shortDescr: "Курячі крила в соусі BBQ з кунжутом, які хочеться з'їсти з кісточками!",
       weight: "350 грам",
-      img: "bbq-wings",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/wings/bbq-wings.png?raw=true",
       price: 150,
       productTipe: 'wings'
     },
@@ -100,7 +100,7 @@ let obj = {
       name: "КАРТОПЛЯ ФРІ",
       shortDescr: "Найсмачніша у галактиці картопля фрі у фрітюрі.",
       weight: "100/35 грам",
-      img: "french-fries",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/frying/french-fries.png?raw=true",
       price: 60,
       productTipe: 'frying'
     },
@@ -109,7 +109,7 @@ let obj = {
       name: "Картопля Діп",
       shortDescr: "Картопля лодочка",
       weight: "100/35 грам",
-      img: "potato-dip",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/frying/potato-dip.png?raw=true",
       price: 60,
       productTipe: 'frying'
     },
@@ -118,7 +118,7 @@ let obj = {
       name: "Нагетси",
       shortDescr: "Курячі нагетси в паніровці. Порція - 6шт (140грамів)",
       weight: "140/28 грам",
-      img: "nuggets",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/frying/nuggets.png?raw=true",
       price: 90,
       productTipe: 'frying'
     },
@@ -126,7 +126,7 @@ let obj = {
       id: "j46V2RYbz5",
       name: "Пиво Bud 0.5L",
       shortDescr: "Пиво Bud 0.5L світле, фільтроване. 5%",
-      img: "",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/beer/bud-0.5.png?raw=true",
       price: 65,
       productTipe: 'beer'
     },
@@ -134,7 +134,7 @@ let obj = {
       id: "j46V2RYbz5",
       name: "Пиво Beck's Ж/Б 0.5L",
       shortDescr: "Пиво Beck's 0.5L",
-      img: "",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/beer/becks-0.5L.png?raw=true",
       price: 65,
       productTipe: 'beer'
     },
@@ -142,7 +142,7 @@ let obj = {
       id: "Be4z3m38TF",
       name: "Пиво Beck's Green Lemon Ж/Б 0.5L",
       shortDescr: "Пиво Beck's Green Lemon 0.5L 2,5% в жестяній банці",
-      img: "",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/beer/beck's-green-lemon-0.5L.png?raw=true",
       price: 60,
       productTipe: 'beer'
     },
@@ -150,7 +150,7 @@ let obj = {
       id: "h5S9mN76kB",
       name: "Coca-Cola 0,33L Ж/Б",
       size: "0.33L",
-      img: "",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/drinksAsauces/coca-cola.png?raw=true",
       price: 25,
       productTipe: 'drinksAsauces'
     },
@@ -158,7 +158,7 @@ let obj = {
       id: "e8M5XVhk86",
       name: "Соус BBQ",
       size: "28 грам",
-      img: "",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/drinksAsauces/sauce-BBQ.png?raw=true",
       price: 10,
       productTipe: 'drinksAsauces'
     },
@@ -166,7 +166,7 @@ let obj = {
       id: "X7dme7R2T",
       name: "Соус Кетчуп",
       size: "28 грам",
-      img: "ketchup-sauce",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/drinksAsauces/ketchup-sauce.png?raw=true",
       price: 10,
       productTipe: 'drinksAsauces'
     },
