@@ -6,13 +6,13 @@ import { foodFetching, foodFetched, foodFetchingError } from '../../store/foodSl
 
 import FoodItem from '../FoodItem/FoodItem';
 import Spinner from '../Spinner/Spinner';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './foodList.scss';
 
 const FoodList = () => {
   const dispatch = useDispatch();
   const foodItemList = useSelector(state => state.food.foodList);
   const loadingStatus = useSelector(state => state.food.foodLoadingStatus);
-  // console.log(foodItemList, loadingStatus);
 
   useEffect(() => {
     dispatch(foodFetching());
@@ -36,6 +36,7 @@ const FoodList = () => {
   });
   
   const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
+  const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
 
   return (
     <div className="food-list">
@@ -43,6 +44,7 @@ const FoodList = () => {
         {content}
       </div>
       {spinnerShow}
+      {errorShow}
     </div>
   )
 }
