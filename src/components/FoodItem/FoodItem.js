@@ -1,7 +1,7 @@
 import './foodItem.scss';
 
 const FoodItem = (props) => {
-  const {img, name, price, shortDescr} = props.data;
+  const {img, name, price, shortDescr, size, weight} = props.data;
 
   return (
     <div className="food-item">
@@ -11,7 +11,14 @@ const FoodItem = (props) => {
       <div className="food-item__body">
         <div className="food-item__features">
           <div className="food-item__title">{name}</div>
-          <div className="food-item__descr">{shortDescr}</div>
+          <div className="food-item__descr">
+            {shortDescr}
+            <br />
+            <br />
+
+            Розмір: {size} см<br />
+            Вага: {weight} грам<br />
+          </div>
           <div className="food-item__price">{`${price} грн`}</div>
         </div>
         <div className="food-item__btns">
