@@ -8,7 +8,7 @@ let obj = {
       shortDescr: "Салямі, кабаносі, шинка тостова, балик, маринована цибуля, сир моцарела, помідори, червоний соус",
       weight: "620 грам",
       size: "30 см",
-      img: "./resources/img/pizza/мясне-сафарі-4-мяса.png",
+      img: "meat-safari-4-meats",
       price: 210,
       productTipe: 'pizza'
     },
@@ -18,7 +18,7 @@ let obj = {
       shortDescr: "Салямі, свинина, печериці, перець болгарський, маринована цибуля, помідори, моцарела, сирний соус, спеції",
       weight: "600 грам",
       size: "30 см",
-      img: "./resources/img/pizza/grilla.png",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/grilla.png?raw=true",
       price: 225,
       productTipe: 'pizza'
     },
@@ -28,7 +28,7 @@ let obj = {
       shortDescr: "Куряче філе, печериці, помідор, моцарела, пармезан, соус сирний",
       weight: "550 грам",
       size: "30 см",
-      img: "./resources/img/pizza/soloway-white.png",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/soloway-white.png?raw=true",
       price: 195,
       productTipe: 'pizza'
     },
@@ -37,7 +37,7 @@ let obj = {
       name: "Бургер DOUBLE KILL",
       shortDescr: "Подвійна котлета з яловичини, подвійний сир чеддер, подвійний бекон, помідор, соус чеддер",
       size: "82 мм",
-      img: "",
+      img: "burger-double-kill",
       price: 200,
       productTipe: 'burger'
     },
@@ -46,7 +46,7 @@ let obj = {
       name: "Бургер з яловичиною",
       shortDescr: "Котлета з яловичини, сир чеддер, айсберг, помідор, огірок квашений, карамелізована цибуля, соус біг мак",
       size: "82 мм",
-      img: "",
+      img: "beef-burger",
       price: 200,
       productTipe: 'burger'
     },
@@ -55,7 +55,7 @@ let obj = {
       name: "Бургер з свининою",
       shortDescr: "Котлета зі свинини з сиром моцарела, бекон, айсберг, помідор, огірок квашений, карамелізована цибуля, соус біг-мак",
       size: "82 мм",
-      img: "",
+      img: "burger-with-pork",
       price: 200,
       productTipe: 'burger'
     },
@@ -64,7 +64,7 @@ let obj = {
       name: "Крила медові",
       shortDescr: "Курячі крила в томатно-медовому соусі з кунжутом, які хочеться з'їсти з кісточками!",
       weight: "350 грам",
-      img: "",
+      img: "honey-wings",
       price: 150,
       productTipe: 'wings'
     },
@@ -73,7 +73,7 @@ let obj = {
       name: "Крила Чілі",
       shortDescr: "Курячі крила в гострому соусі з кунжутом, які хочеться з'їсти з кісточками!",
       weight: "350 грам",
-      img: "",
+      img: "chile-wings",
       price: 150,
       productTipe: 'wings'
     },
@@ -82,7 +82,7 @@ let obj = {
       name: "Крила гірчичні",
       shortDescr: "Курячі крила в гірчичному соусі з кунжутом, які хочеться з'їсти з кісточками!",
       weight: "350 грам",
-      img: "",
+      img: "mustard-wings",
       price: 150,
       productTipe: 'wings'
     },
@@ -91,7 +91,7 @@ let obj = {
       name: "Крила BBQ",
       shortDescr: "Курячі крила в соусі BBQ з кунжутом, які хочеться з'їсти з кісточками!",
       weight: "350 грам",
-      img: "",
+      img: "bbq-wings",
       price: 150,
       productTipe: 'wings'
     },
@@ -100,7 +100,7 @@ let obj = {
       name: "КАРТОПЛЯ ФРІ",
       shortDescr: "Найсмачніша у галактиці картопля фрі у фрітюрі.",
       weight: "100/35 грам",
-      img: "",
+      img: "french-fries",
       price: 60,
       productTipe: 'frying'
     },
@@ -109,7 +109,7 @@ let obj = {
       name: "Картопля Діп",
       shortDescr: "Картопля лодочка",
       weight: "100/35 грам",
-      img: "",
+      img: "potato-dip",
       price: 60,
       productTipe: 'frying'
     },
@@ -118,7 +118,7 @@ let obj = {
       name: "Нагетси",
       shortDescr: "Курячі нагетси в паніровці. Порція - 6шт (140грамів)",
       weight: "140/28 грам",
-      img: "",
+      img: "nuggets",
       price: 90,
       productTipe: 'frying'
     },
@@ -166,7 +166,7 @@ let obj = {
       id: "X7dme7R2T",
       name: "Соус Кетчуп",
       size: "28 грам",
-      img: "",
+      img: "ketchup-sauce",
       price: 10,
       productTipe: 'drinksAsauces'
     },
