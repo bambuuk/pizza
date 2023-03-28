@@ -51,9 +51,10 @@
 
 .food-line-inner {
   display: flex;
+  text-align: center;
   width: 200%;
   &-item {
-    margin-right: 30%;
+    width: 100%;
   }
 }
 
@@ -88,7 +89,7 @@
     display: grid;
     grid-template: 51px / minmax(auto, 600px);
     justify-content: center;
-    margin: 65px 0 0 0;
+    margin: 35px 0 0 0;
     padding: 0 10px;
   }
   .food-filter {
@@ -116,6 +117,16 @@
     background: url("../../resources/img/arrow-24.png") no-repeat 95% center;
     background-color: #8F4069;
   }
+  .food-line-outer {
+    margin: 30px auto 0 auto;
+  }
 }
 
-@media (max-width: 575px) {}
+@media (max-width: 575px) {
+  .food-line-inner {
+    width: 300%;
+    &-item {
+      width: 150%;
+    }
+  }
+}
