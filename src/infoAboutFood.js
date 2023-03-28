@@ -38,7 +38,7 @@ let obj = {
       shortDescr: "Свинина, Дор Блю, печериці, цибуля маринована, моцарела, сирний соус, спеції",
       weight: "520 грам",
       size: "30 см",
-      img: "tanos",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/tanos.png?raw=true",
       price: 220,
       productType: 'pizza'
     },
@@ -48,7 +48,7 @@ let obj = {
       shortDescr: "Дор блю, моцарела, чеддер, пармезан, вершки",
       weight: "500 грам",
       size: "30 см",
-      img: "rockfor",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/rockfor.png?raw=true",
       price: 250,
       productType: 'pizza'
     },
@@ -58,7 +58,7 @@ let obj = {
       shortDescr: "Свинина, кабаносі, огірок маринований, цибуля маринована, маслини, моцарела, соус червоний",
       weight: "590 грам",
       size: "30 см",
-      img: "ukrainian",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/ukrainian.png?raw=true",
       price: 180,
       productType: 'pizza'
     },
@@ -68,7 +68,7 @@ let obj = {
       shortDescr: "Бекон, балик, печериці, помідор, чеддер, моцарела, ніжний вершковий соус, пармезан",
       weight: "550 грам",
       size: "30 см",
-      img: "karbonara",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/karbonara.png?raw=true",
       price: 250,
       productType: 'pizza'
     },
@@ -78,7 +78,7 @@ let obj = {
       shortDescr: "Кабаносі, шинка, печериці, перець болгарський, помідор, моцарела, соус червоний, корінь мандрагори",
       weight: "590 грам",
       size: "30 см",
-      img: "hagrid",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/hagrid.png?raw=true",
       price: 185,
       productType: 'pizza'
     },
@@ -88,7 +88,7 @@ let obj = {
       shortDescr: "Куряче філе, ананаси, кукурудза, моцарела, помідори, соус червоний, спеції",
       weight: "545 грам",
       size: "30 см",
-      img: "hawaiian-wave",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/hawaiian-wave.png?raw=true",
       price: 205,
       productType: 'pizza'
     },
@@ -98,7 +98,7 @@ let obj = {
       shortDescr: "Свинина, куряче філе, опеньки мариновані, сир моцарела, помідори, сирний соус, спеції",
       weight: "500 грам",
       size: "30 см",
-      img: "joker",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/joker.png?raw=true",
       price: 235,
       productType: 'pizza'
     },
@@ -108,7 +108,7 @@ let obj = {
       shortDescr: "Креветки, мідії, кальмар, лосось, моцарела, маслини, ніжний вершковий соус. Незабутній смак.",
       weight: "555 грам",
       size: "30 см",
-      img: "akvamen",
+      img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/akvamen.png?raw=true",
       price: 290,
       productType: 'pizza'
     },
@@ -202,8 +202,8 @@ let obj = {
       price: 90,
       productType: 'frying'
     },
-    j46V2RYbz5: {
-      id: "j46V2RYbz5",
+    KA94Kfiu97: {
+      id: "KA94Kfiu97",
       name: "Пиво Bud 0.5L",
       shortDescr: "Пиво Bud 0.5L світле, фільтроване. 5%",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/beer/bud-0.5.png?raw=true",

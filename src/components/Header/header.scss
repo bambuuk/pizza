@@ -38,11 +38,30 @@
 	}
 
 	&__link {
+		position: relative;
 		color: $main-color-text;
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 20px;
 		transition: all 3s ease-in-out;
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: -10%;
+			opacity: 0;
+			width: 100%;
+			height: 100%;
+			border-bottom: 1px solid #ff764d;
+			-webkit-box-shadow: inset 0px -1px 0px 0px #ff764d;
+			-moz-box-shadow: inset 0px -1px 0px 0px #ff764d;
+			box-shadow: inset 0px -1px 0px 0px #ff764d;
+			-webkit-transition: all 0.3s ease;
+			transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;;
+		}
+		&:hover::after {
+			opacity: 1;
+		}
 	}
 
 	&__link.active {
