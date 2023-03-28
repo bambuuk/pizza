@@ -79,6 +79,7 @@
     line-height: 17px;
     transition: 0.4s all;
     color: $main-color-text;
+    cursor: pointer;
     &:hover {
       background-color: $btn-color;
     }

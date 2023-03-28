@@ -32,6 +32,86 @@ let obj = {
       price: 195,
       productType: 'pizza'
     },
+    H4Vg7Vd5t2: {
+      id: "H4Vg7Vd5t2",
+      name: "Танос",
+      shortDescr: "Свинина, Дор Блю, печериці, цибуля маринована, моцарела, сирний соус, спеції",
+      weight: "520 грам",
+      size: "30 см",
+      img: "tanos",
+      price: 220,
+      productType: 'pizza'
+    },
+    bx472uHE3V: {
+      id: "bx472uHE3V",
+      name: "Рокфор (4 сира)",
+      shortDescr: "Дор блю, моцарела, чеддер, пармезан, вершки",
+      weight: "500 грам",
+      size: "30 см",
+      img: "rockfor",
+      price: 250,
+      productType: 'pizza'
+    },
+    Ck46V3pnM: {
+      id: "Ck46V3pnM",
+      name: "УКРАЇНСЬКА",
+      shortDescr: "Свинина, кабаносі, огірок маринований, цибуля маринована, маслини, моцарела, соус червоний",
+      weight: "590 грам",
+      size: "30 см",
+      img: "ukrainian",
+      price: 180,
+      productType: 'pizza'
+    },
+    Jz9Vz2U7x6: {
+      id: "Jz9Vz2U7x6",
+      name: "Карбонара",
+      shortDescr: "Бекон, балик, печериці, помідор, чеддер, моцарела, ніжний вершковий соус, пармезан",
+      weight: "550 грам",
+      size: "30 см",
+      img: "karbonara",
+      price: 250,
+      productType: 'pizza'
+    },
+    e552BvXj2C: {
+      id: "e552BvXj2C",
+      name: "ХАГРІД",
+      shortDescr: "Кабаносі, шинка, печериці, перець болгарський, помідор, моцарела, соус червоний, корінь мандрагори",
+      weight: "590 грам",
+      size: "30 см",
+      img: "hagrid",
+      price: 185,
+      productType: 'pizza'
+    },
+    mgDH296L3z: {
+      id: "mgDH296L3z",
+      name: "Гавайська хвиля",
+      shortDescr: "Куряче філе, ананаси, кукурудза, моцарела, помідори, соус червоний, спеції",
+      weight: "545 грам",
+      size: "30 см",
+      img: "hawaiian-wave",
+      price: 205,
+      productType: 'pizza'
+    },
+    m95Thy8UU: {
+      id: "m95Thy8UU",
+      name: "Джокер",
+      shortDescr: "Свинина, куряче філе, опеньки мариновані, сир моцарела, помідори, сирний соус, спеції",
+      weight: "500 грам",
+      size: "30 см",
+      img: "joker",
+      price: 235,
+      productType: 'pizza'
+    },
+    Ub59pZf9U2: {
+      id: "Ub59pZf9U2",
+      name: "Аквамен",
+      shortDescr: "Креветки, мідії, кальмар, лосось, моцарела, маслини, ніжний вершковий соус. Незабутній смак.",
+      weight: "555 грам",
+      size: "30 см",
+      img: "akvamen",
+      price: 290,
+      productType: 'pizza'
+    },
     C5ti4V7n7X: {
       id: "C5ti4V7n7X",
       name: "Бургер DOUBLE KILL",
