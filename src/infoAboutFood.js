@@ -10,7 +10,7 @@ let obj = {
       size: "30 см",
       img: "https://raw.githubusercontent.com/bambuuk/pizza/main/src/resources/img/pizza/meat-safari-4-meats.png",
       price: 210,
-      productTipe: 'pizza'
+      productType: 'pizza'
     },
     F7g3JkYx2: {
       id: "F7g3JkYx2",
@@ -20,7 +20,7 @@ let obj = {
       size: "30 см",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/grilla.png?raw=true",
       price: 225,
-      productTipe: 'pizza'
+      productType: 'pizza'
     },
     J8n42Da7Nk: {
       id: "J8n42Da7Nk",
@@ -30,7 +30,7 @@ let obj = {
       size: "30 см",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/pizza/soloway-white.png?raw=true",
       price: 195,
-      productTipe: 'pizza'
+      productType: 'pizza'
     },
     C5ti4V7n7X: {
       id: "C5ti4V7n7X",
@@ -39,7 +39,7 @@ let obj = {
       size: "82 мм",
       img: "https://raw.githubusercontent.com/bambuuk/pizza/main/src/resources/img/burger/burger-double-kill.jpg",
       price: 200,
-      productTipe: 'burger'
+      productType: 'burger'
     },
     hJL45Zjj95: {
       id: "hJL45Zjj95",
@@ -48,7 +48,7 @@ let obj = {
       size: "82 мм",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/burger/beef-burger.jpg?raw=true",
       price: 200,
-      productTipe: 'burger'
+      productType: 'burger'
     },
     VxkYH8287f: {
       id: "VxkYH8287f",
@@ -57,7 +57,7 @@ let obj = {
       size: "82 мм",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/burger/burger-with-pork.png?raw=true",
       price: 200,
-      productTipe: 'burger'
+      productType: 'burger'
     },
     nT8Af3z45L: {
       id: "nT8Af3z45L",
@@ -66,7 +66,7 @@ let obj = {
       weight: "350 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/wings/honey-wings.png?raw=true",
       price: 150,
-      productTipe: 'wings'
+      productType: 'wings'
     },
     cft6G8M4N9: {
       id: "cft6G8M4N9",
@@ -75,7 +75,7 @@ let obj = {
       weight: "350 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/wings/chile-wings.png?raw=true",
       price: 150,
-      productTipe: 'wings'
+      productType: 'wings'
     },
     FxU8t35Xg3: {
       id: "FxU8t35Xg3",
@@ -84,7 +84,7 @@ let obj = {
       weight: "350 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/wings/mustard-wings.png?raw=true",
       price: 150,
-      productTipe: 'wings'
+      productType: 'wings'
     },
     JK895yMf4u: {
       id: "JK895yMf4u",
@@ -93,7 +93,7 @@ let obj = {
       weight: "350 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/wings/bbq-wings.png?raw=true",
       price: 150,
-      productTipe: 'wings'
+      productType: 'wings'
     },
     fi4ZXE728u: {
       id: "fi4ZXE728u",
@@ -102,7 +102,7 @@ let obj = {
       weight: "100/35 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/frying/french-fries.png?raw=true",
       price: 60,
-      productTipe: 'frying'
+      productType: 'frying'
     },
     B28TEi66tb: {
       id: "B28TEi66tb",
@@ -111,7 +111,7 @@ let obj = {
       weight: "100/35 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/frying/potato-dip.png?raw=true",
       price: 60,
-      productTipe: 'frying'
+      productType: 'frying'
     },
     Y55mfL82Vj: {
       id: "Y55mfL82Vj",
@@ -120,7 +120,7 @@ let obj = {
       weight: "140/28 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/frying/nuggets.png?raw=true",
       price: 90,
-      productTipe: 'frying'
+      productType: 'frying'
     },
     j46V2RYbz5: {
       id: "j46V2RYbz5",
@@ -128,7 +128,7 @@ let obj = {
       shortDescr: "Пиво Bud 0.5L світле, фільтроване. 5%",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/beer/bud-0.5.png?raw=true",
       price: 65,
-      productTipe: 'beer'
+      productType: 'beer'
     },
     j46V2RYbz5: {
       id: "j46V2RYbz5",
@@ -136,7 +136,7 @@ let obj = {
       shortDescr: "Пиво Beck's 0.5L",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/beer/becks-0.5L.png?raw=true",
       price: 65,
-      productTipe: 'beer'
+      productType: 'beer'
     },
     Be4z3m38TF: {
       id: "Be4z3m38TF",
@@ -144,7 +144,7 @@ let obj = {
       shortDescr: "Пиво Beck's Green Lemon 0.5L 2,5% в жестяній банці",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/beer/beck's-green-lemon-0.5L.png?raw=true",
       price: 60,
-      productTipe: 'beer'
+      productType: 'beer'
     },
     h5S9mN76kB: {
       id: "h5S9mN76kB",
@@ -152,7 +152,7 @@ let obj = {
       size: "0.33L",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/drinksAsauces/coca-cola.png?raw=true",
       price: 25,
-      productTipe: 'drinksAsauces'
+      productType: 'drinksAsauces'
     },
     e8M5XVhk86: {
       id: "e8M5XVhk86",
@@ -160,7 +160,7 @@ let obj = {
       size: "28 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/drinksAsauces/sauce-BBQ.png?raw=true",
       price: 10,
-      productTipe: 'drinksAsauces'
+      productType: 'drinksAsauces'
     },
     X7dme7R2T: {
       id: "X7dme7R2T",
@@ -168,7 +168,7 @@ let obj = {
       size: "28 грам",
       img: "https://github.com/bambuuk/pizza/blob/main/src/resources/img/drinksAsauces/ketchup-sauce.png?raw=true",
       price: 10,
-      productTipe: 'drinksAsauces'
+      productType: 'drinksAsauces'
     },
   }
 }

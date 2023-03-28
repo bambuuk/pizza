@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   foodList: [],
   foodLoadingStatus: 'idle',
+  activeFoodFilter: { name: 'pizza', label: 'ПІЦА' },
+  filteredFoodList: []
 }
 
 const foodSlice = createSlice({
@@ -13,9 +15,14 @@ const foodSlice = createSlice({
     foodFetched: (state, action) => {
       state.foodLoadingStatus = 'idle';
       state.foodList = action.payload;
+      state.filteredFoodList = state.foodList.filter(item => item.productType === state.activeFoodFilter.name);
     },
     foodFetchingError: state => {
       state.foodLoadingStatus = 'error';
+    },
+    foodChangingActiveFilter: (state, action) => {
+      state.activeFoodFilter = action.payload;
+      state.filteredFoodList = state.foodList.filter(item => item.productType === state.activeFoodFilter.name);
     }
   }
 });
@@ -27,4 +34,5 @@ export const {
   foodFetching,
   foodFetched,
   foodFetchingError,
+  foodChangingActiveFilter,
 } = actions;

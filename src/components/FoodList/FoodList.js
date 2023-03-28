@@ -11,7 +11,7 @@ import './foodList.scss';
 
 const FoodList = () => {
   const dispatch = useDispatch();
-  const foodItemList = useSelector(state => state.food.foodList);
+  const foodItemList = useSelector(state => state.food.filteredFoodList);
   const loadingStatus = useSelector(state => state.food.foodLoadingStatus);
 
   useEffect(() => {

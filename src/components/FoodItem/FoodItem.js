@@ -1,7 +1,20 @@
 import './foodItem.scss';
 
 const FoodItem = (props) => {
-  const {img, name, price, shortDescr, size, weight} = props.data;
+  const {img, name, price, shortDescr, size, weight, productType} = props.data;
+
+  const shDescr = shortDescr ? <>{shortDescr} <br /> <br /></> : null;
+  let showingSizeAndWeight = null;
+  if(size && weight ) {
+    showingSizeAndWeight = <>
+      Розмір: {size} <br />
+      Вага: {weight}
+    </>
+  } else if (!!size === true && !!weight !== true) {
+    showingSizeAndWeight = `Розмір: ${size}`;
+  } else if (!!weight === true && !!size !== true) {
+    showingSizeAndWeight = `Вага: ${weight}`;
+  }
 
   return (
     <div className="food-item">
@@ -12,12 +25,8 @@ const FoodItem = (props) => {
         <div className="food-item__features">
           <div className="food-item__title">{name}</div>
           <div className="food-item__descr">
-            {shortDescr}
-            <br />
-            <br />
-
-            Розмір: {size} см<br />
-            Вага: {weight} грам<br />
+            {shDescr}
+            {showingSizeAndWeight}
           </div>
           <div className="food-item__price">{`${price} грн`}</div>
         </div>

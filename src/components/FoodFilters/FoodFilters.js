@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { foodChangingActiveFilter } from '../../store/foodSlice';
+
 import './foodFilters.scss';
 
 const FoodFilters = () => {
-  const [activeFilter, setActiveFilter] = useState({ name: 'pizza', label: 'ПІЦА' });
+  const dispatch = useDispatch();
+  const activeFoodFilter = useSelector(state => state.food.activeFoodFilter);
+
+  const [activeFilter, setActiveFilter] = useState(activeFoodFilter);
   const foodListData = [
     { name: 'pizza', label: 'ПІЦА' },
     { name: 'burger', label: 'БУРГЕР IS BACK' },
@@ -48,6 +54,10 @@ const FoodFilters = () => {
       </option>
     )
   });
+
+  useEffect(() => {
+    dispatch(foodChangingActiveFilter(activeFilter));
+  }, [activeFilter])
 
   return (
     <div className="food-filter food-filter_content">
