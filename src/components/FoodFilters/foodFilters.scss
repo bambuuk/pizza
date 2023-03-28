@@ -8,7 +8,6 @@
     row-gap: 10px;
     justify-content: center;
     align-items: center;
-    margin: 65px 0 0 0;
     padding: 0 10px;
   }
   &__item {
@@ -40,6 +39,35 @@
   &_wrapper {
     display: none;
   } 
+}
+
+.food-line-outer {
+  color: white;
+  overflow: hidden;
+  text-transform: uppercase;
+  width: 98%;
+  margin: 30px auto;
+}
+
+.food-line-inner {
+  display: flex;
+  width: 200%;
+  &-item {
+    margin-right: 30%;
+  }
+}
+
+@keyframes run {
+  0% {
+    //
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.run {
+  animation: run infinite 30s linear;
 }
 
 .active-btn {

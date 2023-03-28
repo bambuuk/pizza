@@ -61,6 +61,12 @@ const FoodFilters = () => {
 
   return (
     <div className="food-filter food-filter_content">
+      <div className='food-line-outer'>
+        <div className='food-line-inner run'>
+          <div className='food-line-inner-item'>NEW!!! Години роботи: з 11:00 до 21:30 без вихідних</div>
+          <div className='food-line-inner-item'>NEW!!! Години роботи: з 11:00 до 21:30 без вихідних</div>
+        </div>
+      </div>
       <ul className="food-filter__list">
         {foodItemsUl}
       </ul>
