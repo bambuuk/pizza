@@ -41,6 +41,7 @@ const Header = ({ fixedHeader }) => {
         </nav>
 
         <div className="header__address">Пашутинська 61/84. Кропивницький</div>
+        <div className="header__shoppin-bag"></div>
 
         <div className="header__social-networks social-networks">
           <a
@@ -77,9 +78,11 @@ const Header = ({ fixedHeader }) => {
           onKeyDown={toggleBurgerMenuActive}
           role="button"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <div className="header__burger_wrapper">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
 
         <nav className={`burger burger__menu ${styleMenu}`}>

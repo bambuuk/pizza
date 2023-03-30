@@ -78,6 +78,13 @@
 	&__social-networks {
 		display: flex;
 	}
+
+	&__shoppin-bag {
+		display: none;
+		background: url('../../resources/icons/shopping-bag-24.png') no-repeat;
+		width: 24px;
+		height: 24px;
+	}
 }
 
 .social-networks {
@@ -158,7 +165,7 @@
 	}
 
 	.social-networks {
-		justify-content: end;
+		justify-content: flex-end;
 	}
 }
 
@@ -172,21 +179,33 @@
 
 	.header {
 		display: flex;
-		justify-content: space-between;
 
 		&__contacts {
 			display: none;
+		}
+		&__shoppin-bag {
+			display: block;
+			margin-right: 15px;
+		}
+		&__logo {
+			flex: 1 1 auto
 		}
 	}
 
 	.header__burger {
 		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		transform: translateY(-50%);
+		justify-content: end;
 		width: 30px;
 		height: 20px;
 		z-index: 30;
+		cursor: pointer;
+		&_wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			width: 30px;
+			height: 20px;
+		}
 
 		& span {
 			display: block;
@@ -198,7 +217,9 @@
 
 		&_active {
 			position: fixed;
+			width: 100%;
 			right: 20px;
+			width: 100%;
 		}
 
 		&_active span {
