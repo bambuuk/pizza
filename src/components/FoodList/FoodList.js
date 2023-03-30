@@ -34,12 +34,16 @@ const FoodList = () => {
   const content = foodItemList.map(item => {
     return <FoodItem key={item.id} data={item} />
   });
-  
+
   const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
   const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
 
   return (
     <div className="food-list">
+      <div className="basket_wrapper basket">
+        <div className="basket__img"></div>
+        <div className="basket__counter">1</div>
+      </div>
       <div className="food-items">
         {content}
       </div>

@@ -59,6 +59,7 @@ const FoodFilters = () => {
 
   useEffect(() => {
     dispatch(foodChangingActiveFilter(activeFilter));
+    // eslint-disable-next-line
   }, [activeFilter]);
 
   return (

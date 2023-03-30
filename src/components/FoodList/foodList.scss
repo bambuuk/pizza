@@ -11,6 +11,48 @@
   padding: 0 10px;
 }
 
+.basket {
+  &_wrapper {
+    position: fixed;
+    top: 100px;
+    right: 45px;
+    z-index: 50;
+    // opacity: 0;
+    // visibility: hidden;
+  }
+  &__img {
+    background: url('../../resources/icons/shopping-cart-40.png') center no-repeat;
+    background-color: #333333;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
+    transition: all 0.2s ease-in-out,-webkit-transform 0.2s ease-in-out;
+    overflow: hidden;
+    will-change: transform;
+    &:hover {
+      transform: scale(1.1);
+      border: 1px solid $btn-color;
+      box-shadow: 0 0 10px 0 $btn-color;
+    }
+  }
+  &__counter {
+    position: fixed;
+    z-index: 60;
+    top: 145px;
+    right: 40px;
+    width: 24px;
+    height: 24px;
+    background-color: $btn-color;
+    color: $main-color-text;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 @media (max-width: 1200px) {
   .food-items {
     display: grid;
