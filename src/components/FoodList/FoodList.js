@@ -7,6 +7,7 @@ import { foodFetching, foodFetched, foodFetchingError } from '../../store/foodSl
 import FoodItem from '../FoodItem/FoodItem';
 import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import img from '../../resources/img/pizza/akvamen.png';
 import './foodList.scss';
 
 const FoodList = () => {
@@ -72,22 +73,22 @@ const FoodList = () => {
             <div className="order-list__title">Ваше замовлення:</div>
             <div className="order-list__products">
               <div className="order-list__product-item">
-                <div className="order-lst__img">
-                  <img src="" alt="" />
+                <div className="order-list__img">
+                  <img src={img} alt="" />
                 </div>
                 <div className="order-list__descr">
                   <div className="order-list__subtitle">SoloWay White</div>
                   <div className="order-list__features">Розмір</div>
                 </div>
                 <div className="order-list__counter">
-                  <span className="order-list__minus order-list__sign">
-                    span
-                  </span>
+                  <div className="order-list__minus order-list__sign">
+                    <span></span>
+                  </div>
                   <span className="order-list__qty">1</span>
-                  <span className="order-list__plus order-list__sign">
+                  <div className="order-list__plus order-list__sign">
                     <span></span>
                     <span></span>
-                  </span>
+                  </div>
                 </div>
                 <div className="order-list__amount">585 грн</div>
                 <div className="order-list__del-product order-list__sign">
@@ -96,7 +97,7 @@ const FoodList = () => {
                 </div>
               </div>
             </div>
-            <div className="total-amount">Сума: 585 грн</div>
+            <div className="order-list__total-amount">Сума: 585 грн</div>
             <div className="order-list__form order-form">
               <form action="">
 
