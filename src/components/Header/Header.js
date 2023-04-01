@@ -9,6 +9,7 @@ const Header = ({ fixedHeader }) => {
   const toggleBurgerMenuActive = (e) => {
     if (e.type === 'click' || e.code === 'Enter') {
       setActive(!active);
+      document.body.classList.toggle('no-scroll');
     }
   };
 

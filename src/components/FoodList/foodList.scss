@@ -12,18 +12,20 @@
 }
 
 .basket {
-  opacity: 0;
-  visibility: hidden;
   transition: all 0.2s ease-in-out;
-  &_active {
+  &_show {
     opacity: 1;
     visibility: visible;
+  }
+  &_hidden {
+    opacity: 0;
+    visibility: hidden;
   }
   &_wrapper {
     position: fixed;
     top: 100px;
     right: 45px;
-    z-index: 50;
+    z-index: 10;
   }
   &__img {
     background: url('../../resources/icons/shopping-cart-40.png') center no-repeat;
@@ -54,6 +56,70 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    line-height: 24px;
+    font-size: 14px;
+  }
+}
+
+.order-list {
+  transition: all 0.3s ease-in-out;
+  &_show {
+    opacity: 1;
+    visibility: visible;
+  }
+  &_hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  &_overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.8);
+    z-index: 20;
+    overflow-y: auto;
+  }
+  &__popup {
+    margin: 65px auto;
+    width: 100%;
+    max-width: 560px;
+    min-height: 300px;
+    background-color: rgba(255,255,255,1);
+    padding: 40px;
+
+  }
+  &__close {
+    position: fixed;
+    top: 10px;
+    right: 30px;
+    width: 43px;
+    height: 43px;
+    display: flex;
+  }
+  &__close-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    & span {
+      display: block;
+			width: 100%;
+      margin-bottom: -3px;
+			background-color: $btn-color;
+			height: 3px;
+      &:nth-child(1) {
+				transform: rotate(-45deg)
+			}
+			&:nth-child(2) {
+				transform: rotate(45deg)
+			}
+    }
   }
 }
 
@@ -70,41 +136,12 @@
 @media (max-width: 767px) {
   .basket {
     &_wrapper {
-      position: fixed;
-      top: 100px;
-      right: 45px;
-      z-index: 50;
-    }
-    &__img {
-      background: url('../../resources/icons/shopping-cart-40.png') center no-repeat;
-      background-color: #333333;
-      width: 60px;
-      height: 60px;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
-      transition: all 0.2s ease-in-out,-webkit-transform 0.2s ease-in-out;
-      overflow: hidden;
-      will-change: transform;
-      &:hover {
-        transform: scale(1.1);
-        border: 1px solid $btn-color;
-        box-shadow: 0 0 10px 0 $btn-color;
-      }
+      top: 80%;
+      right: 15px;
     }
     &__counter {
-      position: fixed;
-      z-index: 60;
-      top: 145px;
-      right: 40px;
-      width: 24px;
-      height: 24px;
-      background-color: $btn-color;
-      color: $main-color-text;
-      border-radius: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      top: 88%;
+      right: 10px;
     }
   }
 }
