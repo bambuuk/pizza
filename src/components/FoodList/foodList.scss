@@ -139,12 +139,13 @@
   }
   &__product-item {
     width: 100%;
-    padding: 15px 0;
+    margin: 15px 0;
     display: grid;
     grid-template: 70px / 70px 165px 70px 1fr 20px;
     grid-auto-rows: 70px;
     column-gap: 15px;
     align-items: center;
+    overflow: hidden;
     &:hover .order-list__sign {
       opacity: 1;
     }
@@ -158,11 +159,17 @@
     height: 100%;
     object-fit: cover;
   }
+  &__descr {
+    white-space: nowrap;
+    overflow: hidden;
+  }
   &__subtitle {
     font-size: 16px;
     font-weight: 600;
     color: #000;
-    line-height: 24px;
+    line-height: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &__features {
     opacity: .7;
@@ -170,11 +177,14 @@
     font-weight: 400;
     color: #000;
     line-height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &__counter {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    white-space: nowrap;
   }
   &__sign {
     cursor: pointer;
@@ -267,13 +277,21 @@
 }
 
 @media (max-width: 767px) {
+  .order-list {
+    &__popup {
+      max-width: 460px;
+    }
+    &__product-item {
+      display: grid;
+      grid-template: 70px / 70px 1fr 60px 60px 20px;
+      column-gap: 10px;
+    }
+  }
   .basket {
     &_wrapper {
-      top: 80%;
       right: 15px;
     }
     &__counter {
-      top: 88%;
       right: 10px;
     }
   }
@@ -283,5 +301,37 @@
   .food-items {
     display: grid;
     grid-template: minmax(500px, auto) / minmax(280px, 360px);
+  }
+  .order-list {
+    &__popup {
+      max-width: 460px;
+    }
+    &__product-item {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    &__img {
+      display: none;
+    }
+    &__descr {
+      max-width: 80%;
+      height: 35px;
+    }
+    &__counter {
+      width: 70px;
+    }
+    &__amount {
+      margin-top: 10px;
+    }
+    &__del-product {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    &__close {
+      right: 10px;
+    }
   }
 }
