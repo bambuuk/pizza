@@ -2,7 +2,7 @@
 
 .food-item {
   display: grid;
-	grid-auto-flow: row;
+  grid-auto-flow: row;
   grid-template: 240px 1fr / 1fr;
   background-color: $main-bg-for-objects;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -89,11 +89,11 @@
     text-align: center;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0;
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
     }
     &[type='number'] {
       appearance: none;
@@ -105,34 +105,34 @@
     justify-content: center;
     align-items: center;
     width: 25px;
-    height: 25px; 
+    height: 25px;
     cursor: pointer;
   }
   &__dec span {
     width: 15px;
     height: 1px;
     background-position: center;
-    background-size: 50% 1px,1px 50%;
+    background-size: 50% 1px, 1px 50%;
     background-repeat: no-repeat;
     border-radius: 50px;
-    background: linear-gradient(#777,#777),#fff;
+    background: linear-gradient(#777, #777), #fff;
   }
   &__inc {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 25px;
-    height: 25px; 
+    height: 25px;
     position: relative;
     cursor: pointer;
   }
   &__inc span {
     position: absolute;
     background-position: center;
-    background-size: 50% 1px,1px 50%;
+    background-size: 50% 1px, 1px 50%;
     background-repeat: no-repeat;
     border-radius: 50px;
-    background: linear-gradient(#777,#777),#fff;
+    background: linear-gradient(#777, #777), #fff;
   }
   &__inc span:first-child {
     width: 15px;
@@ -144,18 +144,10 @@
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) {}
 
-}
+@media (max-width: 991px) {}
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {}
 
-}
-
-@media (max-width: 767px) {
-  
-}
-
-@media (max-width: 575px) {
-
-}
+@media (max-width: 575px) {}
