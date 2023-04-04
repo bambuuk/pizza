@@ -115,11 +115,11 @@ const FoodList = () => {
                   <div className="order-form__subtitle">Варіанти доставки:</div>
                   <p className="order-form__radio">
                     <input type="radio" name="typeOfDelivery" id="deliveryAroundCity" value="Доставка по місту до 8 км 50 гривень"/>
-                    <label for="deliveryAroundCity">Доставка по місту до 8 км 50 гривень</label>
+                    <label htmlFor="deliveryAroundCity">Доставка по місту до 8 км 50 гривень</label>
                   </p>
                   <p className="order-form__radio">
                     <input type="radio" name="typeOfDelivery" id="pickup" value="Самовивіз за адресою вул. Пашутинська 61/84"/>
-                    <label for="pickup">Самовивіз за адресою вул. Пашутинська 61/84</label>
+                    <label htmlFor="pickup">Самовивіз за адресою вул. Пашутинська 61/84</label>
                   </p>
                 </div>
 
@@ -137,11 +137,11 @@ const FoodList = () => {
                   <div className="order-form__subtitle">Спосіб оплати:</div>
                   <p className="order-form__radio">
                     <input type="radio" name="typeOfPayment" id="cash" value="Готівкою при отриманні"/>
-                    <label for="cash">Готівкою при отриманні</label>
+                    <label htmlFor="cash">Готівкою при отриманні</label>
                   </p>
                   <p className="order-form__radio">
                     <input type="radio" name="typeOfPayment" id="online" value="Онлайн карткою Visa або Mastercard"/>
-                    <label for="online">Онлайн карткою Visa або Mastercard</label>
+                    <label htmlFor="online">Онлайн карткою Visa або Mastercard</label>
                   </p>
                 </div>
                 
