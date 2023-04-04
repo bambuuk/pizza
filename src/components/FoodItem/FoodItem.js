@@ -8,11 +8,11 @@ const FoodItem = (props) => {
 
   const onOrderFood = () => {
     // localStorage.removeItem('foodData');
-    const foodData = JSON.parse(localStorage.getItem('foodData'));
-    let newArrProduct = null;
+    const foodData = localStorage.getItem('foodData') ? JSON.parse(localStorage.getItem('foodData')) : [];
+    let newArrProduct = [];
     let foodItemAmount = 0;
 
-    if (foodData !== null && Array.isArray(foodData)) {
+    if (Array.isArray(foodData)) {
       let dublicate = false;
       for (let i = 0; i < foodData.length; i++) {
         if (foodData[i].id === id) {
@@ -30,7 +30,9 @@ const FoodItem = (props) => {
 
       newArrProduct.forEach(item => {
         foodItemAmount += +item.counter;
-      })
+      });
+
+
     }
 
     localStorage.setItem('foodData', JSON.stringify(newArrProduct));
