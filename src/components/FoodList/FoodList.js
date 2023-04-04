@@ -14,7 +14,10 @@ const FoodList = () => {
   const dispatch = useDispatch();
   const foodItemList = useSelector(state => state.food.filteredFoodList);
   const loadingStatus = useSelector(state => state.food.foodLoadingStatus);
+  const totalFoodPosition = JSON.parse(localStorage.getItem('totalFoodPosition'));
+
   const [shoppingBag, setShoppingBag] = useState(false);
+  const [totalOrderAmount, setTotalOrderAmount] = useState(+totalFoodPosition);
 
   const onActiveShopBag = (e) => {
     let clName = e.target.className;
@@ -28,6 +31,14 @@ const FoodList = () => {
     }
   }
 
+  const onChangeTotalOrderAmount = (value) => {
+    setTotalOrderAmount(value);
+  }
+
+  const content = foodItemList.map(item => {
+    return <FoodItem key={item.id} data={item} onChangeTotalOrderAmount={onChangeTotalOrderAmount} />
+  });
+  
   useEffect(() => {
     dispatch(foodFetching());
     onValue(ref(db), (snapshot) => {
@@ -45,20 +56,16 @@ const FoodList = () => {
     // eslint-disable-next-line
   }, []);
 
-  const content = foodItemList.map(item => {
-    return <FoodItem key={item.id} data={item} />
-  });
-
   const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
   const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
-  const activeStyleBasket = shoppingBag ? 'basket_hidden' : 'basket_show';
+  const activeStyleBasket = totalOrderAmount < 1 ? 'basket_hidden' : 'basket_show';
   const activeStyleShopBag = shoppingBag ? 'order-list_show' : 'order-list_hidden';
 
   return (
     <div className="food-list">
       <div className={`basket_wrapper basket ${activeStyleBasket}`} onClick={onActiveShopBag}>
         <div className="basket__img"></div>
-        <div className="basket__counter">1</div>
+        <div className="basket__counter">{totalFoodPosition}</div>
       </div>
 
       <div className={`order-list ${activeStyleShopBag}`}>
