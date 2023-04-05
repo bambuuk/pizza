@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { db } from '../../firebase';
 import { ref, onValue, } from 'firebase/database';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,6 +47,9 @@ const FoodList = () => {
       ).filter(item => +item.counter > 0);
 
       const newTotalFoodPosition = totalFoodPosition - 1;
+      if (newTotalFoodPosition === 0) {
+        setShoppingBag(shoppingBag => !shoppingBag);
+      }
 
       localStorage.setItem('foodData', JSON.stringify(newFoodListInShopBag));
       localStorage.setItem('totalFoodPosition', JSON.stringify(newTotalFoodPosition));
@@ -126,11 +129,6 @@ const FoodList = () => {
   };
 
   onUpdShowwingShopBagAndBasket();
-
-  // useEffect(() => {
-  //   onUpdShowwingShopBagAndBasket();
-  //   // eslint-disable-next-line
-  // }, [totalOrderAmount, shoppingBag, foodListInShopBag]);
 
   useEffect(() => {
     dispatch(foodFetching());
