@@ -41,33 +41,40 @@ const FoodList = () => {
   }
 
   const onCounterShopBag = (id, sign) => {
+    let newFoodListInShopBag = [];
+    let newTotalFoodPosition = 0;
     if (sign === 'dec') {
-      const newFoodListInShopBag = foodListInShopBag.map(
+      newFoodListInShopBag = foodListInShopBag.map(
         item => item.id === id ? { ...item, counter: +item.counter - 1 } : item
       ).filter(item => +item.counter > 0);
 
-      const newTotalFoodPosition = totalFoodPosition - 1;
-      if (newTotalFoodPosition === 0) {
-        setShoppingBag(shoppingBag => !shoppingBag);
-      }
-
-      localStorage.setItem('foodData', JSON.stringify(newFoodListInShopBag));
-      localStorage.setItem('totalFoodPosition', JSON.stringify(newTotalFoodPosition));
-      setFoodListInShopBag(newFoodListInShopBag);
-      setTotalOrderAmount(newTotalFoodPosition);
+      newTotalFoodPosition = totalFoodPosition - 1;
     } else if (sign === 'inc') {
-      const newFoodListInShopBag = foodListInShopBag.map(
+      newFoodListInShopBag = foodListInShopBag.map(
         item => item.id === id ? { ...item, counter: +item.counter + 1 } : item
       );
 
-      const newTotalFoodPosition = totalFoodPosition + 1;
+      newTotalFoodPosition = totalFoodPosition + 1;
+    } else if (sign === 'del') {
+      let delProductCount = 0;
+      foodListInShopBag.forEach(item => {
+        if(item.id === id) {
+          delProductCount = item.counter;
+        }
+      });
 
-      localStorage.setItem('foodData', JSON.stringify(newFoodListInShopBag));
-      localStorage.setItem('totalFoodPosition', JSON.stringify(newTotalFoodPosition));
-      setFoodListInShopBag(newFoodListInShopBag);
-      setTotalOrderAmount(newTotalFoodPosition);
+      newTotalFoodPosition = totalFoodPosition - delProductCount;
+      newFoodListInShopBag = foodListInShopBag.filter(item => item.id !== id);
     }
-    // console.log(shopBagFoodData)
+
+    if (newTotalFoodPosition === 0) {
+      setShoppingBag(shoppingBag => !shoppingBag);
+    }
+
+    localStorage.setItem('foodData', JSON.stringify(newFoodListInShopBag));
+    localStorage.setItem('totalFoodPosition', JSON.stringify(newTotalFoodPosition));
+    setFoodListInShopBag(newFoodListInShopBag);
+    setTotalOrderAmount(newTotalFoodPosition);
   }
 
   const contentFoodList = foodItemList.map(item => {
@@ -100,7 +107,7 @@ const FoodList = () => {
           </div>
         </div>
         <div className="order-list__amount">{price * (+counter)} грн</div>
-        <div className="order-list__sign order-list__del-product">
+        <div className="order-list__sign order-list__del-product" onClick={() => onCounterShopBag(id, 'del')}>
           <span></span>
           <span></span>
         </div>
