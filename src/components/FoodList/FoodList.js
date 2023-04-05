@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { db } from '../../firebase';
 import { ref, onValue, } from 'firebase/database';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,18 +7,18 @@ import { foodFetching, foodFetched, foodFetchingError } from '../../store/foodSl
 import FoodItem from '../FoodItem/FoodItem';
 import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import img from '../../resources/img/pizza/akvamen.png';
 import './foodList.scss';
 
 const FoodList = () => {
   const dispatch = useDispatch();
   const foodItemList = useSelector(state => state.food.filteredFoodList);
   const loadingStatus = useSelector(state => state.food.foodLoadingStatus);
-  const totalFoodPosition = localStorage.getItem('totalFoodPosition') ? JSON.parse( localStorage.getItem('totalFoodPosition')) : null;
-  const shopBagFoodData = localStorage.getItem('foodData') ? JSON.parse( localStorage.getItem('foodData')) : null;
+  const totalFoodPosition = localStorage.getItem('totalFoodPosition') ? JSON.parse(localStorage.getItem('totalFoodPosition')) : null;
+  const shopBagFoodData = localStorage.getItem('foodData') ? JSON.parse(localStorage.getItem('foodData')) : null;
 
   const [shoppingBag, setShoppingBag] = useState(false);
   const [totalOrderAmount, setTotalOrderAmount] = useState(totalFoodPosition);
+  const [foodListInShopBag, setFoodListInShopBag] = useState(shopBagFoodData);
 
   const onActiveShopBag = (e) => {
     let clName = e.target.className;
@@ -36,11 +36,47 @@ const FoodList = () => {
     setTotalOrderAmount(value);
   }
 
+  const onChangeFoodListInShopBag = (value) => {
+    setFoodListInShopBag(value);
+  }
+
+  const onCounterShopBag = (id, sign) => {
+    if (sign === 'dec') {
+      const newFoodListInShopBag = foodListInShopBag.map(
+        item => item.id === id ? { ...item, counter: +item.counter - 1 } : item
+      ).filter(item => +item.counter > 0);
+
+      const newTotalFoodPosition = totalFoodPosition - 1;
+
+      localStorage.setItem('foodData', JSON.stringify(newFoodListInShopBag));
+      localStorage.setItem('totalFoodPosition', JSON.stringify(newTotalFoodPosition));
+      setFoodListInShopBag(newFoodListInShopBag);
+      setTotalOrderAmount(newTotalFoodPosition);
+    } else if (sign === 'inc') {
+      const newFoodListInShopBag = foodListInShopBag.map(
+        item => item.id === id ? { ...item, counter: +item.counter + 1 } : item
+      );
+
+      const newTotalFoodPosition = totalFoodPosition + 1;
+
+      localStorage.setItem('foodData', JSON.stringify(newFoodListInShopBag));
+      localStorage.setItem('totalFoodPosition', JSON.stringify(newTotalFoodPosition));
+      setFoodListInShopBag(newFoodListInShopBag);
+      setTotalOrderAmount(newTotalFoodPosition);
+    }
+    // console.log(shopBagFoodData)
+  }
+
   const contentFoodList = foodItemList.map(item => {
-    return <FoodItem key={item.id} data={item} onChangeTotalOrderAmount={onChangeTotalOrderAmount} />
+    return <FoodItem
+      key={item.id}
+      data={item}
+      onChangeTotalOrderAmount={onChangeTotalOrderAmount}
+      onChangeFoodListInShopBag={onChangeFoodListInShopBag}
+    />
   });
 
-  const contentShopBagFoodList = shopBagFoodData !== null ? shopBagFoodData.map(({img, name, price, size, weight, counter, id }) => {
+  const contentShopBagFoodList = foodListInShopBag !== null ? foodListInShopBag.map(({ img, name, price, size, weight, counter, id }) => {
     return (
       <div key={id} className="order-list__product-item">
         <div className="order-list__img">
@@ -48,14 +84,14 @@ const FoodList = () => {
         </div>
         <div className="order-list__descr">
           <div className="order-list__subtitle">{name}</div>
-          {size ? <div className="order-list__features">Розмір - {size}</div> : null}
+          {size ? <div className="order-list__features">Розмір - {size}{weight ? `, (${weight})` : null}</div> : null}
         </div>
         <div className="order-list__counter">
-          <div className="order-list__minus order-list__sign">
+          <div className="order-list__minus order-list__sign" onClick={() => onCounterShopBag(id, 'dec')}>
             <span></span>
           </div>
           <span className="order-list__qty">{counter}</span>
-          <div className="order-list__plus order-list__sign">
+          <div className="order-list__plus order-list__sign" onClick={() => onCounterShopBag(id, 'inc')}>
             <span></span>
             <span></span>
           </div>
@@ -68,6 +104,33 @@ const FoodList = () => {
       </div>
     );
   }) : null;
+
+  const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
+  const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
+  let activeStyleBasket = 'basket_hidden';
+  let activeStyleShopBag = 'order-list_hidden';
+
+  const onUpdShowwingShopBagAndBasket = () => {
+    if (totalOrderAmount < 1 || shoppingBag) {
+      activeStyleBasket = 'basket_hidden';
+    } else {
+      activeStyleBasket = 'basket_show';
+    }
+  
+    if (foodListInShopBag.length > 0 && shoppingBag) {
+      activeStyleShopBag = 'order-list_show';
+    } else {
+      activeStyleShopBag = 'order-list_hidden';
+      document.body.classList.remove('no-scroll');
+    }
+  };
+
+  onUpdShowwingShopBagAndBasket();
+
+  // useEffect(() => {
+  //   onUpdShowwingShopBagAndBasket();
+  //   // eslint-disable-next-line
+  // }, [totalOrderAmount, shoppingBag, foodListInShopBag]);
 
   useEffect(() => {
     dispatch(foodFetching());
@@ -85,11 +148,7 @@ const FoodList = () => {
     });
     // eslint-disable-next-line
   }, []);
-
-  const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
-  const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
-  const activeStyleBasket = totalOrderAmount < 1 ? 'basket_hidden' : 'basket_show';
-  const activeStyleShopBag = shoppingBag ? 'order-list_show' : 'order-list_hidden';
+  console.log('render')
 
   return (
     <div className="food-list">

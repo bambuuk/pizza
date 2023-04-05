@@ -3,7 +3,7 @@ import './foodItem.scss';
 
 const FoodItem = (props) => {
   const { img, name, price, shortDescr, size, weight, id } = props.data;
-  const { onChangeTotalOrderAmount } = props;
+  const { onChangeTotalOrderAmount, onChangeFoodListInShopBag } = props;
   const [counter, setCounter] = useState(1);
 
   const onOrderFood = () => {
@@ -31,13 +31,12 @@ const FoodItem = (props) => {
       newArrProduct.forEach(item => {
         foodItemAmount += +item.counter;
       });
-
-
     }
 
     localStorage.setItem('foodData', JSON.stringify(newArrProduct));
     localStorage.setItem('totalFoodPosition', JSON.stringify(foodItemAmount));
     onChangeTotalOrderAmount(foodItemAmount);
+    onChangeFoodListInShopBag(newArrProduct);
 
     setCounter('1');
   }
