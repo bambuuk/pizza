@@ -8,9 +8,7 @@ const withLayout = (BaseComponent, nameComponent) => {
     return (
       <div className="wrapper">
         <Header fixedHeader={fixedHeader} />
-        <main>
           <BaseComponent />
-        </main>
         <Footer />
       </div>
     );

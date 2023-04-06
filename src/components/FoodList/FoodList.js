@@ -2,8 +2,9 @@ import { useEffect, useState, useMemo } from 'react';
 import { db } from '../../firebase';
 import { ref, onValue, } from 'firebase/database';
 import { useDispatch, useSelector } from 'react-redux';
-import { foodFetching, foodFetched, foodFetchingError } from '../../store/foodSlice';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+import { foodFetching, foodFetched, foodFetchingError } from '../../store/foodSlice';
 import FoodItem from '../FoodItem/FoodItem';
 import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -19,6 +20,9 @@ const FoodList = () => {
   const [shoppingBag, setShoppingBag] = useState(false);
   const [totalOrderAmount, setTotalOrderAmount] = useState(totalFoodPosition);
   const [foodListInShopBag, setFoodListInShopBag] = useState(shopBagFoodData);
+  const [activeStyleBasket, setActiveStyleBasket] = useState('basket_hidden');
+  const [activeStyleShopBag, setActiveStyleShopBag] = useState('order-list_hidden');
+  // let activeStyleShopBag = useRef('order-list_hidden');
 
   const onActiveShopBag = (e) => {
     let clName = e.target.className;
@@ -58,7 +62,7 @@ const FoodList = () => {
     } else if (sign === 'del') {
       let delProductCount = 0;
       foodListInShopBag.forEach(item => {
-        if(item.id === id) {
+        if (item.id === id) {
           delProductCount = item.counter;
         }
       });
@@ -78,63 +82,63 @@ const FoodList = () => {
   }
 
   const contentFoodList = foodItemList.map(item => {
-    return <FoodItem
-      key={item.id}
-      data={item}
-      onChangeTotalOrderAmount={onChangeTotalOrderAmount}
-      onChangeFoodListInShopBag={onChangeFoodListInShopBag}
-    />
+    return <CSSTransition key={item.id} timeout={300} classNames="food-list">
+            <FoodItem
+            data={item}
+            onChangeTotalOrderAmount={onChangeTotalOrderAmount}
+            onChangeFoodListInShopBag={onChangeFoodListInShopBag}
+            />
+          </CSSTransition>
   });
 
   const contentShopBagFoodList = foodListInShopBag !== null ? foodListInShopBag.map(({ img, name, price, size, weight, counter, id }) => {
     return (
-      <div key={id} className="order-list__product-item">
-        <div className="order-list__img">
-          <img src={img} alt={name} />
-        </div>
-        <div className="order-list__descr">
-          <div className="order-list__subtitle">{name}</div>
-          {size ? <div className="order-list__features">Розмір - {size}{weight ? `, (${weight})` : null}</div> : null}
-        </div>
-        <div className="order-list__counter">
-          <div className="order-list__minus order-list__sign" onClick={() => onCounterShopBag(id, 'dec')}>
+      <CSSTransition key={id} timeout={300} classNames="food-list">
+        <div  className="order-list__product-item">
+          <div className="order-list__img">
+            <img src={img} alt={name} />
+          </div>
+          <div className="order-list__descr">
+            <div className="order-list__subtitle">{name}</div>
+            {size ? <div className="order-list__features">Розмір - {size}{weight ? `, (${weight})` : null}</div> : null}
+          </div>
+          <div className="order-list__counter">
+            <div className="order-list__minus order-list__sign" onClick={() => onCounterShopBag(id, 'dec')}>
+              <span></span>
+            </div>
+            <span className="order-list__qty">{counter}</span>
+            <div className="order-list__plus order-list__sign" onClick={() => onCounterShopBag(id, 'inc')}>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <div className="order-list__amount">{price * (+counter)} грн</div>
+          <div className="order-list__sign order-list__del-product" onClick={() => onCounterShopBag(id, 'del')}>
+            <span></span>
             <span></span>
           </div>
-          <span className="order-list__qty">{counter}</span>
-          <div className="order-list__plus order-list__sign" onClick={() => onCounterShopBag(id, 'inc')}>
-            <span></span>
-            <span></span>
-          </div>
         </div>
-        <div className="order-list__amount">{price * (+counter)} грн</div>
-        <div className="order-list__sign order-list__del-product" onClick={() => onCounterShopBag(id, 'del')}>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
+      </CSSTransition>
     );
   }) : null;
 
   const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
   const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
-  let activeStyleBasket = 'basket_hidden';
-  let activeStyleShopBag = 'order-list_hidden';
 
   const onUpdShowwingShopBagAndBasket = () => {
     if (totalOrderAmount < 1 || shoppingBag) {
-      activeStyleBasket = 'basket_hidden';
+      setActiveStyleBasket('basket_hidden');
     } else {
-      activeStyleBasket = 'basket_show';
+      setActiveStyleBasket('basket_show');
     }
-  
+
     if (foodListInShopBag.length > 0 && shoppingBag) {
-      activeStyleShopBag = 'order-list_show';
+      setActiveStyleShopBag('order-list_show');
     } else {
-      activeStyleShopBag = 'order-list_hidden';
+      setActiveStyleShopBag('order-list_hidden');
       document.body.classList.remove('no-scroll');
     }
   };
-  onUpdShowwingShopBagAndBasket();
 
   const orderSum = useMemo(() => {
     let sum = 0;
@@ -145,6 +149,13 @@ const FoodList = () => {
   }, [foodListInShopBag]);
 
   useEffect(() => {
+    onUpdShowwingShopBagAndBasket();
+    // eslint-disable-next-line
+  }, [totalOrderAmount, shoppingBag, foodListInShopBag]);
+
+  useEffect(() => {
+    onUpdShowwingShopBagAndBasket();
+
     dispatch(foodFetching());
     onValue(ref(db), (snapshot) => {
       const data = snapshot.val();
@@ -180,7 +191,9 @@ const FoodList = () => {
           <div className="order-list__popup">
             <div className="order-list__title">Ваше замовлення:</div>
             <div className="order-list__products">
-              {contentShopBagFoodList}
+              <TransitionGroup component="div">
+                {contentShopBagFoodList}
+              </TransitionGroup>
             </div>
             <div className="order-list__total-amount">Сума: {orderSum} грн</div>
             <div className="order-list__form order-form">
@@ -231,9 +244,9 @@ const FoodList = () => {
                 </div>
 
                 <div className="order-form__orderAmount">
-                  <div className="order-form__amount">Сума: 640грн</div>
+                  <div className="order-form__amount">Сума: {orderSum} грн</div>
                   <div className="order-form__deliveryAmount">Доставка по місту до 8 км 50 гривень: 50грн</div>
-                  <div className="order-form__totalAmount">Загальна сума: 690грн</div>
+                  <div className="order-form__totalAmount">Загальна сума: {orderSum} грн</div>
                 </div>
 
                 <button className="order-form__orderBtn">Замовити</button>
@@ -243,9 +256,9 @@ const FoodList = () => {
         </div>
       </div>
 
-      <div className="food-items">
+      <TransitionGroup component="div" className="food-items">
         {contentFoodList}
-      </div>
+      </TransitionGroup>
       {spinnerShow}
       {errorShow}
     </div>

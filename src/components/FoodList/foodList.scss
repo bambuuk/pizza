@@ -440,6 +440,24 @@
   }
 }
 
+.food-list-enter {
+  opacity: 0;
+}
+
+.food-list-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.food-list-exit {
+  opacity: 1;
+}
+
+.food-list-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
 @media (max-width: 1200px) {
   .food-items {
     display: grid;

@@ -50,6 +50,7 @@ const Footer = () => {
                 50.4367035,29.3661665,7z/data=!3m1!4b1`} 
                 className="footer__link"
                 target="_blank"
+                rel="noreferrer"
               >
                 м.Кропивницький
               </a>
@@ -60,6 +61,7 @@ const Footer = () => {
                 50.4367035,29.3661665,7z/data=!3m1!4b1`} 
                 className="footer__link"
                 target="_blank"
+                rel="noreferrer"
               >
                 вул. Пашутинська 61/84
               </a>

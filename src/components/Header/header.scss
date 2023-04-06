@@ -44,6 +44,7 @@
 		font-size: 16px;
 		line-height: 20px;
 		transition: all 3s ease-in-out;
+
 		&:after {
 			content: '';
 			position: absolute;
@@ -57,8 +58,10 @@
 			-moz-box-shadow: inset 0px -1px 0px 0px #ff764d;
 			box-shadow: inset 0px -1px 0px 0px #ff764d;
 			-webkit-transition: all 0.3s ease;
-			transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;;
+			transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+			;
 		}
+
 		&:hover::after {
 			opacity: 1;
 		}
@@ -66,6 +69,10 @@
 
 	&__link.active {
 		color: #833c27;
+	}
+
+	&__link:hover.active::after {
+		opacity: 0;
 	}
 
 	&__address {
@@ -183,11 +190,13 @@
 		&__contacts {
 			display: none;
 		}
+
 		&__shoppin-bag {
 			display: block;
 			margin-right: 15px;
 			cursor: pointer;
 		}
+
 		&__logo {
 			flex: 1 1 auto
 		}
@@ -200,6 +209,7 @@
 		height: 20px;
 		z-index: 30;
 		cursor: pointer;
+
 		&_wrapper {
 			display: flex;
 			flex-direction: column;
