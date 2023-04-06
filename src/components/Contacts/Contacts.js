@@ -15,7 +15,6 @@ const Contacts = () => {
         setModal(false);
       }, 1500);
     }
-    e.target.reset();
   };
 
   return (
