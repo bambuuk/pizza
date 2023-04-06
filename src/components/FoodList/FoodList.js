@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { db } from '../../firebase';
 import { ref, onValue, } from 'firebase/database';
 import { useDispatch, useSelector } from 'react-redux';
@@ -134,8 +134,15 @@ const FoodList = () => {
       document.body.classList.remove('no-scroll');
     }
   };
-
   onUpdShowwingShopBagAndBasket();
+
+  const orderSum = useMemo(() => {
+    let sum = 0;
+    foodListInShopBag.forEach(item => {
+      sum += (+item.price) * (+item.counter);
+    });
+    return sum;
+  }, [foodListInShopBag]);
 
   useEffect(() => {
     dispatch(foodFetching());
@@ -175,7 +182,7 @@ const FoodList = () => {
             <div className="order-list__products">
               {contentShopBagFoodList}
             </div>
-            <div className="order-list__total-amount">Сума: 585 грн</div>
+            <div className="order-list__total-amount">Сума: {orderSum} грн</div>
             <div className="order-list__form order-form">
               <form action="">
 
