@@ -507,6 +507,7 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      padding: 20px 0 10px 0;
     }
 
     &__img {
@@ -520,10 +521,6 @@
 
     &__counter {
       width: 70px;
-    }
-
-    &__amount {
-      margin-top: 10px;
     }
 
     &__del-product {
