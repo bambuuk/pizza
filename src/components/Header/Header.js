@@ -7,10 +7,15 @@ import './header.scss';
 
 const Header = ({ fixedHeader }) => {
   const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
+  const [activeLogRegWindow, setActiveLogRegWindow] = useState(false);
 
-  const toggleBurgerMenuActive = (e) => {
-    if (e.type === 'click' || e.code === 'Enter') {
-      setActiveBurgerMenu(!activeBurgerMenu);
+  const toggleActive = (e, activeObject) => {
+    if ((e.type === 'click' || e.code === 'Enter') && activeObject === 'burger-menu') {
+      setActiveBurgerMenu(value => !value);
+      document.body.classList.toggle('no-scroll');
+    }
+    if ((e.type === 'click' || e.code === 'Enter') && activeObject === 'log-reg-window') {
+      setActiveLogRegWindow(value => !value);
       document.body.classList.toggle('no-scroll');
     }
   };
@@ -71,7 +76,11 @@ const Header = ({ fixedHeader }) => {
           </a>
         </div>
 
-        <div className="header__logreg">
+        <div 
+          className="header__logreg"
+          onClick={(e) => toggleActive(e, 'log-reg-window')}
+          onKeyDown={(e) => toggleActive(e, 'log-reg-window')}
+        >
           <span>Увійти</span>
         </div>
 
@@ -81,8 +90,8 @@ const Header = ({ fixedHeader }) => {
 
         <div
           className={`header__burger ${styleBurger}`}
-          onClick={toggleBurgerMenuActive}
-          onKeyDown={toggleBurgerMenuActive}
+          onClick={(e) => toggleActive(e, 'burger-menu')}
+          onKeyDown={(e) => toggleActive(e, 'burger-menu')}
           role="button"
         >
           <div className="header__burger_wrapper">
@@ -115,7 +124,7 @@ const Header = ({ fixedHeader }) => {
           </ul>
         </nav>
       </header>
-      <Auth />
+      <Auth activeLogRegWindow={activeLogRegWindow} toggleActive={toggleActive} />
     </div>
   )
 }

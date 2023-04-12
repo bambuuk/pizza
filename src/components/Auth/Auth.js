@@ -1,16 +1,27 @@
+import { useState } from 'react';
 import './auth.scss';
 
-const Auth = () => {
+const Auth = (props) => {
+  const { activeLogRegWindow, toggleActive } = props;
+  const authPopupClazz = activeLogRegWindow ? 'active-popup' : '';
+  const [activeRegPage, setActiveRegPage] = useState(false);
+
+  const showRegWindow = activeRegPage ? 'show' : '';
+  const hideLogWindow = activeRegPage ? 'hide' : '';
   return (
-    <div className="auth auth_overlay">
+    <div className={`auth auth_overlay ${authPopupClazz}`}>
       <div className="auth__wrapper">
-        <span className="icon-close">
+        <span 
+          className="icon-close"
+          onClick={(e) => toggleActive(e, 'log-reg-window')}
+          onKeyDown={(e) => toggleActive(e, 'log-reg-window')}
+        >
           <i className='bx bx-x'></i>
         </span>
         <div className="logreg-box">
 
           {/* Login form */}
-          <div className="form-box login">
+          <div className={`form-box login ${hideLogWindow}`}>
             <div className="logreg-title">
               <h2 className="">Login</h2>
             </div>
@@ -28,27 +39,26 @@ const Auth = () => {
                 <label htmlFor="password">Password</label>
               </div>
 
-              <div className="remember-forgot">
-                <label><input type="checkbox" />Remember me</label>
-                <a href="#">Forgot password?</a>
-              </div>
-
               <button type="submit" className="btn">Login</button>
 
               <div className="logreg-link">
                 <p>
                   Don't have an account?
-                  <a href="#" className="register-link">Register</a>
+                  <a 
+                    href="#" 
+                    className="register-link"
+                    onClick={() => setActiveRegPage(value => !value)}
+                    onKeyDown={() => setActiveRegPage(value => !value)}
+                  > Register</a>
                 </p>
               </div>
             </form>
           </div>
 
           {/* Register form */}
-          <div className="form-box register">
+          <div className={`form-box register ${showRegWindow}`}>
             <div className="logreg-title">
               <h2 className="">Registration</h2>
-              <p>Please provide the following to varify your identity</p>
             </div>
 
             <form action="">
@@ -70,18 +80,17 @@ const Auth = () => {
                 <label htmlFor="password">Password</label>
               </div>
 
-              <div className="remember-forgot">
-                <label><input type="checkbox" />
-                  I agree to the terms & conditions
-                </label>
-              </div>
-
-              <button type="submit" className="btn">Registar</button>
+              <button type="submit" className="btn">Register</button>
 
               <div className="logreg-link">
                 <p>
                   Already have an account?
-                  <a href="#" className="login-link">Login</a>
+                  <a 
+                    href="#" 
+                    className="login-link"
+                    onClick={() => setActiveRegPage(value => !value)}
+                    onKeyDown={() => setActiveRegPage(value => !value)}
+                  > Login</a>
                 </p>
               </div>
             </form>

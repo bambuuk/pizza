@@ -11,8 +11,9 @@
   background: rgba(0, 0, 0, .8);
   z-index: 100;
   overflow-y: auto;
-  opacity: 1;
-  pointer-events: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s all;
 }
 .auth {
   &__wrapper {
@@ -34,24 +35,24 @@
   }
 }
 
-.auth_overlay .active-popup {
+.auth_overlay.active-popup {
   opacity: 1;
   pointer-events: auto;
 }
 
-.auth__wrapper .form-box.login {
+.form-box.login {
   display: block;
 }
 
-.auth__wrapper.active .form-box.login {
-  display: block;
-}
-
-.auth__wrapper .form-box.register {
+.form-box.login.hide {
   display: none;
 }
 
-.auth__wrapper.active .form-box.register {
+.form-box.register {
+  display: none;
+}
+
+.form-box.register.show {
   display: block;
 }
 
