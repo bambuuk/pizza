@@ -1,23 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+
+import Auth from "../Auth/Auth";
 import logo from '../../resources/img/logo.png';
 import './header.scss';
 
 const Header = ({ fixedHeader }) => {
-  const [active, setActive] = useState(false);
+  const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
 
   const toggleBurgerMenuActive = (e) => {
     if (e.type === 'click' || e.code === 'Enter') {
-      setActive(!active);
+      setActiveBurgerMenu(!activeBurgerMenu);
       document.body.classList.toggle('no-scroll');
     }
   };
 
-  const styleBurger = active ? 'header__burger_active' : '';
-  const styleMenu = active ? 'burger__menu_active' : '';
-  const styleOverlay = active ? 'overlay_active' : '';
-
+  const styleBurger = activeBurgerMenu ? 'header__burger_active' : '';
+  const styleMenu = activeBurgerMenu ? 'burger__menu_active' : '';
   const headerClazz = fixedHeader ? 'header header_fixed' : 'header';
+
   return (
     <div className="header-wrapper">
       <header className={headerClazz}>
@@ -70,7 +71,7 @@ const Header = ({ fixedHeader }) => {
           </a>
         </div>
 
-        <div className="header__logres">
+        <div className="header__logreg">
           <span>Увійти</span>
         </div>
 
@@ -108,10 +109,13 @@ const Header = ({ fixedHeader }) => {
             <li>
               <NavLink to="/contacts" className="burger__link">Контакти</NavLink>
             </li>
+            <li>
+              <span className="burger__logreg">Увійти</span>
+            </li>
           </ul>
         </nav>
       </header>
-      <div className={`overlay ${styleOverlay}`}></div>
+      <Auth />
     </div>
   )
 }

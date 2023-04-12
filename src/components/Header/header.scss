@@ -75,7 +75,7 @@
 		opacity: 0;
 	}
 
-	&__logres {
+	&__logreg {
 		display: flex;
 		justify-self: center;
 		align-items: center;
@@ -163,10 +163,6 @@
 	visibility: hidden;
 }
 
-.overlay {
-	display: none;
-}
-
 @media (max-width: 1200px) {
 	.header {
 
@@ -197,15 +193,15 @@
 
 @media (max-width: 767px) {
 
-	.social-networks,
-	.header__list,
-	.header__menu {
+	.social-networks {
 		display: none;
 	}
 
 	.header {
 		display: flex;
-
+		&__list,
+		&__menu,
+		&__logreg,
 		&__contacts {
 			display: none;
 		}
@@ -305,6 +301,12 @@
 			&.active {
 				color: #833c27;
 			}
+		}
+		&__logreg {
+			font-size: 36px;
+			font-weight: 400;
+			color: $main-color-text;
+			cursor: pointer;
 		}
 	}
 }

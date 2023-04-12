@@ -1,105 +1,106 @@
-import 'auth.scss';
+import './auth.scss';
 
 const Auth = () => {
   return (
-    <section class="section">
-      <div class="wrapper">
-        <span class="icon-close">
-          <i class='bx bx-x' ></i>
+    <div className="auth auth_overlay">
+      <div className="auth__wrapper">
+        <span className="icon-close">
+          <i className='bx bx-x'></i>
         </span>
-        <div class="logreg-box">
+        <div className="logreg-box">
 
           {/* Login form */}
-          <div class="form-box login">
-            <div class="logreg-title">
-              <h2 class="">Login</h2>
-              <p>Please login to use the platform</p>
+          <div className="form-box login">
+            <div className="logreg-title">
+              <h2 className="">Login</h2>
             </div>
 
             <form action="">
-              <div class="input-box">
-                <span class="icon"><i class='bx bxs-envelope'></i></span>
+              <div className="input-box">
+                <span className="icon"><i className='bx bxs-envelope'></i></span>
                 <input type="email" required />
                 <label>Email</label>
               </div>
 
-              <div class="input-box">
-                <span class="icon"><i class='bx bxs-lock-alt' ></i></span>
+              <div className="input-box">
+                <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
                 <input id="password" type="password" required />
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
               </div>
 
-              <div class="remember-forgot">
+              <div className="remember-forgot">
                 <label><input type="checkbox" />Remember me</label>
                 <a href="#">Forgot password?</a>
               </div>
 
-              <button type="submit" class="btn">Login</button>
+              <button type="submit" className="btn">Login</button>
 
-              <div class="logreg-link">
+              <div className="logreg-link">
                 <p>
                   Don't have an account?
-                  <a href="#" class="register-link">Register</a>
+                  <a href="#" className="register-link">Register</a>
                 </p>
               </div>
             </form>
           </div>
 
           {/* Register form */}
-          <div class="form-box register">
-            <div class="logreg-title">
-              <h2 class="">Registration</h2>
+          <div className="form-box register">
+            <div className="logreg-title">
+              <h2 className="">Registration</h2>
               <p>Please provide the following to varify your identity</p>
             </div>
 
             <form action="">
-              <div class="input-box">
-                <span class="icon"><i class='bx bxs-user' ></i></span>
+              <div className="input-box">
+                <span className="icon"><i className='bx bxs-user' ></i></span>
                 <input type="text" required />
                 <label>Full Name</label>
               </div>
 
-              <div class="input-box">
-                <span class="icon"><i class='bx bxs-envelope'></i></span>
+              <div className="input-box">
+                <span className="icon"><i className='bx bxs-envelope'></i></span>
                 <input type="email" required />
                 <label>Email</label>
               </div>
 
-              <div class="input-box">
-                <span class="icon"><i class='bx bxs-lock-alt' ></i></span>
+              <div className="input-box">
+                <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
                 <input id="password" type="password" required />
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
               </div>
 
-              <div class="remember-forgot">
+              <div className="remember-forgot">
                 <label><input type="checkbox" />
                   I agree to the terms & conditions
                 </label>
               </div>
 
-              <button type="submit" class="btn">Registar</button>
+              <button type="submit" className="btn">Registar</button>
 
-              <div class="logreg-link">
+              <div className="logreg-link">
                 <p>
                   Already have an account?
-                  <a href="#" class="login-link">Login</a>
+                  <a href="#" className="login-link">Login</a>
                 </p>
               </div>
             </form>
           </div>
         </div>
 
-        <div class="media-options">
+        <div className="media-options">
           <a href="">
-            <i class='bx bxl-google' ></i>
+            <i className='bx bxl-google' ></i>
             <span>Login with Google</span>
           </a>
           <a href="">
-            <i class='bx bxl-facebook-circle' ></i>
+            <i className='bx bxl-facebook-circle' ></i>
             <span>Login with Facebook</span>
           </a>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
+
+export default Auth;
