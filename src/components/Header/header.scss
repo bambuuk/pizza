@@ -6,7 +6,7 @@
 
 .header {
 	display: grid;
-	grid-template: 1fr / minmax(auto, 80px) minmax(auto, 490px) minmax(auto, 345px) minmax(auto, 120px) 1fr;
+	grid-template: 1fr / minmax(auto, 80px) 1fr minmax(auto, 80px) minmax(auto, 150px) minmax(auto, 100px);
 	grid-auto-rows: 0px;
 	width: 100%;
 	align-items: center;
@@ -75,15 +75,34 @@
 		opacity: 0;
 	}
 
-	&__address {
-		padding: 0 0 0 19px;
+	&__logres {
+		display: flex;
+		justify-self: center;
+		align-items: center;
+		padding: 0 20px;
+		height: 40px;
+		min-width: 100px;
+		max-width: 150px;
+		border: 1px solid $btn-color;
+		border-radius: 10px;
+		transition: 0.4s all;
+		cursor: pointer;
+
 		font-weight: 400;
-		font-size: 16px;
-		line-height: 20px;
+		font-size: 14px;
+		color: $main-color-text;
+		& span {
+			margin: 0 auto;
+		}
+		&:hover {
+			background-color: $btn-color;
+			color: #000000;
+		}
 	}
 
 	&__social-networks {
 		display: flex;
+		justify-self: end;
 	}
 
 	&__shoppin-bag {
@@ -96,8 +115,6 @@
 
 .social-networks {
 	display: flex;
-	padding-left: 10px;
-
 	&__round {
 		display: flex;
 		justify-content: center;
@@ -125,10 +142,12 @@
 	border: 1px solid $btn-color;
 	border-radius: 10px;
 	transition: 0.4s all;
-	padding: 0 30px;
 	font-weight: 400;
 	font-size: 14px;
 	color: $main-color-text;
+	& span {
+		margin: 0 auto;
+	}
 
 	&:hover {
 		background-color: $btn-color;

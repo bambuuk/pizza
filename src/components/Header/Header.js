@@ -41,7 +41,6 @@ const Header = ({ fixedHeader }) => {
           </ul>
         </nav>
 
-        <div className="header__address">Пашутинська 61/84. Кропивницький</div>
         <div className="header__shoppin-bag"></div>
 
         <div className="header__social-networks social-networks">
@@ -71,7 +70,13 @@ const Header = ({ fixedHeader }) => {
           </a>
         </div>
 
-        <Link to="/contacts" className="header__contacts">Контакти</Link>
+        <div className="header__logres">
+          <span>Увійти</span>
+        </div>
+
+        <Link to="/contacts" className="header__contacts">
+          <span>Контакти</span>
+        </Link>
 
         <div
           className={`header__burger ${styleBurger}`}
