@@ -22,7 +22,6 @@ const FoodList = () => {
   const [foodListInShopBag, setFoodListInShopBag] = useState(shopBagFoodData);
   const [activeStyleBasket, setActiveStyleBasket] = useState('basket_hidden');
   const [activeStyleShopBag, setActiveStyleShopBag] = useState('order-list_hidden');
-  // let activeStyleShopBag = useRef('order-list_hidden');
 
   const onActiveShopBag = (e) => {
     let clName = e.target.className;

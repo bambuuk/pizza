@@ -9,12 +9,20 @@ const Header = ({ fixedHeader }) => {
   const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
   const [activeLogRegWindow, setActiveLogRegWindow] = useState(false);
 
-  const toggleActive = (e, activeObject) => {
-    if ((e.type === 'click' || e.code === 'Enter') && activeObject === 'burger-menu') {
-      setActiveBurgerMenu(value => !value);
-      document.body.classList.toggle('no-scroll');
-    }
-    if ((e.type === 'click' || e.code === 'Enter') && activeObject === 'log-reg-window') {
+  const toggleBurgerMenuActive = (e) => {
+    setActiveBurgerMenu(value => !value);
+    document.body.classList.toggle('no-scroll');
+  };
+
+  const toggleLogRegWindActive = (e) => {
+    let clName = e.target.className;
+    if (
+      clName === 'auth auth_overlay active-popup' ||
+      clName === 'icon-close' || 
+      clName === 'bx bx-x' || 
+      clName === "header__logreg" ||
+      e.target.parentElement.className === "header__logreg" 
+    ) {
       setActiveLogRegWindow(value => !value);
       document.body.classList.toggle('no-scroll');
     }
@@ -78,8 +86,7 @@ const Header = ({ fixedHeader }) => {
 
         <div 
           className="header__logreg"
-          onClick={(e) => toggleActive(e, 'log-reg-window')}
-          onKeyDown={(e) => toggleActive(e, 'log-reg-window')}
+          onClick={toggleLogRegWindActive}
         >
           <span>Увійти</span>
         </div>
@@ -90,8 +97,7 @@ const Header = ({ fixedHeader }) => {
 
         <div
           className={`header__burger ${styleBurger}`}
-          onClick={(e) => toggleActive(e, 'burger-menu')}
-          onKeyDown={(e) => toggleActive(e, 'burger-menu')}
+          onClick={toggleBurgerMenuActive}
           role="button"
         >
           <div className="header__burger_wrapper">
@@ -124,7 +130,7 @@ const Header = ({ fixedHeader }) => {
           </ul>
         </nav>
       </header>
-      <Auth activeLogRegWindow={activeLogRegWindow} toggleActive={toggleActive} />
+      <Auth activeLogRegWindow={activeLogRegWindow} toggleLogRegWindActive={toggleLogRegWindActive} />
     </div>
   )
 }

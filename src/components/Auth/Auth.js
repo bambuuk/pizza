@@ -2,19 +2,17 @@ import { useState } from 'react';
 import './auth.scss';
 
 const Auth = (props) => {
-  const { activeLogRegWindow, toggleActive } = props;
+  const { activeLogRegWindow, toggleLogRegWindActive } = props;
   const authPopupClazz = activeLogRegWindow ? 'active-popup' : '';
   const [activeRegPage, setActiveRegPage] = useState(false);
 
   const showRegWindow = activeRegPage ? 'show' : '';
   const hideLogWindow = activeRegPage ? 'hide' : '';
   return (
-    <div className={`auth auth_overlay ${authPopupClazz}`}>
+    <div className={`auth auth_overlay ${authPopupClazz}`} onClick={toggleLogRegWindActive}>
       <div className="auth__wrapper">
         <span 
           className="icon-close"
-          onClick={(e) => toggleActive(e, 'log-reg-window')}
-          onKeyDown={(e) => toggleActive(e, 'log-reg-window')}
         >
           <i className='bx bx-x'></i>
         </span>
