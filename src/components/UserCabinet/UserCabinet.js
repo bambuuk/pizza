@@ -13,11 +13,12 @@ const UserCabinet = (props) => {
       setIsAuth(false);
       toggleLogRegWindActive(null, 'logout');
     } catch (err) {
-      console.log(err, 'error')
+      console.log(err, 'error');
     }
   }
+
+  const showWindow = activeLogRegWindow ? 'user-cabinet_active' : '';
   
-  const showWindow = activeLogRegWindow ? 'user-cabinet_active' : '1';
   return (
     <div className={`user-cabinet ${showWindow}`}>
       <div className="user-cabinet__overlay" onClick={toggleLogRegWindActive}>

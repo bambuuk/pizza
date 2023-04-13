@@ -14,6 +14,7 @@ const Auth = (props) => {
       const result = await signInWithPopup(auth, provider);
       localStorage.setItem('auth-token-pizza', result.user.refreshToken);
       setIsAuth(true);
+      toggleLogRegWindActive(null, 'login');
       console.log(result);
     } catch (err) {
       console.error(err);
@@ -22,6 +23,7 @@ const Auth = (props) => {
 
   const showRegWindow = activeRegPage ? 'show' : '';
   const hideLogWindow = activeRegPage ? 'hide' : '';
+  
   return (
     <div className={`auth auth_overlay ${authPopupClazz}`} onClick={toggleLogRegWindActive}>
       <div className="auth__wrapper">

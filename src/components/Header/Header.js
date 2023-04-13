@@ -28,16 +28,14 @@ const Header = ({ fixedHeader }) => {
         e.target.parentElement.className === "header__logreg" ||
         clName === 'user-cabinet active' ||
         clName === 'user-cabinet__icon-close' ||
-        clName === 'user-cabinet__overlay' ||
-        action === 'logout'
+        clName === 'user-cabinet__overlay'
       ) {
         setActiveLogRegWindow(value => !value);
         document.body.classList.toggle('no-scroll');
       }
     }
 
-    if (action === 'logout') {
-      console.log('logout')
+    if (action === 'logout' || action === 'login') {
       setActiveLogRegWindow(value => !value);
       document.body.classList.toggle('no-scroll');
     }
