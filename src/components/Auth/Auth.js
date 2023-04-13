@@ -1,21 +1,28 @@
 import { useState } from 'react';
-import { auth, provider } from '../../firebase';
+import { auth, googleProvider, facebookProvider } from '../../firebase';
 import { signInWithPopup } from 'firebase/auth';
 
 import './auth.scss';
 
 const Auth = (props) => {
   const { activeLogRegWindow, toggleLogRegWindActive, setIsAuth } = props;
-  const authPopupClazz = activeLogRegWindow ? 'active-popup' : '';
   const [activeRegPage, setActiveRegPage] = useState(false);
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (typeSystemAuth) => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      localStorage.setItem('auth-token-pizza', result.user.refreshToken);
+      if (typeSystemAuth === 'google') {
+        const result = await signInWithPopup(auth, googleProvider);
+        localStorage.setItem('auth-token-pizza', result.user.refreshToken);
+        console.log(result);
+      } else if (typeSystemAuth === 'facebook') {
+        const result = await signInWithPopup(auth, facebookProvider);
+        localStorage.setItem('auth-token-pizza', result.user.refreshToken);
+        console.log(result);
+      }
+
       setIsAuth(true);
       toggleLogRegWindActive(null, 'login');
-      console.log(result);
+
     } catch (err) {
       console.error(err);
     }
@@ -23,11 +30,12 @@ const Auth = (props) => {
 
   const showRegWindow = activeRegPage ? 'show' : '';
   const hideLogWindow = activeRegPage ? 'hide' : '';
-  
+  const authPopupClazz = activeLogRegWindow ? 'active-popup' : '';
+
   return (
     <div className={`auth auth_overlay ${authPopupClazz}`} onClick={toggleLogRegWindActive}>
       <div className="auth__wrapper">
-        <span 
+        <span
           className="icon-close"
         >
           <i className='bx bx-x'></i>
@@ -58,8 +66,8 @@ const Auth = (props) => {
               <div className="logreg-link">
                 <p>
                   Don't have an account?
-                  <a 
-                    href="#" 
+                  <a
+                    href="#"
                     className="register-link"
                     onClick={() => setActiveRegPage(value => !value)}
                     onKeyDown={() => setActiveRegPage(value => !value)}
@@ -99,8 +107,8 @@ const Auth = (props) => {
               <div className="logreg-link">
                 <p>
                   Already have an account?
-                  <a 
-                    href="#" 
+                  <a
+                    href="#"
                     className="login-link"
                     onClick={() => setActiveRegPage(value => !value)}
                     onKeyDown={() => setActiveRegPage(value => !value)}
@@ -112,11 +120,11 @@ const Auth = (props) => {
         </div>
 
         <div className="media-options">
-          <button onClick={signInWithGoogle}>
+          <button onClick={(e) => signInWithGoogle('google')}>
             <i className='bx bxl-google' ></i>
             <span>Login with Google</span>
           </button>
-          <button>
+          <button onClick={(e) => signInWithGoogle('facebook')}>
             <i className='bx bxl-facebook-circle' ></i>
             <span>Login with Facebook</span>
           </button>

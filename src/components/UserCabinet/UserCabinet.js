@@ -12,6 +12,7 @@ const UserCabinet = (props) => {
       localStorage.removeItem('auth-token-pizza');
       setIsAuth(false);
       toggleLogRegWindActive(null, 'logout');
+      console.log('logout')
     } catch (err) {
       console.log(err, 'error');
     }
