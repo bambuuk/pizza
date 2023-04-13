@@ -1,0 +1,100 @@
+@import '../../style/variables';
+
+.user-cabinet {
+  pointer-events: none;
+  opacity: 0;
+  transition: .5s all;
+  &_active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+  &__overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .8);
+    z-index: 100;
+    overflow-y: auto;
+
+    display: grid;
+    grid-template-columns: minmax(300px, 650px); 
+    justify-content: center;
+    align-items: center;
+  }
+  &__wrapper {
+    position: relative;
+    min-height: 300px;
+    padding: 38px 100px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    color: $popup-text-color;
+  }
+  &__icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, .2);
+    border-left: 2px solid rgba(255, 255, 255, .2);
+    border-bottom: 2px solid rgba(255, 255, 255, .2);
+    transition: 0.4s all;
+    & i {
+      font-size: 32px;
+      color: $btn-color;
+    }
+    &:hover {
+      background-color: $btn-color;
+    }
+    &:hover i {
+      color: $popup-text-color;
+    }
+  }
+  &__title {
+    margin: 0 0 42px 0;
+    font-weight: 700;
+    font-size: 40px;
+    text-align: center;
+  }
+  &__body {
+    display: grid;
+    grid-template: repeat(2, 40px) / 1fr;
+    row-gap: 15px;
+    align-items: center;
+  }
+  &__user-name, &__email {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    font-weight: 400;
+    font-size: 16px;
+  }
+  &__logout {
+    margin: 0 auto;
+    margin-top: 20px;
+
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 40px;
+    border: 1px solid $btn-color;
+    border-radius: 10px;
+    transition: 0.4s all;
+
+    font-weight: 400;
+    font-size: 14px;
+    color: $popup-text-color;
+    &:hover {
+      background-color: $btn-color;
+    }
+  }
+}

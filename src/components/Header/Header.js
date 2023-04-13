@@ -3,6 +3,7 @@ import { useState } from "react";
 import Cookies from 'universal-cookie';
 
 import Auth from "../Auth/Auth";
+import UserCabinet from "../UserCabinet/UserCabinet";
 import logo from '../../resources/img/logo.png';
 import './header.scss';
 
@@ -20,12 +21,16 @@ const Header = ({ fixedHeader }) => {
 
   const toggleLogRegWindActive = (e) => {
     let clName = e.target.className;
+    
     if (
       clName === 'auth auth_overlay active-popup' ||
       clName === 'icon-close' || 
       clName === 'bx bx-x' || 
       clName === "header__logreg" ||
-      e.target.parentElement.className === "header__logreg" 
+      e.target.parentElement.className === "header__logreg"  ||
+      clName === 'user-cabinet active' ||
+      clName === 'user-cabinet__icon-close' ||
+      clName === 'user-cabinet__overlay'
     ) {
       setActiveLogRegWindow(value => !value);
       document.body.classList.toggle('no-scroll');
@@ -129,16 +134,22 @@ const Header = ({ fixedHeader }) => {
               <NavLink to="/contacts" className="burger__link">Контакти</NavLink>
             </li>
             <li>
-              <span className="burger__logreg">Увійти</span>
+              <span className="burger__logreg">{isAuth ? 'Ваш кабінет' : 'Увійти'}</span>
             </li>
           </ul>
         </nav>
       </header>
-      <Auth 
-        activeLogRegWindow={activeLogRegWindow} 
-        toggleLogRegWindActive={toggleLogRegWindActive}
-        setIsAuth={setIsAuth} 
-      />
+      {isAuth ? 
+        <UserCabinet 
+          activeLogRegWindow={activeLogRegWindow} 
+          toggleLogRegWindActive={toggleLogRegWindActive}
+        /> : 
+        <Auth 
+          activeLogRegWindow={activeLogRegWindow} 
+          toggleLogRegWindActive={toggleLogRegWindActive}
+          setIsAuth={setIsAuth} 
+        />
+      }
     </div>
   )
 }
