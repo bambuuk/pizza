@@ -203,7 +203,7 @@
   align-items: center;
 }
 
-.media-options a {
+.media-options button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -215,20 +215,19 @@
   box-shadow: 0 2px 5 px rgba(0, 0, 0, .2);
   border-radius: 40px;
   color: #fff;
-  text-decoration: none;
   transition: .5s all;
 }
 
-.media-options a:hover {
+.media-options button:hover {
   background: rgba(255, 255, 255, .2);
 }
 
-.media-options a i {
+.media-options button i {
   font-size: 22px;
   margin: 0 8px 1.5px 0;
 }
 
-.media-options a span {
+.media-options button span {
   font-size: 16px;
   font-weight: 500;
 }

@@ -1,10 +1,27 @@
 import { useState } from 'react';
+import { auth, provider } from '../../firebase';
+import { signInWithPopup } from 'firebase/auth';
+import Cookies from 'universal-cookie';
+
 import './auth.scss';
 
+const cookies = new Cookies();
+
 const Auth = (props) => {
-  const { activeLogRegWindow, toggleLogRegWindActive } = props;
+  const { activeLogRegWindow, toggleLogRegWindActive, setIsAuth } = props;
   const authPopupClazz = activeLogRegWindow ? 'active-popup' : '';
   const [activeRegPage, setActiveRegPage] = useState(false);
+
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      cookies.set('auth-token', result.user.refreshToken);
+      setIsAuth(true);
+      console.log(result);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   const showRegWindow = activeRegPage ? 'show' : '';
   const hideLogWindow = activeRegPage ? 'hide' : '';
@@ -96,14 +113,14 @@ const Auth = (props) => {
         </div>
 
         <div className="media-options">
-          <a href="">
+          <button onClick={signInWithGoogle}>
             <i className='bx bxl-google' ></i>
             <span>Login with Google</span>
-          </a>
-          <a href="">
+          </button>
+          <button>
             <i className='bx bxl-facebook-circle' ></i>
             <span>Login with Facebook</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>

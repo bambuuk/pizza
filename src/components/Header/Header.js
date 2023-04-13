@@ -1,13 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import Cookies from 'universal-cookie';
 
 import Auth from "../Auth/Auth";
 import logo from '../../resources/img/logo.png';
 import './header.scss';
 
+const cookies = new Cookies();
+
 const Header = ({ fixedHeader }) => {
   const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
   const [activeLogRegWindow, setActiveLogRegWindow] = useState(false);
+  const [isAuth, setIsAuth] = useState(cookies.get('auth-token'));
 
   const toggleBurgerMenuActive = (e) => {
     setActiveBurgerMenu(value => !value);
@@ -88,7 +92,7 @@ const Header = ({ fixedHeader }) => {
           className="header__logreg"
           onClick={toggleLogRegWindActive}
         >
-          <span>Увійти</span>
+          <span>{isAuth ? 'Ваш кабінет' : 'Увійти'}</span>
         </div>
 
         <Link to="/contacts" className="header__contacts">
@@ -130,7 +134,11 @@ const Header = ({ fixedHeader }) => {
           </ul>
         </nav>
       </header>
-      <Auth activeLogRegWindow={activeLogRegWindow} toggleLogRegWindActive={toggleLogRegWindActive} />
+      <Auth 
+        activeLogRegWindow={activeLogRegWindow} 
+        toggleLogRegWindActive={toggleLogRegWindActive}
+        setIsAuth={setIsAuth} 
+      />
     </div>
   )
 }
