@@ -1,37 +1,43 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
-import Cookies from 'universal-cookie';
 
 import Auth from "../Auth/Auth";
 import UserCabinet from "../UserCabinet/UserCabinet";
 import logo from '../../resources/img/logo.png';
 import './header.scss';
 
-const cookies = new Cookies();
-
 const Header = ({ fixedHeader }) => {
   const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
   const [activeLogRegWindow, setActiveLogRegWindow] = useState(false);
-  const [isAuth, setIsAuth] = useState(cookies.get('auth-token'));
+  const [isAuth, setIsAuth] = useState(localStorage.getItem('auth-token-pizza'));
 
   const toggleBurgerMenuActive = (e) => {
     setActiveBurgerMenu(value => !value);
     document.body.classList.toggle('no-scroll');
   };
 
-  const toggleLogRegWindActive = (e) => {
-    let clName = e.target.className;
-    
-    if (
-      clName === 'auth auth_overlay active-popup' ||
-      clName === 'icon-close' || 
-      clName === 'bx bx-x' || 
-      clName === "header__logreg" ||
-      e.target.parentElement.className === "header__logreg"  ||
-      clName === 'user-cabinet active' ||
-      clName === 'user-cabinet__icon-close' ||
-      clName === 'user-cabinet__overlay'
-    ) {
+  const toggleLogRegWindActive = (e, action) => {
+    if (e) {
+      let clName = e.target.className;
+
+      if (
+        clName === 'auth auth_overlay active-popup' ||
+        clName === 'icon-close' ||
+        clName === 'bx bx-x' ||
+        clName === "header__logreg" ||
+        e.target.parentElement.className === "header__logreg" ||
+        clName === 'user-cabinet active' ||
+        clName === 'user-cabinet__icon-close' ||
+        clName === 'user-cabinet__overlay' ||
+        action === 'logout'
+      ) {
+        setActiveLogRegWindow(value => !value);
+        document.body.classList.toggle('no-scroll');
+      }
+    }
+
+    if (action === 'logout') {
+      console.log('logout')
       setActiveLogRegWindow(value => !value);
       document.body.classList.toggle('no-scroll');
     }
@@ -93,7 +99,7 @@ const Header = ({ fixedHeader }) => {
           </a>
         </div>
 
-        <div 
+        <div
           className="header__logreg"
           onClick={toggleLogRegWindActive}
         >
@@ -139,15 +145,16 @@ const Header = ({ fixedHeader }) => {
           </ul>
         </nav>
       </header>
-      {isAuth ? 
-        <UserCabinet 
-          activeLogRegWindow={activeLogRegWindow} 
+      {isAuth ?
+        <UserCabinet
+          activeLogRegWindow={activeLogRegWindow}
           toggleLogRegWindActive={toggleLogRegWindActive}
-        /> : 
-        <Auth 
-          activeLogRegWindow={activeLogRegWindow} 
+          setIsAuth={setIsAuth}
+        /> :
+        <Auth
+          activeLogRegWindow={activeLogRegWindow}
           toggleLogRegWindActive={toggleLogRegWindActive}
-          setIsAuth={setIsAuth} 
+          setIsAuth={setIsAuth}
         />
       }
     </div>

@@ -1,7 +1,21 @@
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
+
 import './userCabinet.scss';
 
 const UserCabinet = (props) => {
-  const {activeLogRegWindow, toggleLogRegWindActive} = props;
+  const {activeLogRegWindow, toggleLogRegWindActive, setIsAuth} = props;
+
+  const signUserOut = async () => {
+    try {
+      await signOut(auth);
+      localStorage.removeItem('auth-token-pizza');
+      setIsAuth(false);
+      toggleLogRegWindActive(null, 'logout');
+    } catch (err) {
+      console.log(err, 'error')
+    }
+  }
   
   const showWindow = activeLogRegWindow ? 'user-cabinet_active' : '1';
   return (
@@ -25,7 +39,7 @@ const UserCabinet = (props) => {
             </div>
           </div>
 
-          <button className='user-cabinet__logout'>Закінчити сесію</button>
+          <button className='user-cabinet__logout' onClick={signUserOut}>Закінчити сесію</button>
         </div>
       </div>
     </div>

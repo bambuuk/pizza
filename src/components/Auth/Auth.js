@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { auth, provider } from '../../firebase';
 import { signInWithPopup } from 'firebase/auth';
-import Cookies from 'universal-cookie';
 
 import './auth.scss';
-
-const cookies = new Cookies();
 
 const Auth = (props) => {
   const { activeLogRegWindow, toggleLogRegWindActive, setIsAuth } = props;
@@ -15,7 +12,7 @@ const Auth = (props) => {
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      cookies.set('auth-token', result.user.refreshToken);
+      localStorage.setItem('auth-token-pizza', result.user.refreshToken);
       setIsAuth(true);
       console.log(result);
     } catch (err) {
