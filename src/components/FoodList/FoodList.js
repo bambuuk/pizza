@@ -121,9 +121,6 @@ const FoodList = () => {
     );
   }) : null;
 
-  const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
-  const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
-
   const onUpdShowwingShopBagAndBasket = () => {
     if (totalOrderAmount < 1 || shoppingBag) {
       setActiveStyleBasket('basket_hidden');
@@ -170,7 +167,10 @@ const FoodList = () => {
     });
     // eslint-disable-next-line
   }, []);
-  console.log('render')
+  console.log('render', loadingStatus)
+
+  const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
+  const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
 
   return (
     <div className="food-list">
@@ -257,9 +257,9 @@ const FoodList = () => {
 
       <TransitionGroup component="div" className="food-items">
         {contentFoodList}
+        {spinnerShow}
+        {errorShow}
       </TransitionGroup>
-      {spinnerShow}
-      {errorShow}
     </div>
   )
 }

@@ -9,8 +9,10 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword 
 } from 'firebase/auth';
-
+import Cookies from 'universal-cookie';
 import './auth.scss';
+
+const cookies = new Cookies();
 
 const Auth = (props) => {
   const { activeLogRegWindow, toggleLogRegWindActive, setIsAuth } = props;
@@ -25,6 +27,15 @@ const Auth = (props) => {
     try {
       const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
       localStorage.setItem('auth-token-pizza', user.user.refreshToken);
+
+      const userNamesCookiList = cookies.get('userNamesList') ? JSON.parse(cookies.get('userNamesList')) : '';
+
+      const newUserNamesCookiList = Array.isArray(userNamesCookiList) ? 
+        JSON.stringify([...userNamesCookiList, {email: user.user.email, name: userName}]) :
+        JSON.stringify([{email: user.user.email, name: userName}]);
+
+      console.log(userNamesCookiList, ' - ', newUserNamesCookiList);
+      cookies.set('userNamesList', newUserNamesCookiList);
 
       setRegisterEmail('');
       setRegisterPassword('');
