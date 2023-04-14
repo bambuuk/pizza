@@ -83,9 +83,9 @@ const FoodList = () => {
   const contentFoodList = foodItemList.map(item => {
     return <CSSTransition key={item.id} timeout={300} classNames="food-list">
             <FoodItem
-            data={item}
-            onChangeTotalOrderAmount={onChangeTotalOrderAmount}
-            onChangeFoodListInShopBag={onChangeFoodListInShopBag}
+              data={item}
+              onChangeTotalOrderAmount={onChangeTotalOrderAmount}
+              onChangeFoodListInShopBag={onChangeFoodListInShopBag}
             />
           </CSSTransition>
   });
@@ -255,11 +255,15 @@ const FoodList = () => {
         </div>
       </div>
 
-      <TransitionGroup component="div" className="food-items">
-        {contentFoodList}
-        {spinnerShow}
-        {errorShow}
-      </TransitionGroup>
+      {
+        loadingStatus === 'idle' ? 
+          <TransitionGroup component="div" className="food-items">
+            {contentFoodList}
+          </TransitionGroup> :
+          null
+      }
+      {spinnerShow}
+      {errorShow}
     </div>
   )
 }

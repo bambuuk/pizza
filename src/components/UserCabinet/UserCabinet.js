@@ -11,6 +11,7 @@ const UserCabinet = (props) => {
   const [currentUser, setCurrentUser] = useState({});
   const [currentUserName, setCurrentUserName] = useState('');
   const {activeLogRegWindow, toggleLogRegWindActive, setIsAuth} = props;
+  console.log(currentUser)
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {

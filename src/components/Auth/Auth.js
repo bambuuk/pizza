@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword 
 } from 'firebase/auth';
 import Cookies from 'universal-cookie';
+import Spinner from '../Spinner/Spinner';
 import './auth.scss';
 
 const cookies = new Cookies();
@@ -22,19 +23,20 @@ const Auth = (props) => {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [userName, setUserName] = useState('');
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const register = async () => {
+    setShowSpinner(true);
     try {
       const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
       localStorage.setItem('auth-token-pizza', user.user.refreshToken);
 
-      const userNamesCookiList = cookies.get('userNamesList') ? JSON.parse(cookies.get('userNamesList')) : '';
+      const userNamesCookiList = cookies.get('userNamesList') ? cookies.get('userNamesList') : '';
 
       const newUserNamesCookiList = Array.isArray(userNamesCookiList) ? 
         JSON.stringify([...userNamesCookiList, {email: user.user.email, name: userName}]) :
         JSON.stringify([{email: user.user.email, name: userName}]);
 
-      console.log(userNamesCookiList, ' - ', newUserNamesCookiList);
       cookies.set('userNamesList', newUserNamesCookiList);
 
       setRegisterEmail('');
@@ -42,13 +44,15 @@ const Auth = (props) => {
       setUserName('');
       setIsAuth(true);
       toggleLogRegWindActive(null, 'login');
-      console.log(user);
+
     } catch (error) {
+      setShowSpinner(false);
       console.log(error.message);
     }
   };
 
   const login = async () => {
+    setShowSpinner(true);
     try {
       const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       localStorage.setItem('auth-token-pizza', user.user.refreshToken);
@@ -59,9 +63,11 @@ const Auth = (props) => {
       toggleLogRegWindActive(null, 'login');
       console.log(user);
     } catch (error) {
+      setShowSpinner(false);
       console.log(error.message);
     }
   };
+  console.log(2, showSpinner);
 
   const signInWithGoogle = async (typeSystemAuth) => {
     try {
@@ -85,6 +91,8 @@ const Auth = (props) => {
   const onSubmitForm = (e) => {
     e.preventDefault();
   }
+
+  // console.log(loadingStatus);
 
   const showRegWindow = activeRegPage ? 'show' : '';
   const hideLogWindow = activeRegPage ? 'hide' : '';
@@ -136,7 +144,7 @@ const Auth = (props) => {
                 onClick={login} 
                 className="btn"
               >
-                Login
+                {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Login'}
               </button>
 
               <div className="logreg-link">
