@@ -20,7 +20,7 @@ const Contacts = () => {
   return (
     <div className="contacts content__contacts">
       <div className="contacts__description">
-        <div className="contacts__title">Залишились питання</div>
+        <div className="contacts__title">Залишились питання?</div>
         <br />
         <br />
         <p>
