@@ -1,12 +1,56 @@
 import { useState } from 'react';
-import { auth, googleProvider, facebookProvider } from '../../firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { 
+  auth, 
+  googleProvider, 
+  facebookProvider, 
+} from '../../firebase';
+import { 
+  signInWithPopup,
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword 
+} from 'firebase/auth';
 
 import './auth.scss';
 
 const Auth = (props) => {
   const { activeLogRegWindow, toggleLogRegWindActive, setIsAuth } = props;
   const [activeRegPage, setActiveRegPage] = useState(false);
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [userName, setUserName] = useState('');
+
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
+      localStorage.setItem('auth-token-pizza', user.user.refreshToken);
+
+      setRegisterEmail('');
+      setRegisterPassword('');
+      setUserName('');
+      setIsAuth(true);
+      toggleLogRegWindActive(null, 'login');
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      localStorage.setItem('auth-token-pizza', user.user.refreshToken);
+
+      setLoginEmail('');
+      setLoginPassword('');
+      setIsAuth(true);
+      toggleLogRegWindActive(null, 'login');
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const signInWithGoogle = async (typeSystemAuth) => {
     try {
@@ -22,10 +66,13 @@ const Auth = (props) => {
 
       setIsAuth(true);
       toggleLogRegWindActive(null, 'login');
-
     } catch (err) {
       console.error(err);
     }
+  }
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
   }
 
   const showRegWindow = activeRegPage ? 'show' : '';
@@ -48,30 +95,47 @@ const Auth = (props) => {
               <h2 className="">Login</h2>
             </div>
 
-            <form action="">
+            <form onSubmit={onSubmitForm}>
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-envelope'></i></span>
-                <input type="email" required />
+                <input 
+                  name='login-email'
+                  type="email"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)} 
+                  required 
+                />
                 <label>Email</label>
               </div>
 
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
-                <input id="password" type="password" required />
-                <label htmlFor="password">Password</label>
+                <input 
+                  name="login-password"
+                  type="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)} 
+                  required 
+                />
+                <label>Password</label>
               </div>
 
-              <button type="submit" className="btn">Login</button>
+              <button 
+                type="button"
+                onClick={login} 
+                className="btn"
+              >
+                Login
+              </button>
 
               <div className="logreg-link">
                 <p>
                   Don't have an account?
-                  <a
-                    href="#"
+                  <button
                     className="register-link"
                     onClick={() => setActiveRegPage(value => !value)}
                     onKeyDown={() => setActiveRegPage(value => !value)}
-                  > Register</a>
+                  >&nbsp; Register</button>
                 </p>
               </div>
             </form>
@@ -80,39 +144,62 @@ const Auth = (props) => {
           {/* Register form */}
           <div className={`form-box register ${showRegWindow}`}>
             <div className="logreg-title">
-              <h2 className="">Registration</h2>
+              <h2>Registration</h2>
             </div>
 
-            <form action="">
+            <form onSubmit={onSubmitForm}>
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-user' ></i></span>
-                <input type="text" required />
+                <input 
+                  name="user-name"
+                  type="text"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)} 
+                  required 
+                />
                 <label>Full Name</label>
               </div>
 
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-envelope'></i></span>
-                <input type="email" required />
+                <input 
+                  name="registration-email"
+                  type="email"
+                  value={registerEmail}
+                  onChange={(e) => setRegisterEmail(e.target.value)} 
+                  required 
+                />
                 <label>Email</label>
               </div>
 
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
-                <input id="password" type="password" required />
-                <label htmlFor="password">Password</label>
+                <input 
+                  name="registration-password"
+                  type="password"
+                  value={registerPassword}
+                  onChange={(e) => setRegisterPassword(e.target.value)}
+                  required 
+                />
+                <label>Password</label>
               </div>
 
-              <button type="submit" className="btn">Register</button>
+              <button 
+                type="button" 
+                className="btn"
+                onClick={register}
+              >
+                Register
+              </button>
 
               <div className="logreg-link">
                 <p>
                   Already have an account?
-                  <a
-                    href="#"
+                  <button
                     className="login-link"
                     onClick={() => setActiveRegPage(value => !value)}
                     onKeyDown={() => setActiveRegPage(value => !value)}
-                  > Login</a>
+                  >&nbsp; Login</button>
                 </p>
               </div>
             </form>
