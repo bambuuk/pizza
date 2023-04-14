@@ -208,7 +208,7 @@ const Auth = (props) => {
                 className="btn"
                 onClick={register}
               >
-                Register
+                {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Register'}
               </button>
 
               <div className="logreg-link">
