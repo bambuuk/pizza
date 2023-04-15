@@ -1,16 +1,12 @@
 import { useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy } from 'firebase/firestore';
+import { firestoreDb, auth } from '../../firebase';
 
+import Spinner from '../Spinner/Spinner';
 import './shoppingBag.scss';
 
 const ShoppingBag = (props) => {
-  const [customerName, setCustomerName] = useState('');
-  const [customerPhoneNumber, setCustomerPhoneNumber] = useState('');
-  const [customerAddress, setCustomerAddress] = useState('');
-  const [customerComment, setCustomerCommet] = useState('');
-  const [typeOfDelivery, setTypeOfDelivery] = useState('');
-  const [typeOfPayment, setTypeOfPayment] = useState('');
-
   const {
     activeStyleShopBag,
     onActiveShopBag,
@@ -18,6 +14,50 @@ const ShoppingBag = (props) => {
     foodListInShopBag,
     onCounterShopBag
   } = props;
+
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhoneNumber, setCustomerPhoneNumber] = useState('');
+  const [customerAddress, setCustomerAddress] = useState('');
+  const [customerComment, setCustomerCommet] = useState('');
+  const [typeOfDelivery, setTypeOfDelivery] = useState('');
+  const [typeOfPayment, setTypeOfPayment] = useState('');
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  const ordersRef = collection(firestoreDb, 'orders');
+
+  const totalOrderSum = typeOfDelivery === 'deliveryAroundCity' ? (+orderSum + 50) : orderSum;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setShowSpinner(true);
+    try {
+      await addDoc(ordersRef, {
+        foodItemList: JSON.stringify(foodListInShopBag),
+        createdAt: serverTimestamp(),
+        email: auth.currentUser.email,
+        name: customerName,
+        phoneNumber: customerPhoneNumber,
+        address: customerAddress,
+        comment: customerComment,
+        typeOfDelivery,
+        typeOfPayment,
+        totalOrderSum,
+      });
+
+      setCustomerName('');
+      setCustomerPhoneNumber('');
+      setCustomerAddress('');
+      setCustomerCommet('');
+      setTypeOfDelivery('');
+      setTypeOfPayment('');
+
+      setShowSpinner(false);
+    } catch (err) {
+      setShowSpinner(false);
+      console.log(err.messaage);
+    }
+  };
+
 
   const contentShopBagFoodList = foodListInShopBag !== null ? foodListInShopBag.map(({ img, name, price, size, weight, counter, id }) => {
     return (
@@ -50,7 +90,6 @@ const ShoppingBag = (props) => {
     );
   }) : null;
 
-  const totalOrderSum = typeOfDelivery === 'deliveryAroundCity' ? (+orderSum + 50) : orderSum;
 
   return (
     <div className={`order-list ${activeStyleShopBag}`}>
@@ -70,8 +109,8 @@ const ShoppingBag = (props) => {
           </div>
           <div className="order-list__total-amount">Сума: {orderSum} грн</div>
           <div className="order-list__form order-form">
-            <form action="">
 
+            <form onSubmit={handleSubmit}>
               <div className="order-form__enterInfo">
                 <label className="order-form__usualLabel" htmlFor="name">Як до Вас звертатися:</label>
                 <input 
@@ -178,7 +217,9 @@ const ShoppingBag = (props) => {
                 <div className="order-form__totalAmount">Загальна сума: {totalOrderSum} грн</div>
               </div>
 
-              <button className="order-form__orderBtn">Замовити</button>
+              <button className="order-form__orderBtn">
+                {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Замовити'} 
+              </button>
             </form>
           </div>
         </div>
