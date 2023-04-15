@@ -28,14 +28,15 @@ const FoodList = () => {
     if (e) {
       let clName = e.target.className;
       if (
-        clName === 'basket__img' || clName === 'order-list__close-btn' ||
+        clName === 'basket__img' || 
+        clName === 'order-list__close-btn' ||
         clName === 'order-list_overlay' ||
         e.target.parentElement.className === 'order-list__close-btn'
       ) {
         setActiveShoppingBag(shoppingBag => !shoppingBag);
         document.body.classList.toggle('no-scroll');
       } 
-    } else if (action === 'odered-food') {
+    } else if (action === 'ordered-food') {
       console.log('da');
       setActiveShoppingBag(false);
       document.body.classList.toggle('no-scroll');

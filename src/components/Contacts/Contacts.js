@@ -13,7 +13,7 @@ const Contacts = () => {
 
       setTimeout(() => {
         setModal(false);
-      }, 1500);
+      }, 2100);
     }
   };
 

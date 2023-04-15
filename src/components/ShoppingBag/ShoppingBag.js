@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { firestoreDb, auth } from '../../firebase';
 
 import Spinner from '../Spinner/Spinner';
@@ -24,10 +24,37 @@ const ShoppingBag = (props) => {
   const [typeOfDelivery, setTypeOfDelivery] = useState('');
   const [typeOfPayment, setTypeOfPayment] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
+  const [statusOrderingModal, setStatusOrderingModal] = useState(false);
 
   const ordersRef = collection(firestoreDb, 'orders');
 
   const totalOrderSum = typeOfDelivery === 'deliveryAroundCity' ? (+orderSum + 50) : orderSum;
+
+  const onShowStatusOrderingModal = () => {
+    if (statusOrderingModal === false) {
+      setStatusOrderingModal(true);
+
+      setTimeout(() => {
+        setShowSpinner(false);
+        setCustomerName('');
+        setCustomerPhoneNumber('');
+        setCustomerAddress('');
+        setCustomerCommet('');
+        setTypeOfDelivery('');
+        setTypeOfPayment('');
+        
+        localStorage.removeItem('foodData');
+        localStorage.removeItem('totalFoodPosition');
+        onChangeFoodListInShopBag([]);
+        onChangeTotalOrderAmount(0);
+        onActiveShopBag(null, 'ordered-food');
+      }, 9800);
+
+      setTimeout(() => {
+        setStatusOrderingModal(false);
+      }, 10100);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,27 +76,16 @@ const ShoppingBag = (props) => {
           totalOrderSum,
         });
 
-        setShowSpinner(false);
-        setCustomerName('');
-        setCustomerPhoneNumber('');
-        setCustomerAddress('');
-        setCustomerCommet('');
-        setTypeOfDelivery('');
-        setTypeOfPayment('');
-
-        localStorage.removeItem('foodData');
-        localStorage.removeItem('totalFoodPosition');
-        onChangeFoodListInShopBag([]);
-        onChangeTotalOrderAmount(0);
-        onActiveShopBag(null, 'odered-food');
-
+        onShowStatusOrderingModal();
       } catch (err) {
         setShowSpinner(false);
         console.log(err.messaage, err);
       }
+      // For unauthorized user
+    } else {
+      onShowStatusOrderingModal();
     }
   };
-
 
   const contentShopBagFoodList = foodListInShopBag !== null ? foodListInShopBag.map(({ img, name, price, size, weight, counter, id }) => {
     return (
@@ -102,26 +118,31 @@ const ShoppingBag = (props) => {
     );
   }) : null;
 
+  const rndm = Math.floor(Math.random() * (1000 - (-1000)) + (-1000));
 
   return (
     <div className={`order-list ${activeStyleShopBag}`}>
-      <div className="order-list_overlay" onClick={onActiveShopBag} >
-        <div className="order-list__close">
+      <div 
+        className={`order-list_overlay${statusOrderingModal ? ' order-list_hiddenScroll' : ''}`}
+        onClick={onActiveShopBag} 
+      >
+        <div className={`order-list__close ${statusOrderingModal ? 'order-list_hidden' : ''}`}>
           <button className="order-list__close-btn">
             <span></span>
             <span></span>
           </button>
         </div>
-        <div className="order-list__popup">
+        <div className={`order-list__popup ${statusOrderingModal ? 'order-list_hidden' : ''}`}>
           <div className="order-list__title">Ваше замовлення:</div>
           <div className="order-list__products">
             <TransitionGroup component="div">
               {contentShopBagFoodList}
             </TransitionGroup>
           </div>
-          <div className="order-list__total-amount">Сума: {orderSum} грн</div>
-          <div className="order-list__form order-form">
 
+          <div className="order-list__total-amount">Сума: {orderSum} грн</div>
+          
+          <div className="order-list__form order-form">
             <form onSubmit={handleSubmit}>
               <div className="order-form__enterInfo">
                 <label className="order-form__usualLabel" htmlFor="name">Як до Вас звертатися:</label>
@@ -233,6 +254,17 @@ const ShoppingBag = (props) => {
                 {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Замовити'}
               </button>
             </form>
+          </div>
+        </div>
+
+        <div className={`success-ordered ${statusOrderingModal ? 'success-ordered_active' : ''}`}>
+          <h2 className="success-ordered__title">Ваше замовлення прийнято!</h2>
+          <div className="success-ordered__number">
+            Номер вашого замовлення <strong>№{rndm}</strong>
+          </div>
+          <div className="success-ordered__other-info">
+            <p>Невдовзі вам зателефонує наш оператор.</p>
+            <p>Дякуємо за ваш вибір!</p>
           </div>
         </div>
       </div>
