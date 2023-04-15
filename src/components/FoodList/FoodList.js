@@ -18,20 +18,26 @@ const FoodList = () => {
   const totalFoodPosition = localStorage.getItem('totalFoodPosition') ? JSON.parse(localStorage.getItem('totalFoodPosition')) : null;
   const shopBagFoodData = localStorage.getItem('foodData') ? JSON.parse(localStorage.getItem('foodData')) : null;
 
-  const [shoppingBag, setShoppingBag] = useState(false);
+  const [activeShoppingBag, setActiveShoppingBag] = useState(false);
   const [totalOrderAmount, setTotalOrderAmount] = useState(totalFoodPosition);
   const [foodListInShopBag, setFoodListInShopBag] = useState(shopBagFoodData);
   const [activeStyleBasket, setActiveStyleBasket] = useState('basket_hidden');
   const [activeStyleShopBag, setActiveStyleShopBag] = useState('order-list_hidden');
 
-  const onActiveShopBag = (e) => {
-    let clName = e.target.className;
-    if (
-      clName === 'basket__img' || clName === 'order-list__close-btn' ||
-      clName === 'order-list_overlay' ||
-      e.target.parentElement.className === 'order-list__close-btn'
-    ) {
-      setShoppingBag(shoppingBag => !shoppingBag);
+  const onActiveShopBag = (e, action) => {
+    if (e) {
+      let clName = e.target.className;
+      if (
+        clName === 'basket__img' || clName === 'order-list__close-btn' ||
+        clName === 'order-list_overlay' ||
+        e.target.parentElement.className === 'order-list__close-btn'
+      ) {
+        setActiveShoppingBag(shoppingBag => !shoppingBag);
+        document.body.classList.toggle('no-scroll');
+      } 
+    } else if (action === 'odered-food') {
+      console.log('da');
+      setActiveShoppingBag(false);
       document.body.classList.toggle('no-scroll');
     }
   }
@@ -72,7 +78,7 @@ const FoodList = () => {
     }
 
     if (newTotalFoodPosition === 0) {
-      setShoppingBag(shoppingBag => !shoppingBag);
+      setActiveShoppingBag(shoppingBag => !shoppingBag);
     }
 
     localStorage.setItem('foodData', JSON.stringify(newFoodListInShopBag));
@@ -92,32 +98,36 @@ const FoodList = () => {
   });
 
   const onUpdShowingShopBagAndBasket = () => {
-    if (totalOrderAmount < 1 || shoppingBag) {
+    if (totalOrderAmount < 1 || activeShoppingBag) {
       setActiveStyleBasket('basket_hidden');
-    } else {
+    } else if (totalOrderAmount > 0 || activeShoppingBag === false) {
       setActiveStyleBasket('basket_show');
     }
-
-    if (foodListInShopBag.length > 0 && shoppingBag) {
-      setActiveStyleShopBag('order-list_show');
-    } else {
-      setActiveStyleShopBag('order-list_hidden');
-      document.body.classList.remove('no-scroll');
+    
+    if (foodListInShopBag) {
+      if (foodListInShopBag.length > 0 && activeShoppingBag) {
+        setActiveStyleShopBag('order-list_show');
+      } else {
+        setActiveStyleShopBag('order-list_hidden');
+        document.body.classList.remove('no-scroll');
+      }
     }
   };
 
   const orderSum = useMemo(() => {
     let sum = 0;
-    foodListInShopBag.forEach(item => {
-      sum += (+item.price) * (+item.counter);
-    });
+    if (foodListInShopBag) {
+      foodListInShopBag.forEach(item => {
+        sum += (+item.price) * (+item.counter);
+      })
+    }
     return sum;
   }, [foodListInShopBag]);
 
   useEffect(() => {
     onUpdShowingShopBagAndBasket();
     // eslint-disable-next-line
-  }, [totalOrderAmount, shoppingBag, foodListInShopBag]);
+  }, [totalOrderAmount, activeShoppingBag, foodListInShopBag]);
 
   useEffect(() => {
     onUpdShowingShopBagAndBasket();
@@ -155,6 +165,8 @@ const FoodList = () => {
         orderSum={orderSum}
         foodListInShopBag={foodListInShopBag}
         onCounterShopBag={onCounterShopBag}
+        onChangeFoodListInShopBag={onChangeFoodListInShopBag}
+        onChangeTotalOrderAmount={onChangeTotalOrderAmount}
       />
 
       {

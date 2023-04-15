@@ -12,7 +12,9 @@ const ShoppingBag = (props) => {
     onActiveShopBag,
     orderSum,
     foodListInShopBag,
-    onCounterShopBag
+    onCounterShopBag,
+    onChangeFoodListInShopBag,
+    onChangeTotalOrderAmount
   } = props;
 
   const [customerName, setCustomerName] = useState('');
@@ -29,32 +31,42 @@ const ShoppingBag = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowSpinner(true);
-    try {
-      await addDoc(ordersRef, {
-        foodItemList: JSON.stringify(foodListInShopBag),
-        createdAt: serverTimestamp(),
-        email: auth.currentUser.email,
-        name: customerName,
-        phoneNumber: customerPhoneNumber,
-        address: customerAddress,
-        comment: customerComment,
-        typeOfDelivery,
-        typeOfPayment,
-        totalOrderSum,
-      });
 
-      setCustomerName('');
-      setCustomerPhoneNumber('');
-      setCustomerAddress('');
-      setCustomerCommet('');
-      setTypeOfDelivery('');
-      setTypeOfPayment('');
+    // Work for authorization user 
+    if (Boolean(auth.currentUser) === true) {
+      setShowSpinner(true);
+      try {
+        await addDoc(ordersRef, {
+          foodItemList: JSON.stringify(foodListInShopBag),
+          createdAt: serverTimestamp(),
+          email: auth.currentUser.email,
+          name: customerName,
+          phoneNumber: customerPhoneNumber,
+          address: customerAddress,
+          comment: customerComment,
+          typeOfDelivery,
+          typeOfPayment,
+          totalOrderSum,
+        });
 
-      setShowSpinner(false);
-    } catch (err) {
-      setShowSpinner(false);
-      console.log(err.messaage);
+        setShowSpinner(false);
+        setCustomerName('');
+        setCustomerPhoneNumber('');
+        setCustomerAddress('');
+        setCustomerCommet('');
+        setTypeOfDelivery('');
+        setTypeOfPayment('');
+
+        localStorage.removeItem('foodData');
+        localStorage.removeItem('totalFoodPosition');
+        onChangeFoodListInShopBag([]);
+        onChangeTotalOrderAmount(0);
+        onActiveShopBag(null, 'odered-food');
+
+      } catch (err) {
+        setShowSpinner(false);
+        console.log(err.messaage, err);
+      }
     }
   };
 
@@ -113,23 +125,23 @@ const ShoppingBag = (props) => {
             <form onSubmit={handleSubmit}>
               <div className="order-form__enterInfo">
                 <label className="order-form__usualLabel" htmlFor="name">Як до Вас звертатися:</label>
-                <input 
-                  className="order-form__usualInput" 
-                  id="name" 
-                  name="customer name" 
+                <input
+                  className="order-form__usualInput"
+                  id="name"
+                  name="customer name"
                   type="text"
                   value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)} 
+                  onChange={(e) => setCustomerName(e.target.value)}
                   required />
               </div>
 
               <div className="order-form__enterInfo">
                 <label className="order-form__usualLabel" htmlFor="phone-number">Номер телефону:</label>
-                <input 
-                  className="order-form__usualInput" 
-                  id="phone-number" 
-                  name="customer phone number" 
-                  type="tel" 
+                <input
+                  className="order-form__usualInput"
+                  id="phone-number"
+                  name="customer phone number"
+                  type="tel"
                   value={customerPhoneNumber}
                   onChange={(e) => setCustomerPhoneNumber(e.target.value)}
                   required />
@@ -138,22 +150,22 @@ const ShoppingBag = (props) => {
               <div className="order-form__enterInfo">
                 <div className="order-form__subtitle">Варіанти доставки:</div>
                 <p className="order-form__radio">
-                  <input 
-                    type="radio" 
-                    name="typeOfDelivery" 
-                    id="deliveryAroundCity" 
+                  <input
+                    type="radio"
+                    name="typeOfDelivery"
+                    id="deliveryAroundCity"
                     value={typeOfDelivery}
-                    onChange={() => setTypeOfDelivery('deliveryAroundCity')} 
+                    onChange={() => setTypeOfDelivery('deliveryAroundCity')}
                   />
                   <label htmlFor="deliveryAroundCity">Доставка по місту до 8 км 50 гривень</label>
                 </p>
                 <p className="order-form__radio">
-                  <input 
-                    type="radio" 
-                    name="typeOfDelivery" 
-                    id="pickup" 
+                  <input
+                    type="radio"
+                    name="typeOfDelivery"
+                    id="pickup"
                     value={typeOfDelivery}
-                    onChange={() => setTypeOfDelivery('pickup')}  
+                    onChange={() => setTypeOfDelivery('pickup')}
                   />
                   <label htmlFor="pickup">Самовивіз за адресою вул. Пашутинська 61/84</label>
                 </p>
@@ -161,11 +173,11 @@ const ShoppingBag = (props) => {
 
               <div className="order-form__enterInfo">
                 <label className="order-form__usualLabel" htmlFor="address">Адреса</label>
-                <input 
-                  className="order-form__usualInput" 
-                  id="address" 
-                  name="delivery address" 
-                  type="text" 
+                <input
+                  className="order-form__usualInput"
+                  id="address"
+                  name="delivery address"
+                  type="text"
                   value={customerAddress}
                   onChange={(e) => setCustomerAddress(e.target.value)}
                   required />
@@ -173,35 +185,35 @@ const ShoppingBag = (props) => {
 
               <div className="order-form__enterInfo">
                 <label className="order-form__usualLabel" htmlFor="comment">Коментар</label>
-                <input 
-                  className="order-form__usualInput" 
-                  id="comment" 
-                  name="customer comment" 
+                <input
+                  className="order-form__usualInput"
+                  id="comment"
+                  name="customer comment"
                   type="text"
                   value={customerComment}
-                  onChange={(e) => setCustomerCommet(e.target.value)} 
+                  onChange={(e) => setCustomerCommet(e.target.value)}
                 />
               </div>
 
               <div className="order-form__enterInfo">
                 <div className="order-form__subtitle">Спосіб оплати:</div>
                 <p className="order-form__radio">
-                  <input 
-                    type="radio" 
-                    name="typeOfPayment" 
-                    id="cash" 
+                  <input
+                    type="radio"
+                    name="typeOfPayment"
+                    id="cash"
                     value={typeOfPayment}
-                    onChange={() => setTypeOfPayment('cash')} 
+                    onChange={() => setTypeOfPayment('cash')}
                   />
                   <label htmlFor="cash">Готівкою при отриманні</label>
                 </p>
                 <p className="order-form__radio">
-                  <input 
-                    type="radio" 
-                    name="typeOfPayment" 
-                    id="online" 
+                  <input
+                    type="radio"
+                    name="typeOfPayment"
+                    id="online"
                     value={typeOfPayment}
-                    onChange={() => setTypeOfPayment('online')}  
+                    onChange={() => setTypeOfPayment('online')}
                   />
                   <label htmlFor="online">Онлайн карткою Visa або Mastercard</label>
                 </p>
@@ -211,14 +223,14 @@ const ShoppingBag = (props) => {
                 <div className="order-form__amount">Сума: {orderSum} грн</div>
                 {
                   typeOfDelivery === 'deliveryAroundCity' ?
-                  <div className="order-form__deliveryAmount">Доставка по місту до 8 км 50 гривень: 50грн</div> :
-                  null 
+                    <div className="order-form__deliveryAmount">Доставка по місту до 8 км 50 гривень: 50грн</div> :
+                    null
                 }
                 <div className="order-form__totalAmount">Загальна сума: {totalOrderSum} грн</div>
               </div>
 
               <button className="order-form__orderBtn">
-                {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Замовити'} 
+                {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Замовити'}
               </button>
             </form>
           </div>
