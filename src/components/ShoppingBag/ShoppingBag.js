@@ -14,7 +14,8 @@ const ShoppingBag = (props) => {
     foodListInShopBag,
     onCounterShopBag,
     onChangeFoodListInShopBag,
-    onChangeTotalOrderAmount
+    onChangeTotalOrderAmount,
+    totalOrderAmount
   } = props;
 
   const [customerName, setCustomerName] = useState('');
@@ -119,6 +120,7 @@ const ShoppingBag = (props) => {
   }) : null;
 
   const rndm = Math.floor(Math.random() * (1000 - (-1000)) + (-1000));
+  const additionalHeight = +totalOrderAmount * 70;
 
   return (
     <div className={`order-list ${activeStyleShopBag}`}>
@@ -257,7 +259,10 @@ const ShoppingBag = (props) => {
           </div>
         </div>
 
-        <div className={`success-ordered ${statusOrderingModal ? 'success-ordered_active' : ''}`}>
+        <div 
+          className={`success-ordered ${statusOrderingModal ? 'success-ordered_active' : ''}`}
+          style={{top: `calc(100% + ${additionalHeight}px)`}}
+        >
           <h2 className="success-ordered__title">Ваше замовлення прийнято!</h2>
           <div className="success-ordered__number">
             Номер вашого замовлення <strong>№{rndm}</strong>

@@ -168,6 +168,7 @@ const FoodList = () => {
         onCounterShopBag={onCounterShopBag}
         onChangeFoodListInShopBag={onChangeFoodListInShopBag}
         onChangeTotalOrderAmount={onChangeTotalOrderAmount}
+        totalOrderAmount={totalOrderAmount}
       />
 
       {
