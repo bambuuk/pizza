@@ -3,12 +3,14 @@ import {
   auth, 
   googleProvider, 
   facebookProvider, 
+  firestoreDb
 } from '../../firebase';
 import { 
   signInWithPopup,
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword 
 } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
 import Cookies from 'universal-cookie';
 import Spinner from '../Spinner/Spinner';
 import './auth.scss';
@@ -25,6 +27,8 @@ const Auth = (props) => {
   const [userName, setUserName] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
 
+  const ordersRef = collection(firestoreDb, 'orders');
+
   const register = async () => {
     setShowSpinner(true);
     try {
@@ -38,6 +42,11 @@ const Auth = (props) => {
         JSON.stringify([{email: user.user.email, name: userName}]);
 
       cookies.set('userNamesList', newUserNamesCookiList);
+
+      await addDoc(ordersRef, {
+        email: user.user.email,
+        status: 'empty'
+      });
 
       setRegisterEmail('');
       setRegisterPassword('');
@@ -67,17 +76,28 @@ const Auth = (props) => {
       console.log(error.message);
     }
   };
-  console.log(2, showSpinner);
 
-  const signInWithGoogle = async (typeSystemAuth) => {
+  const signInWithOtherSyst = async (typeSystemAuth) => {
     try {
       if (typeSystemAuth === 'google') {
         const result = await signInWithPopup(auth, googleProvider);
         localStorage.setItem('auth-token-pizza', result.user.refreshToken);
+
+        await addDoc(ordersRef, {
+          email: result.user.email,
+          status: 'empty'
+        });
+
         console.log(result);
       } else if (typeSystemAuth === 'facebook') {
         const result = await signInWithPopup(auth, facebookProvider);
         localStorage.setItem('auth-token-pizza', result.user.refreshToken);
+
+        await addDoc(ordersRef, {
+          email: result.user.email,
+          status: 'empty'
+        });
+        
         console.log(result);
       }
 
@@ -226,11 +246,11 @@ const Auth = (props) => {
         </div>
 
         <div className="media-options">
-          <button onClick={(e) => signInWithGoogle('google')}>
+          <button onClick={(e) => signInWithOtherSyst('google')}>
             <i className='bx bxl-google' ></i>
             <span>Login with Google</span>
           </button>
-          <button onClick={(e) => signInWithGoogle('facebook')}>
+          <button onClick={(e) => signInWithOtherSyst('facebook')}>
             <i className='bx bxl-facebook-circle' ></i>
             <span>Login with Facebook</span>
           </button>

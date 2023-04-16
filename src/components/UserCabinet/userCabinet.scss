@@ -111,11 +111,13 @@
     padding-bottom: 5px;
     font-size: 18px;
     font-weight: 600;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    border-bottom: 2px solid rgba(0, 0, 0, .2);
   }
   &__item {
     margin: 15px 0;
     width: 100%;
+    border-top: 1px solid rgba(250, 147, 13, 0.5);
+    border-bottom: 1px solid rgba(250, 147, 13, 0.5);
   }
   &__details {
     display: flex;
@@ -136,7 +138,7 @@
     font-size: 16px;
     font-weight: 500;
   }
-  &__food-list {
+  &__food-item {
     font-size: 14px;
     margin: 8px 0;
     display: grid;
@@ -216,7 +218,7 @@
       font-size: 12px;
       font-weight: 500;
     }
-    &__food-list {
+    &__food-item {
       font-size: 12px;
       margin: 8px 0;
       display: grid;
