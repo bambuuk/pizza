@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { onSnapshot, query, where, orderBy, collection } from "firebase/firestore";
+import { auth, firestoreDb } from '../../firebase';
 import Cookies from 'universal-cookie';
 
 import './userCabinet.scss';
@@ -10,8 +11,10 @@ const cookies = new Cookies();
 const UserCabinet = (props) => {
   const [currentUser, setCurrentUser] = useState({});
   const [currentUserName, setCurrentUserName] = useState('');
+  const [listOrders, setListOrders] = useState([]);
   const {activeLogRegWindow, toggleLogRegWindActive, setIsAuth} = props;
-  console.log(currentUser)
+  
+  const ordersRef = collection(firestoreDb, 'orders');
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -44,6 +47,30 @@ const UserCabinet = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (Boolean(currentUser.email) === true) {
+      // gets all messages with room name from props
+    const queryOrders = query(
+      ordersRef,
+      where("email", "==", currentUser.email),
+      orderBy('createdAt') // need to connect with using method query and add index in firestore 
+    );
+
+    // listening all changes for queryMessages
+    const unsuscribe = onSnapshot(queryOrders, (snapshot) => {
+      let newOrders = [];
+      snapshot.forEach((doc) => {
+        newOrders.push({ ...doc.data(), id: doc.id });
+      });
+      setListOrders(newOrders);
+    });
+
+    return () => unsuscribe();
+  }
+  // eslint-disable-next-line
+  }, [currentUser]);
+
+  console.log(listOrders);
 
   const showWindow = activeLogRegWindow ? 'user-cabinet_active' : '';
   
@@ -78,6 +105,12 @@ const UserCabinet = (props) => {
           </div>
 
           <button className='user-cabinet__logout' onClick={signUserOut}>Закінчити сесію</button>
+
+          <div className="user-cabinet__orders-list orders-list">
+            <div className="orders-listitem">
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>
