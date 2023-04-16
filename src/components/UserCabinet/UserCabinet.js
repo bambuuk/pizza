@@ -4,6 +4,7 @@ import { onSnapshot, query, where, orderBy, collection } from "firebase/firestor
 import { auth, firestoreDb } from '../../firebase';
 import Cookies from 'universal-cookie';
 
+import img from '../../resources/img/pizza/grilla.png';
 import './userCabinet.scss';
 
 const cookies = new Cookies();
@@ -107,8 +108,27 @@ const UserCabinet = (props) => {
           <button className='user-cabinet__logout' onClick={signUserOut}>Закінчити сесію</button>
 
           <div className="user-cabinet__orders-list orders-list">
-            <div className="orders-listitem">
-              
+            <div className="orders-list__subtitle">Історія замовлень:</div>
+            <div className="orders-list__item">
+              <div className="orders-list__details">
+                <div className="orders-list__address">вул. Велика Перспективна 19, кв. 1 м. Кропивницький</div>
+                <div className="orders-list__date">13/01/2000</div>
+                <div className="orders-list__order-sum">1000 грн</div>
+              </div>
+              <div className="orders-list__food-list">
+                <div className="orders-list__food-img">
+                  <img src={img} alt="" />
+                </div>
+                <div className="orders-list__food-name">Гавайська хвиля (4 м'яса)</div>
+                <div className="orders-list__food-number">
+                  <span>1x</span>
+                  <span>26</span>
+                </div>
+                <div className="orders-list__sum">
+                  <div className="orders-list__for-one-item">180 грн</div>
+                  <div className="orders-list__total-sum">3600 грн</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
