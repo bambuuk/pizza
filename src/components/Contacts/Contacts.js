@@ -54,24 +54,24 @@ const Contacts = () => {
           <input
             type="number"
             name="number"
-            className={`${modal ? "formHidden" : null} form__input`}
+            className={`${modal ? "formHidden" : ''} form__input`}
             placeholder="+380(99)99-99-999"
             required
           />
           <input
             type="text"
             name="customer-name"
-            className={`${modal ? "formHidden" : null} form__input`}
+            className={`${modal ? "formHidden" : ''} form__input`}
             placeholder="Як до Вас звертатися"
             required
           />
           <textarea
             name="your-question"
             placeholder="Ваше запитання"
-            className={`${modal ? "formHidden" : null} form__textarea`}
+            className={`${modal ? "formHidden" : ''} form__textarea`}
             required
           />
-          <div className={`${modal ? "modalActive" : null} form__success`}>
+          <div className={`form__window-success${modal ? " form__window-success_active" : ''}`}>
             Повідомлення відправлено!
           </div>
           <button

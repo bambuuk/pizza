@@ -91,7 +91,7 @@
       background-color: #f27048;
     }
   }
-  &__success {
+  &__window-success {
     visibility: hidden;
     position: absolute;
     background: $btn-color;
@@ -101,6 +101,9 @@
     right: 25%;
     text-align: center;
     line-height: 80px;
+    &_active {
+      animation: Modal 1 2s;
+    }
   }
 }
 
@@ -119,10 +122,6 @@
     visibility: hidden;
     opacity: 0;
   }
-}
-
-.modalActive {
-  animation: Modal 1 2s;
 }
 
 .formHidden {

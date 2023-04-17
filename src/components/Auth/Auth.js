@@ -26,6 +26,7 @@ const Auth = (props) => {
   const [loginPassword, setLoginPassword] = useState('');
   const [userName, setUserName] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
+  const [successWindow, setSuccessWindow] = useState(false);
 
   const ordersRef = collection(firestoreDb, 'orders');
 
@@ -48,12 +49,18 @@ const Auth = (props) => {
         status: 'empty'
       });
 
-      setRegisterEmail('');
-      setRegisterPassword('');
-      setUserName('');
-      setIsAuth(true);
-      toggleLogRegWindActive(null, 'login');
+      if (successWindow === false) {
+        setSuccessWindow(true);
 
+        setTimeout(() => {
+          setRegisterEmail('');
+          setRegisterPassword('');
+          setUserName('');
+          setIsAuth(true);
+          toggleLogRegWindActive(null, 'login');
+          setSuccessWindow(false);
+        }, 3000)
+      }
     } catch (error) {
       setShowSpinner(false);
       console.log(error.message);
@@ -66,10 +73,18 @@ const Auth = (props) => {
       const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       localStorage.setItem('auth-token-pizza', user.user.refreshToken);
 
-      setLoginEmail('');
-      setLoginPassword('');
-      setIsAuth(true);
-      toggleLogRegWindActive(null, 'login');
+      if (successWindow === false) {
+        setSuccessWindow(true);
+
+        setTimeout(() => {
+          setLoginEmail('');
+          setLoginPassword('');
+          setIsAuth(true);
+          toggleLogRegWindActive(null, 'login');
+          setSuccessWindow(false);
+        }, 3000);
+      }
+
       console.log(user);
     } catch (error) {
       setShowSpinner(false);
@@ -101,8 +116,15 @@ const Auth = (props) => {
         console.log(result);
       }
 
-      setIsAuth(true);
-      toggleLogRegWindActive(null, 'login');
+      if (successWindow === false) {
+        setSuccessWindow(true);
+
+        setTimeout(() => {
+          setIsAuth(true);
+          toggleLogRegWindActive(null, 'login');
+          setSuccessWindow(false);
+        }, 3000);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -120,10 +142,10 @@ const Auth = (props) => {
 
   return (
     <div className={`auth auth_overlay ${authPopupClazz}`} onClick={toggleLogRegWindActive}>
-      {/* <div className={`form__success${modal ? " modalActive" : ''}`}>
+      <div className={`form__success${successWindow ? " form__success_active" : ''}`}>
         Ви успішно авторизувалися!
-      </div> */}
-      <div className="auth__wrapper">
+      </div>
+      <div className={`auth__wrapper${successWindow ? ' auth__wrapper_hide' : ''}`}>
         <span
           className="icon-close"
         >

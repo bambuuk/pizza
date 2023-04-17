@@ -33,6 +33,9 @@
     flex-direction: column;
     padding: 0 40px;
     transition: .5s all;
+    &_hide {
+      opacity: 0;
+    }
   }
 }
 

@@ -115,3 +115,41 @@ h6 {
 .no-scroll {
 	overflow-y: hidden;
 }
+
+@keyframes Modal {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+	20% {
+		visibility: visible;
+    opacity: 1;
+	}
+
+  80% {
+    visibility: visible;
+    opacity: 1;
+  }
+    
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.form__success {
+	visibility: hidden;
+	position: absolute;
+	background: $btn-color;
+	width: 300px;
+	height: 80px;
+	bottom: 50%;
+	left: 50%;
+	transform: translate(-50%);
+	text-align: center;
+	line-height: 80px;
+	&_active {
+		animation: Modal 1 3s;
+	}
+}
