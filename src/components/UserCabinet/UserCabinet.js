@@ -152,7 +152,7 @@ const UserCabinet = (props) => {
 
   return (
     <div className={`user-cabinet ${showWindow}`}>
-      <div className="user-cabinet__overlay" onClick={toggleLogRegWindActive}>
+      <div className="user-cabinet__overlay" onClick={successWindow ? null : (e) => toggleLogRegWindActive(e)}>
         <div className={`form__success${successWindow ? ' form__success_active' : ''}`}>
           Ви вийшли з власного кабінету!
         </div>

@@ -141,7 +141,7 @@ const Auth = (props) => {
   const authPopupClazz = activeLogRegWindow ? 'active-popup' : '';
 
   return (
-    <div className={`auth auth_overlay ${authPopupClazz}`} onClick={toggleLogRegWindActive}>
+    <div className={`auth auth_overlay ${authPopupClazz}`} onClick={successWindow ? null : (e) => toggleLogRegWindActive(e)}>
       <div className={`form__success${successWindow ? " form__success_active" : ''}`}>
         Ви успішно авторизувалися!
       </div>

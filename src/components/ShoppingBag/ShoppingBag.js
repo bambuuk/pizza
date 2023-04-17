@@ -49,7 +49,10 @@ const ShoppingBag = (props) => {
         onChangeFoodListInShopBag([]);
         onChangeTotalOrderAmount(0);
         onActiveShopBag(null, 'ordered-food');
-      }, 9800);
+      }, 7000);
+      setTimeout(() => {
+        setStatusOrderingModal(false);
+      }, 8000);
     }
   }
 
@@ -122,7 +125,7 @@ const ShoppingBag = (props) => {
     <div className={`order-list ${activeStyleShopBag}`}>
       <div 
         className={`order-list_overlay${statusOrderingModal ? ' order-list_hiddenScroll' : ''}`}
-        onClick={onActiveShopBag} 
+        onClick={statusOrderingModal ? null : (e) => onActiveShopBag(e)} 
       >
         <div className={`order-list__close ${statusOrderingModal ? 'order-list_hidden' : ''}`}>
           <button className="order-list__close-btn">
