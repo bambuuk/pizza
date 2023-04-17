@@ -31,7 +31,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 0 40px;
+    padding: 10px 40px;
     transition: .5s all;
     &_hide {
       opacity: 0;
@@ -255,4 +255,36 @@
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 991px) {
+
+}
+
+@media (max-width: 767px) {
+  
+}
+
+@media (max-width: 575px) {
+  .auth {
+    &__wrapper {
+      width: 320px;
+      padding: 10px;
+      border-bottom: 2px solid rgba(255, 255, 255, .2);
+    }
+  }
+
+  .register-link {
+    padding: 8px;
+    margin-top: 8px;
+  }
+  
+  .media-options button span {
+    font-size: 14px;
+    font-weight: 500;
+  }
 }
