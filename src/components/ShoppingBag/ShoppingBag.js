@@ -50,10 +50,6 @@ const ShoppingBag = (props) => {
         onChangeTotalOrderAmount(0);
         onActiveShopBag(null, 'ordered-food');
       }, 9800);
-
-      setTimeout(() => {
-        setStatusOrderingModal(false);
-      }, 10100);
     }
   }
 

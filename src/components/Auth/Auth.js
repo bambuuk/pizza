@@ -120,6 +120,9 @@ const Auth = (props) => {
 
   return (
     <div className={`auth auth_overlay ${authPopupClazz}`} onClick={toggleLogRegWindActive}>
+      {/* <div className={`form__success${modal ? " modalActive" : ''}`}>
+        Ви успішно авторизувалися!
+      </div> */}
       <div className="auth__wrapper">
         <span
           className="icon-close"
