@@ -33,6 +33,11 @@ const Header = ({ fixedHeader }) => {
         setActiveLogRegWindow(value => !value);
         document.body.classList.toggle('no-scroll');
       }
+      if (clName === 'burger__logreg') {
+        setActiveBurgerMenu(value => !value);
+        setActiveLogRegWindow(value => !value);
+        document.body.classList.toggle('no-scroll');
+      }
     }
 
     if (action === 'logout' || action === 'login') {
@@ -42,8 +47,8 @@ const Header = ({ fixedHeader }) => {
   };
 
   const styleBurger = activeBurgerMenu ? 'header__burger_active' : '';
-  const styleMenu = activeBurgerMenu ? 'burger__menu_active' : '';
   const headerClazz = fixedHeader ? 'header header_fixed' : 'header';
+  const styleMenu = activeBurgerMenu ? 'burger__menu_active' : '';
 
   return (
     <div className="header-wrapper">
@@ -138,7 +143,12 @@ const Header = ({ fixedHeader }) => {
               <NavLink to="/contacts" className="burger__link">Контакти</NavLink>
             </li>
             <li>
-              <span className="burger__logreg">{isAuth ? 'Ваш кабінет' : 'Увійти'}</span>
+              <span 
+                className="burger__logreg"
+                onClick={toggleLogRegWindActive}
+              >
+                {isAuth ? 'Ваш кабінет' : 'Увійти'}
+              </span>
             </li>
           </ul>
         </nav>
