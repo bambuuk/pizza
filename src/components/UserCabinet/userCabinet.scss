@@ -33,6 +33,10 @@
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 1);
     color: $popup-text-color;
+    &_hide {
+      visibility: hidden;
+      opacity: 0;
+    }
   }
   &__icon-close {
     position: absolute;
@@ -114,6 +118,10 @@
     border-bottom: 2px solid rgba(0, 0, 0, .2);
   }
   &__item {
+    &_hide {
+      visibility: hidden;
+      opacity: 0;
+    }
     margin: 15px 0;
     width: 100%;
     border-top: 1px solid rgba(250, 147, 13, 0.5);
