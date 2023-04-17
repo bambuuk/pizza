@@ -183,6 +183,15 @@
   font-size: 16px;
   color: #222;
   font-weight: 600;
+  &:disabled {
+    cursor: wait;
+    background-color: rgb(51, 49, 49);
+    border: 2px solid #000000;
+    color: rgb(194, 186, 178);
+  }
+  &:hover:disabled {
+    background: rgb(51, 49, 49);
+  }
 }
 
 .logreg-box .logreg-link {
@@ -218,6 +227,15 @@
   border-radius: 40px;
   color: #fff;
   transition: .5s all;
+  &:disabled {
+    cursor: wait;
+    background-color: rgb(51, 49, 49);
+    border: 2px solid #000000;
+    color: linen;
+  }
+  &:hover:disabled {
+    background: rgb(51, 49, 49);
+  }
 }
 
 .media-options button:hover {

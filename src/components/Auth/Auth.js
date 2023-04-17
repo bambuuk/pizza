@@ -31,7 +31,7 @@ const Auth = (props) => {
   const ordersRef = collection(firestoreDb, 'orders');
 
   const register = async () => {
-    setShowSpinner(true);
+    setShowSpinner('register');
     try {
       const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
       localStorage.setItem('auth-token-pizza', user.user.refreshToken);
@@ -68,7 +68,7 @@ const Auth = (props) => {
   };
 
   const login = async () => {
-    setShowSpinner(true);
+    setShowSpinner('login');
     try {
       const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       localStorage.setItem('auth-token-pizza', user.user.refreshToken);
@@ -93,6 +93,7 @@ const Auth = (props) => {
   };
 
   const signInWithOtherSyst = async (typeSystemAuth) => {
+    setShowSpinner(`${typeSystemAuth}`);
     try {
       if (typeSystemAuth === 'google') {
         const result = await signInWithPopup(auth, googleProvider);
@@ -126,6 +127,7 @@ const Auth = (props) => {
         }, 3000);
       }
     } catch (err) {
+      setShowSpinner(false);
       console.error(err);
     }
   }
@@ -133,8 +135,6 @@ const Auth = (props) => {
   const onSubmitForm = (e) => {
     e.preventDefault();
   }
-
-  // console.log(loadingStatus);
 
   const showRegWindow = activeRegPage ? 'show' : '';
   const hideLogWindow = activeRegPage ? 'hide' : '';
@@ -156,7 +156,7 @@ const Auth = (props) => {
           {/* Login form */}
           <div className={`form-box login ${hideLogWindow}`}>
             <div className="logreg-title">
-              <h2 className="">Login</h2>
+              <h2 className="">Логін</h2>
             </div>
 
             <form onSubmit={onSubmitForm}>
@@ -169,7 +169,7 @@ const Auth = (props) => {
                   onChange={(e) => setLoginEmail(e.target.value)} 
                   required 
                 />
-                <label>Email</label>
+                <label>Пошта</label>
               </div>
 
               <div className="input-box">
@@ -177,29 +177,31 @@ const Auth = (props) => {
                 <input 
                   name="login-password"
                   type="password"
+                  autoComplete="current-password"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)} 
                   required 
                 />
-                <label>Password</label>
+                <label>Пароль</label>
               </div>
 
               <button 
                 type="button"
                 onClick={login} 
                 className="btn"
+                disabled={showSpinner ? true : false}
               >
-                {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Login'}
+                {showSpinner === 'login' ? <Spinner size={16} wrapperSize={100} /> : 'Увійти'}
               </button>
 
               <div className="logreg-link">
                 <p>
-                  Don't have an account?
+                  Немає облікового запису?
                   <button
                     className="register-link"
                     onClick={() => setActiveRegPage(value => !value)}
                     onKeyDown={() => setActiveRegPage(value => !value)}
-                  >&nbsp; Register</button>
+                  >&nbsp; Зареєструватись</button>
                 </p>
               </div>
             </form>
@@ -208,7 +210,7 @@ const Auth = (props) => {
           {/* Register form */}
           <div className={`form-box register ${showRegWindow}`}>
             <div className="logreg-title">
-              <h2>Registration</h2>
+              <h2>Реєстрація</h2>
             </div>
 
             <form onSubmit={onSubmitForm}>
@@ -221,7 +223,7 @@ const Auth = (props) => {
                   onChange={(e) => setUserName(e.target.value)} 
                   required 
                 />
-                <label>Full Name</label>
+                <label>Ім'я</label>
               </div>
 
               <div className="input-box">
@@ -233,7 +235,7 @@ const Auth = (props) => {
                   onChange={(e) => setRegisterEmail(e.target.value)} 
                   required 
                 />
-                <label>Email</label>
+                <label>Пошта</label>
               </div>
 
               <div className="input-box">
@@ -241,29 +243,31 @@ const Auth = (props) => {
                 <input 
                   name="registration-password"
                   type="password"
+                  autoComplete="current-password"
                   value={registerPassword}
                   onChange={(e) => setRegisterPassword(e.target.value)}
                   required 
                 />
-                <label>Password</label>
+                <label>Пароль</label>
               </div>
 
               <button 
                 type="button" 
                 className="btn"
                 onClick={register}
+                disabled={showSpinner ? true : false}
               >
-                {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Register'}
+                {showSpinner === 'register' ? <Spinner size={16} wrapperSize={100} /> : 'Реєстрація'}
               </button>
 
               <div className="logreg-link">
                 <p>
-                  Already have an account?
+                  Вже маєте акаунт?
                   <button
                     className="login-link"
                     onClick={() => setActiveRegPage(value => !value)}
                     onKeyDown={() => setActiveRegPage(value => !value)}
-                  >&nbsp; Login</button>
+                  >&nbsp; Логін</button>
                 </p>
               </div>
             </form>
@@ -271,13 +275,29 @@ const Auth = (props) => {
         </div>
 
         <div className="media-options">
-          <button onClick={(e) => signInWithOtherSyst('google')}>
-            <i className='bx bxl-google' ></i>
-            <span>Login with Google</span>
+          <button onClick={(e) => signInWithOtherSyst('google')} disabled={showSpinner ? true : false}>
+            {
+              showSpinner === 'google' ?
+              <Spinner size={16} wrapperSize={100} /> :
+              (
+                <>
+                  <i className='bx bxl-google' ></i>
+                  <span>Увійти за допомогою Google</span>
+                </>
+              )
+            }
           </button>
-          <button onClick={(e) => signInWithOtherSyst('facebook')}>
-            <i className='bx bxl-facebook-circle' ></i>
-            <span>Login with Facebook</span>
+          <button onClick={(e) => signInWithOtherSyst('facebook')} disabled={showSpinner ? true : false}>
+            {
+              showSpinner === 'facebook' ?
+              <Spinner size={16} wrapperSize={100} /> :
+              (
+                <>
+                  <i className='bx bxl-facebook-circle' ></i>
+                  <span>Увійти за допомогою Facebook</span>
+                </>
+              )
+            }
           </button>
         </div>
       </div>

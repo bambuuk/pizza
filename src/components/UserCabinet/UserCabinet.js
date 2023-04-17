@@ -145,6 +145,10 @@ const UserCabinet = (props) => {
   }, [listOrders]);
 
   const showWindow = activeLogRegWindow ? 'user-cabinet_active' : '';
+  let showUserEmail = 'unkown';
+  if(currentUser) {
+    showUserEmail = currentUser.email ? currentUser.email : 'unkown';
+  }
 
   return (
     <div className={`user-cabinet ${showWindow}`}>
@@ -166,7 +170,7 @@ const UserCabinet = (props) => {
             </div>
             <div className="user-cabinet__email">
               <span>E-mail</span>
-              <span>{currentUser.email ? currentUser.email : 'unkown'}</span>
+              <span>{showUserEmail}</span>
             </div>
           </div>
 
