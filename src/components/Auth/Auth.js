@@ -27,6 +27,8 @@ const Auth = (props) => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [successWindow, setSuccessWindow] = useState(false);
 
+  const ordersRef = collection(firestoreDb, 'orders');
+
   const loginFormik = useFormik({
     initialValues: {
       loginEmail: '',
@@ -117,8 +119,6 @@ const Auth = (props) => {
     }
   });
 
-  const ordersRef = collection(firestoreDb, 'orders');
-
   const signInWithOtherSyst = async (typeSystemAuth) => {
     setShowSpinner(`${typeSystemAuth}`);
     try {
@@ -192,7 +192,7 @@ const Auth = (props) => {
                   onBlur={loginFormik.handleBlur}
                 />
                 <label>Пошта</label>
-                {loginFormik.errors.loginEmail && loginFormik.touched.loginEmail ? <div className="error" style={{ color: 'white' }}>{loginFormik.errors.loginEmail}</div> : null}
+                {loginFormik.errors.loginEmail && loginFormik.touched.loginEmail ? <div className="error-message">{loginFormik.errors.loginEmail}</div> : null}
               </div>
 
               <div className="input-box">
@@ -206,7 +206,7 @@ const Auth = (props) => {
                   onBlur={loginFormik.handleBlur}
                 />
                 <label>Пароль</label>
-                {loginFormik.errors.loginPassword && loginFormik.touched.loginPassword ? <div className="error" style={{ color: 'white' }}>{loginFormik.errors.loginPassword}</div> : null}
+                {loginFormik.errors.loginPassword && loginFormik.touched.loginPassword ? <div className="error-message">{loginFormik.errors.loginPassword}</div> : null}
               </div>
 
               <button
@@ -246,7 +246,7 @@ const Auth = (props) => {
                   onBlur={registerFormik.handleBlur}
                 />
                 <label>Ім'я</label>
-                {registerFormik.errors.userName && registerFormik.touched.userName ? <div className="error" style={{ color: 'white' }}>{registerFormik.errors.userName}</div> : null}
+                {registerFormik.errors.userName && registerFormik.touched.userName ? <div className="error-message">{registerFormik.errors.userName}</div> : null}
               </div>
 
               <div className="input-box">
@@ -259,7 +259,7 @@ const Auth = (props) => {
                   onBlur={registerFormik.handleBlur}
                 />
                 <label>Пошта</label>
-                {registerFormik.errors.registerEmail && registerFormik.touched.registerEmail ? <div className="error" style={{ color: 'white' }}>{registerFormik.errors.registerEmail}</div> : null}
+                {registerFormik.errors.registerEmail && registerFormik.touched.registerEmail ? <div className="error-message">{registerFormik.errors.registerEmail}</div> : null}
               </div>
 
               <div className="input-box">
@@ -273,7 +273,7 @@ const Auth = (props) => {
                   onBlur={registerFormik.handleBlur}
                 />
                 <label>Пароль</label>
-                {registerFormik.errors.registerPassword && registerFormik.touched.registerPassword ? <div className="error" style={{ color: 'white' }}>{registerFormik.errors.registerPassword}</div> : null}
+                {registerFormik.errors.registerPassword && registerFormik.touched.registerPassword ? <div className="error-message">{registerFormik.errors.registerPassword}</div> : null}
               </div>
 
               <button
