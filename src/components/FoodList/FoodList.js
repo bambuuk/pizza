@@ -37,7 +37,6 @@ const FoodList = () => {
         document.body.classList.toggle('no-scroll');
       } 
     } else if (action === 'ordered-food') {
-      console.log('da');
       setActiveShoppingBag(false);
       document.body.classList.toggle('no-scroll');
     }

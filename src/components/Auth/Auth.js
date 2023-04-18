@@ -26,6 +26,8 @@ const Auth = (props) => {
   const [activeRegPage, setActiveRegPage] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [successWindow, setSuccessWindow] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const [registerError, setRegisterError] = useState('');
 
   const ordersRef = collection(firestoreDb, 'orders');
 
@@ -60,6 +62,7 @@ const Auth = (props) => {
         console.log(user);
       } catch (error) {
         setShowSpinner(false);
+        setLoginError(error.message);
         console.log(error.message);
       }
     }
@@ -110,10 +113,13 @@ const Auth = (props) => {
             setIsAuth(true);
             toggleLogRegWindActive(null, 'login');
             setSuccessWindow(false);
+            setLoginError('');
+            setRegisterError('');
           }, 3000);
         }
       } catch (error) {
         setShowSpinner(false);
+        setRegisterError(error.message);
         console.log(error.message);
       }
     }
@@ -161,6 +167,9 @@ const Auth = (props) => {
   const showRegWindow = activeRegPage ? 'show' : '';
   const hideLogWindow = activeRegPage ? 'hide' : '';
   const authPopupClazz = activeLogRegWindow ? 'active-popup' : '';
+  const loginErrorClazz = loginError ? 'result-err result-err_show' : 'result-err';
+  const regErrorClazz = registerError.includes('email-already-in-use') ? 
+    'result-err result-err_show' : 'result-err';
 
   return (
     <div className={`auth auth_overlay ${authPopupClazz}`} onClick={successWindow ? null : (e) => toggleLogRegWindActive(e)}>
@@ -179,6 +188,10 @@ const Auth = (props) => {
           <div className={`form-box login ${hideLogWindow}`}>
             <div className="logreg-title">
               <h2 className="">Логін</h2>
+            </div>
+
+            <div className={loginErrorClazz}>
+              Неправильне ім'я користувача або пароль. Сробуйте ще раз.
             </div>
 
             <form onSubmit={loginFormik.handleSubmit}>
@@ -233,6 +246,9 @@ const Auth = (props) => {
           <div className={`form-box register ${showRegWindow}`}>
             <div className="logreg-title">
               <h2>Реєстрація</h2>
+            </div>
+            <div className={regErrorClazz}>
+              Дана email адреса вже використовується.
             </div>
 
             <form onSubmit={registerFormik.handleSubmit}>
