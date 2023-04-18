@@ -36,11 +36,11 @@ const Auth = (props) => {
     },
     validationSchema: Yup.object({
       loginEmail: Yup.string()
-        .email('Неправильна email адреса!')
-        .required("Обов'язкове поле!"),
+        .email('Неправильна email адреса')
+        .required("Обов'язкове поле"),
       loginPassword: Yup.string()
-        .min(6, 'Не менше 6 символів!')
-        .required("Обов'язкове поле!"),
+        .min(6, 'Не менше 6 символів')
+        .required("Обов'язкове поле"),
     }),
     onSubmit: async ({ loginEmail, loginPassword }) => {
       setShowSpinner('login');
@@ -73,14 +73,14 @@ const Auth = (props) => {
     },
     validationSchema: Yup.object({
       userName: Yup.string()
-        .min(2, 'Мінімум 2 символа!')
-        .required("Обов'язкове поле!"),
+        .min(2, 'Мінімум 2 символа')
+        .required("Обов'язкове поле"),
       registerEmail: Yup.string()
-        .email('Неправильна email адреса!')
-        .required("Обов'язкове поле!"),
+        .email('Неправильна email адреса')
+        .required("Обов'язкове поле"),
       registerPassword: Yup.string()
-        .min(6, 'Не менше 6 символів!')
-        .required("Обов'язкове поле!"),
+        .min(6, 'Не менше 6 символів')
+        .required("Обов'язкове поле"),
     }),
     onSubmit: async ({ userName, registerEmail, registerPassword }) => {
       setShowSpinner('register');

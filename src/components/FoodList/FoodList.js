@@ -148,7 +148,6 @@ const FoodList = () => {
     });
     // eslint-disable-next-line
   }, []);
-  console.log('render', loadingStatus)
 
   const spinnerShow = loadingStatus === 'loading' ? <Spinner /> : null;
   const errorShow = loadingStatus === 'error' ? <ErrorMessage /> : null;
