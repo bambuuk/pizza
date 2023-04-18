@@ -1,17 +1,21 @@
 import { useState } from 'react';
-import { 
-  auth, 
-  googleProvider, 
-  facebookProvider, 
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
   firestoreDb
 } from '../../firebase';
-import { 
+import {
   signInWithPopup,
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword 
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
 } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import {
+  addDoc, collection
+} from 'firebase/firestore';
 import Cookies from 'universal-cookie';
+import { useFormik } from "formik";
+import * as Yup from 'yup';
 import Spinner from '../Spinner/Spinner';
 import './auth.scss';
 
@@ -22,11 +26,48 @@ const Auth = (props) => {
   const [activeRegPage, setActiveRegPage] = useState(false);
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
+  // const [loginEmail, setLoginEmail] = useState('');
+  // const [loginPassword, setLoginPassword] = useState('');
   const [userName, setUserName] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
   const [successWindow, setSuccessWindow] = useState(false);
+
+  const loginFormik = useFormik({
+    initialValues: {
+      loginEmail: '',
+      loginPassword: '',
+    },
+    validationSchema: Yup.object({
+      loginEmail: Yup.string()
+        .email('Неправильна email адреса!')
+        .required("Обов'язкове поле!"),
+      loginPassword: Yup.string()
+        .min(6, 'Не менше 6 символів!')
+        .required("Обов'язкове поле!"),
+    }),
+    onSubmit: async ({loginEmail, loginPassword}) => {
+      setShowSpinner('login');
+      try {
+        const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+        localStorage.setItem('auth-token-pizza', user.user.refreshToken);
+
+        if (successWindow === false) {
+          setSuccessWindow(true);
+
+          setTimeout(() => {
+            setIsAuth(true);
+            toggleLogRegWindActive(null, 'login');
+            setSuccessWindow(false);
+          }, 3000);
+        }
+
+        console.log(user);
+      } catch (error) {
+        setShowSpinner(false);
+        console.log(error.message);
+      }
+    }
+  });
 
   const ordersRef = collection(firestoreDb, 'orders');
 
@@ -38,9 +79,9 @@ const Auth = (props) => {
 
       const userNamesCookiList = cookies.get('userNamesList') ? cookies.get('userNamesList') : '';
 
-      const newUserNamesCookiList = Array.isArray(userNamesCookiList) ? 
-        JSON.stringify([...userNamesCookiList, {email: user.user.email, name: userName}]) :
-        JSON.stringify([{email: user.user.email, name: userName}]);
+      const newUserNamesCookiList = Array.isArray(userNamesCookiList) ?
+        JSON.stringify([...userNamesCookiList, { email: user.user.email, name: userName }]) :
+        JSON.stringify([{ email: user.user.email, name: userName }]);
 
       cookies.set('userNamesList', newUserNamesCookiList);
 
@@ -67,30 +108,30 @@ const Auth = (props) => {
     }
   };
 
-  const login = async () => {
-    setShowSpinner('login');
-    try {
-      const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-      localStorage.setItem('auth-token-pizza', user.user.refreshToken);
+  // const login = async () => {
+  //   setShowSpinner('login');
+  //   try {
+  //     const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+  //     localStorage.setItem('auth-token-pizza', user.user.refreshToken);
 
-      if (successWindow === false) {
-        setSuccessWindow(true);
+  //     if (successWindow === false) {
+  //       setSuccessWindow(true);
 
-        setTimeout(() => {
-          setLoginEmail('');
-          setLoginPassword('');
-          setIsAuth(true);
-          toggleLogRegWindActive(null, 'login');
-          setSuccessWindow(false);
-        }, 3000);
-      }
+  //       setTimeout(() => {
+  //         setLoginEmail('');
+  //         setLoginPassword('');
+  //         setIsAuth(true);
+  //         toggleLogRegWindActive(null, 'login');
+  //         setSuccessWindow(false);
+  //       }, 3000);
+  //     }
 
-      console.log(user);
-    } catch (error) {
-      setShowSpinner(false);
-      console.log(error.message);
-    }
-  };
+  //     console.log(user);
+  //   } catch (error) {
+  //     setShowSpinner(false);
+  //     console.log(error.message);
+  //   }
+  // };
 
   const signInWithOtherSyst = async (typeSystemAuth) => {
     setShowSpinner(`${typeSystemAuth}`);
@@ -113,7 +154,6 @@ const Auth = (props) => {
           email: result.user.email,
           status: 'empty'
         });
-        
         console.log(result);
       }
 
@@ -159,35 +199,37 @@ const Auth = (props) => {
               <h2 className="">Логін</h2>
             </div>
 
-            <form onSubmit={onSubmitForm}>
+            <form onSubmit={loginFormik.handleSubmit}>
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-envelope'></i></span>
-                <input 
-                  name='login-email'
+                <input
+                  id="loginEmail"
+                  name="loginEmail"
                   type="email"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)} 
-                  required 
+                  value={loginFormik.values.loginEmail}
+                  onChange={loginFormik.handleChange}
+                  onBlur={loginFormik.handleBlur}
                 />
                 <label>Пошта</label>
+                {loginFormik.errors.loginEmail && loginFormik.touched.loginEmail ? <div className="error" style={{color: 'white'}}>{loginFormik.errors.loginEmail}</div> : null}
               </div>
 
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
-                <input 
-                  name="login-password"
+                <input
+                  name="loginPassword"
                   type="password"
                   autoComplete="current-password"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)} 
-                  required 
+                  value={loginFormik.values.loginPassword}
+                  onChange={loginFormik.handleChange}
+                  onBlur={loginFormik.handleBlur}
                 />
                 <label>Пароль</label>
+                {loginFormik.errors.loginPassword && loginFormik.touched.loginPassword ? <div className="error" style={{color: 'white'}}>{loginFormik.errors.loginPassword}</div> : null}
               </div>
 
-              <button 
-                type="button"
-                onClick={login} 
+              <button
+                type="submit"
                 className="btn"
                 disabled={showSpinner ? true : false}
               >
@@ -200,7 +242,6 @@ const Auth = (props) => {
                   <button
                     className="register-link"
                     onClick={() => setActiveRegPage(value => !value)}
-                    onKeyDown={() => setActiveRegPage(value => !value)}
                   >&nbsp; Зареєструватись</button>
                 </p>
               </div>
@@ -216,43 +257,43 @@ const Auth = (props) => {
             <form onSubmit={onSubmitForm}>
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-user' ></i></span>
-                <input 
+                <input
                   name="user-name"
                   type="text"
                   value={userName}
-                  onChange={(e) => setUserName(e.target.value)} 
-                  required 
+                  onChange={(e) => setUserName(e.target.value)}
+                  required
                 />
                 <label>Ім'я</label>
               </div>
 
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-envelope'></i></span>
-                <input 
+                <input
                   name="registration-email"
                   type="email"
                   value={registerEmail}
-                  onChange={(e) => setRegisterEmail(e.target.value)} 
-                  required 
+                  onChange={(e) => setRegisterEmail(e.target.value)}
+                  required
                 />
                 <label>Пошта</label>
               </div>
 
               <div className="input-box">
                 <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
-                <input 
+                <input
                   name="registration-password"
                   type="password"
                   autoComplete="current-password"
                   value={registerPassword}
                   onChange={(e) => setRegisterPassword(e.target.value)}
-                  required 
+                  required
                 />
                 <label>Пароль</label>
               </div>
 
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="btn"
                 onClick={register}
                 disabled={showSpinner ? true : false}
@@ -278,25 +319,25 @@ const Auth = (props) => {
           <button onClick={(e) => signInWithOtherSyst('google')} disabled={showSpinner ? true : false}>
             {
               showSpinner === 'google' ?
-              <Spinner size={16} wrapperSize={100} /> :
-              (
-                <>
-                  <i className='bx bxl-google' ></i>
-                  <span>Увійти за допомогою Google</span>
-                </>
-              )
+                <Spinner size={16} wrapperSize={100} /> :
+                (
+                  <>
+                    <i className='bx bxl-google' ></i>
+                    <span>Увійти за допомогою Google</span>
+                  </>
+                )
             }
           </button>
           <button onClick={(e) => signInWithOtherSyst('facebook')} disabled={showSpinner ? true : false}>
             {
               showSpinner === 'facebook' ?
-              <Spinner size={16} wrapperSize={100} /> :
-              (
-                <>
-                  <i className='bx bxl-facebook-circle' ></i>
-                  <span>Увійти за допомогою Facebook</span>
-                </>
-              )
+                <Spinner size={16} wrapperSize={100} /> :
+                (
+                  <>
+                    <i className='bx bxl-facebook-circle' ></i>
+                    <span>Увійти за допомогою Facebook</span>
+                  </>
+                )
             }
           </button>
         </div>
