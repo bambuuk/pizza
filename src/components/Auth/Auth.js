@@ -59,7 +59,7 @@ const Auth = (props) => {
             setSuccessWindow(false);
           }, 3000);
         }
-        console.log(user);
+        console.log('login');
       } catch (error) {
         setShowSpinner(false);
         setLoginError(error.message);
@@ -117,6 +117,7 @@ const Auth = (props) => {
             setRegisterError('');
           }, 3000);
         }
+        console.log('login');
       } catch (error) {
         setShowSpinner(false);
         setRegisterError(error.message);
@@ -136,8 +137,6 @@ const Auth = (props) => {
           email: result.user.email,
           status: 'empty'
         });
-
-        console.log(result);
       } else if (typeSystemAuth === 'facebook') {
         const result = await signInWithPopup(auth, facebookProvider);
         localStorage.setItem('auth-token-pizza', result.user.refreshToken);
@@ -146,7 +145,6 @@ const Auth = (props) => {
           email: result.user.email,
           status: 'empty'
         });
-        console.log(result);
       }
 
       if (successWindow === false) {
@@ -158,9 +156,10 @@ const Auth = (props) => {
           setSuccessWindow(false);
         }, 3000);
       }
+      console.log('login');
     } catch (err) {
       setShowSpinner(false);
-      console.error(err);
+      console.error(err.message);
     }
   }
 
@@ -168,7 +167,7 @@ const Auth = (props) => {
   const hideLogWindow = activeRegPage ? 'hide' : '';
   const authPopupClazz = activeLogRegWindow ? 'active-popup' : '';
   const loginErrorClazz = loginError ? 'result-err result-err_show' : 'result-err';
-  const regErrorClazz = registerError.includes('email-already-in-use') ? 
+  const regErrorClazz = registerError.includes('email-already-in-use') ?
     'result-err result-err_show' : 'result-err';
 
   return (
@@ -200,6 +199,7 @@ const Auth = (props) => {
                 <input
                   name="loginEmail"
                   type="email"
+                  autoComplete="email"
                   value={loginFormik.values.loginEmail}
                   onChange={loginFormik.handleChange}
                   onBlur={loginFormik.handleBlur}
@@ -213,7 +213,7 @@ const Auth = (props) => {
                 <input
                   name="loginPassword"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="password"
                   value={loginFormik.values.loginPassword}
                   onChange={loginFormik.handleChange}
                   onBlur={loginFormik.handleBlur}
@@ -283,7 +283,7 @@ const Auth = (props) => {
                 <input
                   name="registerPassword"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="password"
                   value={registerFormik.values.registerPassword}
                   onChange={registerFormik.handleChange}
                   onBlur={registerFormik.handleBlur}

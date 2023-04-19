@@ -121,8 +121,8 @@ const UserCabinet = (props) => {
       });
 
       return (
-        <div 
-          className="orders-list__item" 
+        <div
+          className="orders-list__item"
           key={id}
         >
           <div className="orders-list__details">
@@ -146,7 +146,7 @@ const UserCabinet = (props) => {
 
   const showWindow = activeLogRegWindow ? 'user-cabinet_active' : '';
   let showUserEmail = 'unkown';
-  if(currentUser) {
+  if (currentUser) {
     showUserEmail = currentUser.email ? currentUser.email : 'unkown';
   }
 

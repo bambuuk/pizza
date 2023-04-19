@@ -184,9 +184,9 @@ const ShoppingBag = (props) => {
                   onBlur={formik.handleBlur}
                 />
                 {
-                  formik.errors.customerName && formik.touched.customerName ? 
-                  <div className="error-message">{formik.errors.customerName}</div> : 
-                  null
+                  formik.errors.customerName && formik.touched.customerName ?
+                    <div className="error-message">{formik.errors.customerName}</div> :
+                    null
                 }
               </div>
 
@@ -202,9 +202,9 @@ const ShoppingBag = (props) => {
                   onBlur={formik.handleBlur}
                 />
                 {
-                  formik.errors.phoneNumber && formik.touched.phoneNumber ? 
-                  <div className="error-message">{formik.errors.phoneNumber}</div> : 
-                  null
+                  formik.errors.phoneNumber && formik.touched.phoneNumber ?
+                    <div className="error-message">{formik.errors.phoneNumber}</div> :
+                    null
                 }
               </div>
 
@@ -233,9 +233,9 @@ const ShoppingBag = (props) => {
                   <label htmlFor="pickup">Самовивіз за адресою вул. Пашутинська 61/84</label>
                 </p>
                 {
-                  formik.errors.typeOfDelivery && formik.touched.typeOfDelivery ? 
-                  <div className="error-message">{formik.errors.typeOfDelivery}</div> : 
-                  null
+                  formik.errors.typeOfDelivery && formik.touched.typeOfDelivery ?
+                    <div className="error-message">{formik.errors.typeOfDelivery}</div> :
+                    null
                 }
               </div>
 
@@ -251,9 +251,9 @@ const ShoppingBag = (props) => {
                   onBlur={formik.handleBlur}
                 />
                 {
-                  formik.errors.deliveryAddress && formik.touched.deliveryAddress ? 
-                  <div className="error-message">{formik.errors.deliveryAddress}</div> : 
-                  null
+                  formik.errors.deliveryAddress && formik.touched.deliveryAddress ?
+                    <div className="error-message">{formik.errors.deliveryAddress}</div> :
+                    null
                 }
               </div>
 
@@ -269,9 +269,9 @@ const ShoppingBag = (props) => {
                   onBlur={formik.handleBlur}
                 />
                 {
-                  formik.errors.comment && formik.touched.comment ? 
-                  <div className="error-message">{formik.errors.comment}</div> : 
-                  null
+                  formik.errors.comment && formik.touched.comment ?
+                    <div className="error-message">{formik.errors.comment}</div> :
+                    null
                 }
               </div>
 
@@ -300,9 +300,9 @@ const ShoppingBag = (props) => {
                   <label htmlFor="online">Онлайн карткою Visa або Mastercard</label>
                 </p>
                 {
-                  formik.errors.typeOfPayment && formik.touched.typeOfPayment ? 
-                  <div className="error-message">{formik.errors.typeOfPayment}</div> : 
-                  null
+                  formik.errors.typeOfPayment && formik.touched.typeOfPayment ?
+                    <div className="error-message">{formik.errors.typeOfPayment}</div> :
+                    null
                 }
               </div>
 
@@ -310,8 +310,8 @@ const ShoppingBag = (props) => {
                 <div className="order-form__amount">Сума: {orderSum} грн</div>
                 {
                   formik.values.typeOfDelivery === 'deliveryAroundCity' ?
-                  <div className="order-form__deliveryAmount">Доставка по місту до 8 км 50 гривень: 50грн</div> :
-                  null
+                    <div className="order-form__deliveryAmount">Доставка по місту до 8 км 50 гривень: 50грн</div> :
+                    null
                 }
                 <div className="order-form__totalAmount">
                   Загальна сума: {formik.values.typeOfDelivery === 'pickup' ? orderSum : +orderSum + 50} грн
