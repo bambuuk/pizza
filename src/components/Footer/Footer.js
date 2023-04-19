@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="footer__img-wrapper">
             <img src={payment_system} alt="Payment system" className="footer__img-ps" />
           </div>
-          <div className="footer__made">Made by IK Studio PRO</div>
+          <div className="footer__made">Made by Ivan Korobka</div>
         </div>
         <div className="footer__information">
           <div className="footer__title">Клієнтам:</div>
