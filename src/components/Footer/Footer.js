@@ -45,9 +45,9 @@ const Footer = () => {
               </a>
             </li>
             <li className="footer__link-item">
-              <a 
+              <a
                 href={`https://www.google.com/maps/search/%D0%B3%D1%80%D0%B8%D0%BB%D0%BB%D0%B0/@
-                50.4367035,29.3661665,7z/data=!3m1!4b1`} 
+                50.4367035,29.3661665,7z/data=!3m1!4b1`}
                 className="footer__link"
                 target="_blank"
                 rel="noreferrer"
@@ -56,9 +56,9 @@ const Footer = () => {
               </a>
             </li>
             <li className="footer__link-item">
-              <a 
+              <a
                 href={`https://www.google.com/maps/search/%D0%B3%D1%80%D0%B8%D0%BB%D0%BB%D0%B0/@
-                50.4367035,29.3661665,7z/data=!3m1!4b1`} 
+                50.4367035,29.3661665,7z/data=!3m1!4b1`}
                 className="footer__link"
                 target="_blank"
                 rel="noreferrer"

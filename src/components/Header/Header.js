@@ -143,7 +143,7 @@ const Header = ({ fixedHeader }) => {
               <NavLink to="/contacts" className="burger__link">Контакти</NavLink>
             </li>
             <li>
-              <span 
+              <span
                 className="burger__logreg"
                 onClick={toggleLogRegWindActive}
               >

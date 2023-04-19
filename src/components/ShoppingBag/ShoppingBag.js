@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { firestoreDb, auth } from '../../firebase';
+import { useFormik } from "formik";
+import * as Yup from 'yup';
 
 import Spinner from '../Spinner/Spinner';
 import './shoppingBag.scss';
@@ -18,18 +20,10 @@ const ShoppingBag = (props) => {
     totalOrderAmount
   } = props;
 
-  const [customerName, setCustomerName] = useState('');
-  const [customerPhoneNumber, setCustomerPhoneNumber] = useState('');
-  const [customerAddress, setCustomerAddress] = useState('');
-  const [customerComment, setCustomerCommet] = useState('');
-  const [typeOfDelivery, setTypeOfDelivery] = useState('');
-  const [typeOfPayment, setTypeOfPayment] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
   const [statusOrderingModal, setStatusOrderingModal] = useState(false);
 
   const ordersRef = collection(firestoreDb, 'orders');
-
-  const totalOrderSum = typeOfDelivery === 'deliveryAroundCity' ? (+orderSum + 50) : orderSum;
 
   const onShowStatusOrderingModal = () => {
     if (statusOrderingModal === false) {
@@ -37,13 +31,7 @@ const ShoppingBag = (props) => {
 
       setTimeout(() => {
         setShowSpinner(false);
-        setCustomerName('');
-        setCustomerPhoneNumber('');
-        setCustomerAddress('');
-        setCustomerCommet('');
-        setTypeOfDelivery('');
-        setTypeOfPayment('');
-        
+
         localStorage.removeItem('foodData');
         localStorage.removeItem('totalFoodPosition');
         onChangeFoodListInShopBag([]);
@@ -56,36 +44,75 @@ const ShoppingBag = (props) => {
     }
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const phoneRegExp = /^[+]?3?[\s]?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$/;
 
-    // Work for authorization user 
-    if (Boolean(auth.currentUser) === true) {
-      setShowSpinner(true);
-      try {
-        await addDoc(ordersRef, {
-          foodItemList: JSON.stringify(foodListInShopBag),
-          createdAt: serverTimestamp(),
-          email: auth.currentUser.email,
-          name: customerName,
-          phoneNumber: customerPhoneNumber,
-          address: customerAddress,
-          comment: customerComment,
-          typeOfDelivery,
-          typeOfPayment,
-          totalOrderSum,
-        });
+  const formik = useFormik({
+    initialValues: {
+      customerName: '',
+      phoneNumber: '',
+      typeOfDelivery: '',
+      deliveryAddress: '',
+      comment: '',
+      typeOfPayment: ''
+    },
+    validationSchema: Yup.object({
+      customerName: Yup.string()
+        .min(2, 'Не менше 2 символів')
+        .required("Обов'язкове поле"),
+      phoneNumber: Yup.string()
+        .matches(phoneRegExp, 'Має бути у форматі +380*********')
+        .required("Обов'язкове поле"),
+      typeOfDelivery: Yup.string()
+        .required("Необхідно обрати тип доставки"),
+      deliveryAddress: Yup.string()
+        .min(10, 'Не менше 10 символів'),
+      comment: Yup.string()
+        .min(10, 'Не менше 10 символів'),
+      typeOfPayment: Yup.string()
+        .required("Необхідно обрати тип оплати"),
+    }),
+    onSubmit: async ({
+      customerName,
+      phoneNumber,
+      typeOfDelivery,
+      deliveryAddress,
+      comment,
+      typeOfPayment
+    }) => {
+      console.log(customerName,
+        phoneNumber,
+        typeOfDelivery,
+        deliveryAddress,
+        comment,
+        typeOfPayment)
+      // Work for authorization user 
+      if (Boolean(auth.currentUser) === true) {
+        setShowSpinner(true);
+        try {
+          await addDoc(ordersRef, {
+            foodItemList: JSON.stringify(foodListInShopBag),
+            createdAt: serverTimestamp(),
+            email: auth.currentUser.email,
+            name: customerName,
+            phoneNumber: phoneNumber,
+            address: deliveryAddress,
+            comment: comment,
+            typeOfPayment,
+            typeOfDelivery,
+            totalOrderSum: typeOfDelivery === 'pickup' ? orderSum : +orderSum + 50,
+          });
 
+          onShowStatusOrderingModal();
+        } catch (err) {
+          setShowSpinner(false);
+          console.log(err.messaage, err);
+        }
+        // For unauthorized user
+      } else {
         onShowStatusOrderingModal();
-      } catch (err) {
-        setShowSpinner(false);
-        console.log(err.messaage, err);
       }
-      // For unauthorized user
-    } else {
-      onShowStatusOrderingModal();
     }
-  };
+  });
 
   const contentShopBagFoodList = foodListInShopBag !== null ? foodListInShopBag.map(({ img, name, price, size, weight, counter, id }) => {
     return (
@@ -123,9 +150,9 @@ const ShoppingBag = (props) => {
 
   return (
     <div className={`order-list ${activeStyleShopBag}`}>
-      <div 
+      <div
         className={`order-list_overlay${statusOrderingModal ? ' order-list_hiddenScroll' : ''}`}
-        onClick={statusOrderingModal ? null : (e) => onActiveShopBag(e)} 
+        onClick={statusOrderingModal ? null : (e) => onActiveShopBag(e)}
       >
         <div className={`order-list__close ${statusOrderingModal ? 'order-list_hidden' : ''}`}>
           <button className="order-list__close-btn">
@@ -142,19 +169,25 @@ const ShoppingBag = (props) => {
           </div>
 
           <div className="order-list__total-amount">Сума: {orderSum} грн</div>
-          
+
           <div className="order-list__form order-form">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
               <div className="order-form__enterInfo">
                 <label className="order-form__usualLabel" htmlFor="name">Як до Вас звертатися:</label>
                 <input
                   className="order-form__usualInput"
                   id="name"
-                  name="customer name"
+                  name="customerName"
                   type="text"
-                  value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)}
-                  required />
+                  value={formik.values.customerName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {
+                  formik.errors.customerName && formik.touched.customerName ?
+                    <div className="error-message">{formik.errors.customerName}</div> :
+                    null
+                }
               </div>
 
               <div className="order-form__enterInfo">
@@ -162,11 +195,17 @@ const ShoppingBag = (props) => {
                 <input
                   className="order-form__usualInput"
                   id="phone-number"
-                  name="customer phone number"
-                  type="tel"
-                  value={customerPhoneNumber}
-                  onChange={(e) => setCustomerPhoneNumber(e.target.value)}
-                  required />
+                  name="phoneNumber"
+                  type="number"
+                  value={formik.values.phoneNumber}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {
+                  formik.errors.phoneNumber && formik.touched.phoneNumber ?
+                    <div className="error-message">{formik.errors.phoneNumber}</div> :
+                    null
+                }
               </div>
 
               <div className="order-form__enterInfo">
@@ -176,8 +215,9 @@ const ShoppingBag = (props) => {
                     type="radio"
                     name="typeOfDelivery"
                     id="deliveryAroundCity"
-                    value={typeOfDelivery}
-                    onChange={() => setTypeOfDelivery('deliveryAroundCity')}
+                    value="deliveryAroundCity"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
                   <label htmlFor="deliveryAroundCity">Доставка по місту до 8 км 50 гривень</label>
                 </p>
@@ -186,11 +226,17 @@ const ShoppingBag = (props) => {
                     type="radio"
                     name="typeOfDelivery"
                     id="pickup"
-                    value={typeOfDelivery}
-                    onChange={() => setTypeOfDelivery('pickup')}
+                    value="pickup"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
                   <label htmlFor="pickup">Самовивіз за адресою вул. Пашутинська 61/84</label>
                 </p>
+                {
+                  formik.errors.typeOfDelivery && formik.touched.typeOfDelivery ?
+                    <div className="error-message">{formik.errors.typeOfDelivery}</div> :
+                    null
+                }
               </div>
 
               <div className="order-form__enterInfo">
@@ -198,11 +244,17 @@ const ShoppingBag = (props) => {
                 <input
                   className="order-form__usualInput"
                   id="address"
-                  name="delivery address"
+                  name="deliveryAddress"
                   type="text"
-                  value={customerAddress}
-                  onChange={(e) => setCustomerAddress(e.target.value)}
-                  required />
+                  value={formik.values.deliveryAddress}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {
+                  formik.errors.deliveryAddress && formik.touched.deliveryAddress ?
+                    <div className="error-message">{formik.errors.deliveryAddress}</div> :
+                    null
+                }
               </div>
 
               <div className="order-form__enterInfo">
@@ -210,11 +262,17 @@ const ShoppingBag = (props) => {
                 <input
                   className="order-form__usualInput"
                   id="comment"
-                  name="customer comment"
+                  name="comment"
                   type="text"
-                  value={customerComment}
-                  onChange={(e) => setCustomerCommet(e.target.value)}
+                  value={formik.values.comment}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                 />
+                {
+                  formik.errors.comment && formik.touched.comment ?
+                    <div className="error-message">{formik.errors.comment}</div> :
+                    null
+                }
               </div>
 
               <div className="order-form__enterInfo">
@@ -224,8 +282,9 @@ const ShoppingBag = (props) => {
                     type="radio"
                     name="typeOfPayment"
                     id="cash"
-                    value={typeOfPayment}
-                    onChange={() => setTypeOfPayment('cash')}
+                    value="cash"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
                   <label htmlFor="cash">Готівкою при отриманні</label>
                 </p>
@@ -234,33 +293,41 @@ const ShoppingBag = (props) => {
                     type="radio"
                     name="typeOfPayment"
                     id="online"
-                    value={typeOfPayment}
-                    onChange={() => setTypeOfPayment('online')}
+                    value="online"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
                   <label htmlFor="online">Онлайн карткою Visa або Mastercard</label>
                 </p>
+                {
+                  formik.errors.typeOfPayment && formik.touched.typeOfPayment ?
+                    <div className="error-message">{formik.errors.typeOfPayment}</div> :
+                    null
+                }
               </div>
 
               <div className="order-form__orderAmount">
                 <div className="order-form__amount">Сума: {orderSum} грн</div>
                 {
-                  typeOfDelivery === 'deliveryAroundCity' ?
+                  formik.values.typeOfDelivery === 'deliveryAroundCity' ?
                     <div className="order-form__deliveryAmount">Доставка по місту до 8 км 50 гривень: 50грн</div> :
                     null
                 }
-                <div className="order-form__totalAmount">Загальна сума: {totalOrderSum} грн</div>
+                <div className="order-form__totalAmount">
+                  Загальна сума: {formik.values.typeOfDelivery === 'pickup' ? orderSum : +orderSum + 50} грн
+                </div>
               </div>
 
-              <button className="order-form__orderBtn">
+              <button className="order-form__orderBtn" type="submit">
                 {showSpinner ? <Spinner size={16} wrapperSize={100} /> : 'Замовити'}
               </button>
             </form>
           </div>
         </div>
 
-        <div 
+        <div
           className={`success-ordered ${statusOrderingModal ? 'success-ordered_active' : ''}`}
-          style={{top: `calc(100% + ${additionalHeight}px)`}}
+          style={{ top: `calc(100% + ${additionalHeight}px)` }}
         >
           <h2 className="success-ordered__title">Ваше замовлення прийнято!</h2>
           <div className="success-ordered__number">
