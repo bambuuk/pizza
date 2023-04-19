@@ -93,9 +93,9 @@ const UserCabinet = (props) => {
       let date = '';
       let month = '';
       let year = '';
-      if (createdAt) {
+        if (createdAt) {
         date = new Date(createdAt.seconds * 1000).getDate();
-        month = new Date(createdAt.seconds * 1000).getMonth();
+        month = new Date(createdAt.seconds * 1000).getMonth() + 1;
         year = new Date(createdAt.seconds * 1000).getFullYear();
         date = date.length > 1 ? date : `0${date}`;
         month = month.length > 1 ? month : `0${month}`;

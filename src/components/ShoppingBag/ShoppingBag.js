@@ -79,12 +79,6 @@ const ShoppingBag = (props) => {
       comment,
       typeOfPayment
     }) => {
-      console.log(customerName,
-        phoneNumber,
-        typeOfDelivery,
-        deliveryAddress,
-        comment,
-        typeOfPayment)
       // Work for authorization user 
       if (Boolean(auth.currentUser) === true) {
         setShowSpinner(true);
