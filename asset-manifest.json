@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/pizza/static/css/main.f2370f03.css",
+    "main.js": "/pizza/static/js/main.ea37dec2.js",
+    "static/media/bubble-gum-error.gif": "/pizza/static/media/bubble-gum-error.fccb7171e8447468869d.gif",
+    "static/media/bigLogo.png": "/pizza/static/media/bigLogo.525bbf36f8eb49e6e020.png",
+    "static/media/404.png": "/pizza/static/media/404.64b07926f48e9d22944a.png",
+    "static/media/logo.png": "/pizza/static/media/logo.c0fd916f7470f5303d2f.png",
+    "index.html": "/pizza/index.html",
+    "main.f2370f03.css.map": "/pizza/static/css/main.f2370f03.css.map",
+    "main.ea37dec2.js.map": "/pizza/static/js/main.ea37dec2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f2370f03.css",
+    "static/js/main.ea37dec2.js"
+  ]
+}
