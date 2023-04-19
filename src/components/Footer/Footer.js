@@ -29,8 +29,12 @@ const Footer = () => {
         <div className="footer__information">
           <div className="footer__title">Інформація:</div>
           <ul className="footer__links-list">
-            <li className="footer__link-item"><a href="#" className="footer__link">Акції</a></li>
-            <li className="footer__link-item"><a href="#" className="footer__link">Новини</a></li>
+            <li className="footer__link-item">
+              <NavLink to="*" className="footer__link">Акції</NavLink>
+            </li>
+            <li className="footer__link-item">
+              <NavLink to="*" className="footer__link">Новини</NavLink>
+            </li>
             <li className="footer__link-item">
               <NavLink to="/delivery" className="footer__link">Доставка і оплата</NavLink>
             </li>
