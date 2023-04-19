@@ -7,7 +7,6 @@ const FoodItem = (props) => {
   const [counter, setCounter] = useState(1);
 
   const onOrderFood = () => {
-    // localStorage.removeItem('foodData');
     const foodData = localStorage.getItem('foodData') ? JSON.parse(localStorage.getItem('foodData')) : [];
     let newArrProduct = [];
     let foodItemAmount = 0;
@@ -40,9 +39,6 @@ const FoodItem = (props) => {
 
     setCounter('1');
   }
-  // console.log(JSON.parse(localStorage.getItem('foodData')))
-  // console.log(JSON.parse(localStorage.getItem('totalFoodPosition')));
-
 
   // Counter for dec and inc Signs in food-item__amount html block
   const onCounter = (sign) => {

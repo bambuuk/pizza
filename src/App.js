@@ -5,7 +5,8 @@ import './style/style.scss';
 
 function App() {
   return (
-    <BrowserRouter basename="/pizza">
+    // <BrowserRouter basename="/pizza">
+    <BrowserRouter>
       <Suspense>
         <AnimatedRoutes />
       </Suspense>
