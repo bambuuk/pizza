@@ -36,7 +36,6 @@ const Header = ({ fixedHeader }) => {
       if (clName === 'burger__logreg') {
         setActiveBurgerMenu(value => !value);
         setActiveLogRegWindow(value => !value);
-        // document.body.classList.toggle('no-scroll');
       }
     }
 

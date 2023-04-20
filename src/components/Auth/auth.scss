@@ -72,9 +72,18 @@
   align-items: center;
   justify-content: center;
   border-bottom-left-radius: 10px;
+  transition: .5s all;
+  &:hover {
+    background-color: #000000;
+    box-shadow: -2px 2px 5px rgba(240, 229, 229, 0.842);
+  }
+  &:hover i {
+    color: #fff;
+  }
 }
 
 .icon-close i {
+  transition: .5s all;
   font-size: 32px;
   color: #333;
 }
