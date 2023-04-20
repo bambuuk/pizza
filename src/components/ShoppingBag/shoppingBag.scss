@@ -495,4 +495,11 @@
       right: 10px;
     }
   }
+  .success-ordered {
+    font-size: 15px;
+    &__title {
+      text-align: center;
+      font-size: 20px;
+    }
+  }
 }
