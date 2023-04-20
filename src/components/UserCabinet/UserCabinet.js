@@ -89,7 +89,7 @@ const UserCabinet = (props) => {
 
   // Food ordered history value
   const contentFoodList = useMemo(() => {
-    return listOrders ? listOrders.map(({ address, totalOrderSum, createdAt, foodItemList, id }) => {
+    return listOrders ? [...listOrders].sort((a, b) => b.createdAt - a.createdAt).map(({ address, totalOrderSum, createdAt, foodItemList, id }) => {
       let date = '';
       let month = '';
       let year = '';
