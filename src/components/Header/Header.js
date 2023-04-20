@@ -36,7 +36,7 @@ const Header = ({ fixedHeader }) => {
       if (clName === 'burger__logreg') {
         setActiveBurgerMenu(value => !value);
         setActiveLogRegWindow(value => !value);
-        document.body.classList.toggle('no-scroll');
+        // document.body.classList.toggle('no-scroll');
       }
     }
 
@@ -73,7 +73,7 @@ const Header = ({ fixedHeader }) => {
           </ul>
         </nav>
 
-        <div className="header__shoppin-bag"></div>
+        {/* <div className="header__shoppin-bag"></div> */}
 
         <div className="header__social-networks social-networks">
           <a
