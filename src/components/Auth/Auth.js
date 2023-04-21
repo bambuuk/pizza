@@ -224,7 +224,7 @@ const Auth = (props) => {
             </div>
 
             <div className={loginErrorClazz}>
-              Неправильне ім'я користувача або пароль. Сробуйте ще раз.
+              Неправильне ім'я користувача або пароль. Спробуйте ще раз.
             </div>
 
             <form onSubmit={loginFormik.handleSubmit}>

@@ -17,7 +17,6 @@ const ShoppingBag = (props) => {
     onCounterShopBag,
     onChangeFoodListInShopBag,
     onChangeTotalOrderAmount,
-    totalOrderAmount
   } = props;
 
   const [showSpinner, setShowSpinner] = useState(false);
@@ -143,7 +142,10 @@ const ShoppingBag = (props) => {
   }) : null;
 
   const rndm = Math.floor(Math.random() * (1000 - (-1000)) + (-1000));
-  const additionalHeight = +totalOrderAmount * 70;
+  let additionalHeight = '';
+  if (foodListInShopBag) {
+    additionalHeight = +foodListInShopBag.length * 70
+  }
 
   return (
     <div className={`order-list ${activeStyleShopBag}`}>
