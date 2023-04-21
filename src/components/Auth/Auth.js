@@ -28,6 +28,7 @@ const Auth = (props) => {
   const [successWindow, setSuccessWindow] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [registerError, setRegisterError] = useState('');
+  const [blockingCloseFnc, setBlockingCloseFnc] = useState(false);
 
   const ordersRef = collection(firestoreDb, 'orders');
 
@@ -46,6 +47,7 @@ const Auth = (props) => {
     }),
     onSubmit: async ({ loginEmail, loginPassword }) => {
       setShowSpinner('login');
+      setBlockingCloseFnc(true);
       try {
         const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
         localStorage.setItem('auth-token-pizza', user.user.refreshToken);
@@ -57,11 +59,13 @@ const Auth = (props) => {
             setIsAuth(true);
             toggleLogRegWindActive(null, 'login');
             setSuccessWindow(false);
+            setShowSpinner(false);
           }, 3000);
         }
         console.log('login');
       } catch (error) {
         setShowSpinner(false);
+        setBlockingCloseFnc(false);
         setLoginError(error.message);
         console.log(error.message);
       }
@@ -87,6 +91,7 @@ const Auth = (props) => {
     }),
     onSubmit: async ({ userName, registerEmail, registerPassword }) => {
       setShowSpinner('register');
+      setBlockingCloseFnc(true);
       try {
         const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
         localStorage.setItem('auth-token-pizza', user.user.refreshToken);
@@ -113,6 +118,8 @@ const Auth = (props) => {
             setIsAuth(true);
             toggleLogRegWindActive(null, 'login');
             setSuccessWindow(false);
+            setShowSpinner(false);
+            setBlockingCloseFnc(false);
             setLoginError('');
             setRegisterError('');
           }, 3000);
@@ -120,6 +127,7 @@ const Auth = (props) => {
         console.log('login');
       } catch (error) {
         setShowSpinner(false);
+        setBlockingCloseFnc(false);
         setRegisterError(error.message);
         console.log(error.message);
       }
@@ -128,6 +136,7 @@ const Auth = (props) => {
 
   const signInWithOtherSyst = async (typeSystemAuth) => {
     setShowSpinner(`${typeSystemAuth}`);
+    setBlockingCloseFnc(true);
     try {
       if (typeSystemAuth === 'google') {
         const result = await signInWithPopup(auth, googleProvider);
@@ -154,11 +163,14 @@ const Auth = (props) => {
           setIsAuth(true);
           toggleLogRegWindActive(null, 'login');
           setSuccessWindow(false);
+          setShowSpinner(false);
+          setBlockingCloseFnc(false);
         }, 3000);
       }
       console.log('login');
     } catch (err) {
       setShowSpinner(false);
+      setBlockingCloseFnc(false);
       console.error(err.message);
     }
   }
@@ -171,7 +183,12 @@ const Auth = (props) => {
     'result-err result-err_show' : 'result-err';
 
   return (
-    <div className={`auth auth_overlay ${authPopupClazz}`} onClick={successWindow ? null : (e) => toggleLogRegWindActive(e)}>
+    <div 
+      className={
+        `auth auth_overlay ${authPopupClazz}`} 
+        onClick={successWindow || blockingCloseFnc ? 
+        null : (e) => toggleLogRegWindActive(e)}
+    >
       <div className={`form__success${successWindow ? " form__success_active" : ''}`}>
         Ви успішно авторизувалися!
       </div>
