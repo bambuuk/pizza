@@ -4,6 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import FoodFilters from "../../components/FoodFilters/FoodFilters";
 import FoodList from "../../components/FoodList/FoodList";
 import withLayout from "../../hocs/withLayout";
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
 const MainPage = () => {
   return (
@@ -23,7 +24,9 @@ const MainPage = () => {
           <title>Grilla Pizza</title>
         </Helmet>
         <FoodFilters />
-        <FoodList />
+        <ErrorBoundary>
+          <FoodList />
+        </ErrorBoundary>
       </motion.main>
     </HelmetProvider>
   )

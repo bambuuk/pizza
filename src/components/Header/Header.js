@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import Auth from "../Auth/Auth";
 import UserCabinet from "../UserCabinet/UserCabinet";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import logo from '../../resources/img/logo.png';
 import './header.scss';
 
@@ -153,16 +154,20 @@ const Header = ({ fixedHeader }) => {
         </nav>
       </header>
       {isAuth ?
-        <UserCabinet
-          activeLogRegWindow={activeLogRegWindow}
-          toggleLogRegWindActive={toggleLogRegWindActive}
-          setIsAuth={setIsAuth}
-        /> :
-        <Auth
-          activeLogRegWindow={activeLogRegWindow}
-          toggleLogRegWindActive={toggleLogRegWindActive}
-          setIsAuth={setIsAuth}
-        />
+        <ErrorBoundary>
+          <UserCabinet
+            activeLogRegWindow={activeLogRegWindow}
+            toggleLogRegWindActive={toggleLogRegWindActive}
+            setIsAuth={setIsAuth}
+          />
+        </ErrorBoundary> :
+        <ErrorBoundary>
+          <Auth
+            activeLogRegWindow={activeLogRegWindow}
+            toggleLogRegWindActive={toggleLogRegWindActive}
+            setIsAuth={setIsAuth}
+          />
+        </ErrorBoundary>
       }
     </div>
   )
