@@ -1,3 +1,38 @@
+## Description
+This site is a copy of site https://grilla.kr.ua/. I used him for this my project.
+It's a multi-page React app made with functional components, adapted for all standard mobile device screen sizes. Features dynamically and statically rendered elements. I used technologies: React, Redux toolkit, SCSS, Firebase.
+
+
+## Site features:
+
+- Storing / recieving product information in / from a Realtime Database
+- Storing / recieving ordered information in / from a Firestore Database
+- Storing / recieving some info about users in cookies 
+- Authorization with email/password, Google and Facebook Provider
+- Form validation
+- Ability to change count of product for odering
+- Ability to add products to the Shopping Bag, edit and order them 
+- Ability to watch order history in User Cabinet
+- Page routing with animations
+
+
+## Tools:
+
+- React
+- Using Firebase Realtime Database, Firestore, Authorization
+- boxicons
+- formik/yup
+- framer-motion
+- react-transition-group
+- react-router-dom
+- react-helmet-async
+- reduxjs/toolkit
+- universal-cookie
+- scss
+- gh-pages
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
