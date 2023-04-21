@@ -17,7 +17,7 @@ const UserCabinet = (props) => {
 
   const ordersRef = collection(firestoreDb, 'orders');
 
-  // getting info about auth user
+  // getting info about auth user - onAuthStateChanged - it's a listener
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setCurrentUser(currentUser);
@@ -61,14 +61,14 @@ const UserCabinet = (props) => {
     }
   }
 
-  // getting info about ordered history
+  // getting info about ordered history from firestore
   useEffect(() => {
     if (currentUser) {
       if (Boolean(currentUser.email) === true) {
         // gets all messages with room name from props
         const queryOrders = query(
           ordersRef,
-          where("email", "==", currentUser.email),
+          where("email", "==", currentUser.email), // filter
           orderBy('createdAt') // need to connect with using method query and add index in firestore 
         );
 

@@ -129,6 +129,7 @@ const FoodList = () => {
     // eslint-disable-next-line
   }, [totalOrderAmount, activeShoppingBag, foodListInShopBag]);
 
+  // getting value from firebase reartime database
   useEffect(() => {
     onUpdShowingShopBagAndBasket();
 

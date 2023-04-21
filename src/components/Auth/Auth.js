@@ -30,8 +30,10 @@ const Auth = (props) => {
   const [registerError, setRegisterError] = useState('');
   const [blockingCloseFnc, setBlockingCloseFnc] = useState(false);
 
+  // It's a link to orders colecction in firestore 
   const ordersRef = collection(firestoreDb, 'orders');
 
+  // validation login form 
   const loginFormik = useFormik({
     initialValues: {
       loginEmail: '',
@@ -46,12 +48,15 @@ const Auth = (props) => {
         .required("Обов'язкове поле"),
     }),
     onSubmit: async ({ loginEmail, loginPassword }) => {
+      // bloced closing Auth form and show spinner in buttons
       setShowSpinner('login');
       setBlockingCloseFnc(true);
+
       try {
         const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
         localStorage.setItem('auth-token-pizza', user.user.refreshToken);
 
+        // showing success window and closing Auth form
         if (successWindow === false) {
           setSuccessWindow(true);
 
@@ -72,6 +77,7 @@ const Auth = (props) => {
     }
   });
 
+   // validation register form 
   const registerFormik = useFormik({
     initialValues: {
       userName: '',
@@ -90,18 +96,23 @@ const Auth = (props) => {
         .required("Обов'язкове поле"),
     }),
     onSubmit: async ({ userName, registerEmail, registerPassword }) => {
+      // bloced closing Auth form and show spinner in buttons
       setShowSpinner('register');
       setBlockingCloseFnc(true);
+
       try {
         const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
         localStorage.setItem('auth-token-pizza', user.user.refreshToken);
 
+        //getting userNamesList from cookies
         const userNamesCookiList = cookies.get('userNamesList') ? cookies.get('userNamesList') : '';
 
+        // creating newUserName array for cookies
         const newUserNamesCookiList = Array.isArray(userNamesCookiList) ?
           JSON.stringify([...userNamesCookiList, { email: user.user.email, name: userName }]) :
           JSON.stringify([{ email: user.user.email, name: userName }]);
 
+        // adding newUserName to the userNamesList in cookies
         cookies.set('userNamesList', newUserNamesCookiList);
 
         // sending first empty info to the firestore on the user for orders history function 
@@ -111,6 +122,7 @@ const Auth = (props) => {
           status: 'empty'
         });
 
+        // showing success window and closing Auth form
         if (successWindow === false) {
           setSuccessWindow(true);
 
@@ -135,13 +147,17 @@ const Auth = (props) => {
   });
 
   const signInWithOtherSyst = async (typeSystemAuth) => {
+    // bloced closing Auth form and show spinner in buttons
     setShowSpinner(`${typeSystemAuth}`);
     setBlockingCloseFnc(true);
+
     try {
       if (typeSystemAuth === 'google') {
         const result = await signInWithPopup(auth, googleProvider);
         localStorage.setItem('auth-token-pizza', result.user.refreshToken);
 
+        // sending first empty info to the firestore on the user for orders history function 
+        // in the UserCabinet component
         await addDoc(ordersRef, {
           email: result.user.email,
           status: 'empty'
@@ -156,6 +172,7 @@ const Auth = (props) => {
         });
       }
 
+      // showing success window and closing Auth form
       if (successWindow === false) {
         setSuccessWindow(true);
 

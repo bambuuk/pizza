@@ -23,6 +23,7 @@ const ShoppingBag = (props) => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [statusOrderingModal, setStatusOrderingModal] = useState(false);
 
+  // ref on the orders collection in firestore
   const ordersRef = collection(firestoreDb, 'orders');
 
   const onShowStatusOrderingModal = () => {
@@ -46,6 +47,7 @@ const ShoppingBag = (props) => {
 
   const phoneRegExp = /^[+]?3?[\s]?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$/;
 
+  // validation ordering form
   const formik = useFormik({
     initialValues: {
       customerName: '',
@@ -83,6 +85,7 @@ const ShoppingBag = (props) => {
       if (Boolean(auth.currentUser) === true) {
         setShowSpinner(true);
         try {
+          // snding odered food list to the firestore
           await addDoc(ordersRef, {
             foodItemList: JSON.stringify(foodListInShopBag),
             createdAt: serverTimestamp(),

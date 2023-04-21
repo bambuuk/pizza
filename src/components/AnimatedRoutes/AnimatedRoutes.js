@@ -19,6 +19,7 @@ import ContactsPage from '../../pages/ContactsPage/ContactsPage';
 // const PublicOfferPage = lazy(() => import('../../pages/PublicOfferPage/PublicOfferPage'));
 // const ContactsPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'));
 
+/* This component for animation procces of movin a new page */
 const AnimatedRoutes = () => {
   const location = useLocation();
 
