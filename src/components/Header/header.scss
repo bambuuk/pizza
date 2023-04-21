@@ -219,6 +219,8 @@
 
 	.header__burger {
 		display: flex;
+		position: fixed;
+		right: 20px;
 		justify-content: flex-end;
 		width: 30px;
 		height: 20px;

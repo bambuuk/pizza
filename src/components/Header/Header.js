@@ -20,6 +20,7 @@ const Header = ({ fixedHeader }) => {
   const toggleLogRegWindActive = (e, action) => {
     if (e) {
       let clName = e.target.className;
+      console.log(clName)
 
       if (
         clName === 'auth auth_overlay active-popup' ||
@@ -128,19 +129,49 @@ const Header = ({ fixedHeader }) => {
         <nav className={`burger burger__menu ${styleMenu}`}>
           <ul className="burger__list">
             <li>
-              <NavLink to="/" className="burger__link">Головна</NavLink>
+              <NavLink 
+                to="/" 
+                className="burger__link"
+                onClick={toggleBurgerMenuActive}
+              >
+                Головна
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/about-us" className="burger__link">Про нас</NavLink>
+              <NavLink 
+                to="/about-us" 
+                className="burger__link"
+                onClick={toggleBurgerMenuActive}
+              >
+                Про нас
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/delivery" className="burger__link">Доставка</NavLink>
+              <NavLink 
+                to="/delivery" 
+                className="burger__link"
+                onClick={toggleBurgerMenuActive}
+              >
+                Доставка
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/type-of-payment" className="burger__link">Типи оплати</NavLink>
+              <NavLink 
+                to="/type-of-payment" 
+                className="burger__link"
+                onClick={toggleBurgerMenuActive}
+              >
+                Типи оплати
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/contacts" className="burger__link">Контакти</NavLink>
+              <NavLink 
+                to="/contacts" 
+                className="burger__link"
+                onClick={toggleBurgerMenuActive}
+              >
+                Контакти
+              </NavLink>
             </li>
             <li>
               <span
