@@ -5,14 +5,14 @@ It's a multi-page React app made with functional components, adapted for all sta
 
 ## Site features:
 
-- Storing / recieving product information in / from a Realtime Database
-- Storing / recieving ordered information in / from a Firestore Database
-- Storing / recieving some info about users in cookies 
-- Authorization with email/password, Google and Facebook Provider
+- Storing/receiving product information in/from a Realtime Database
+- Storing/receiving order information in/from a Firestore Database
+- Storing some info about users in cookies
+- Authorization with email/password, using a Google and Facebook providers
 - Form validation
-- Ability to change count of product for odering
-- Ability to add products to the Shopping Bag, edit and order them 
-- Ability to watch order history in User Cabinet
+- Ability to change number of products for ordering
+- Ability to add products to the Shopping Bag, edit, and order them
+- Ability to watch order history in User Profile
 - Page routing with animations
 
 
